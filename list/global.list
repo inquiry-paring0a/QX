@@ -10,8 +10,8 @@
 # USER-AGENT: 46
 # TOTAL: 38448
 
-HOST,ff.com,美国
-HOST,faradayfuturecn.com,美国
+HOST,ff.com,Global
+HOST,faradayfuturecn.com,Global
 HOST,3dns-1.adobe.com,Global
 HOST,3dns-2.adobe.com,Global
 HOST,3dns-3.adobe.com,Global
