@@ -1,8 +1,6 @@
 # NAME: DIRECT
 
-HOST-SUFFIX,faradayfuture.com,direct
-HOST-SUFFIX,ff.com, GLOBAL
-HOST-SUFFIX,faradayfuturecn.com.com, direct
+HOST-SUFFIX,faradayfuturecn.com, direct
 HOST-SUFFIX,ffau.to, direct
 HOST-SUFFIX,niu.com, direct
 HOST-KEYWORD,ali, direct
