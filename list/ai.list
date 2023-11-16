@@ -18,4 +18,5 @@ HOST-SUFFIX,stripe.com, OpenAI
 HOST-SUFFIX,bard.google.com, OpenAI
 HOST-SUFFIX,anthropic.com, OpenAI
 HOST-SUFFIX,claude.ai, OpenAI
-HOST-KEYWORD,openai,OpenAI
+HOST-KEYWORD,openai, OpenAI
+HOST-SUFFIX,oaistatic.com, OpenAI
