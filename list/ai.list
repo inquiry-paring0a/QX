@@ -20,3 +20,4 @@ HOST-SUFFIX,anthropic.com, OpenAI
 HOST-SUFFIX,claude.ai, OpenAI
 HOST-KEYWORD,openai, OpenAI
 HOST-SUFFIX,oaistatic.com, OpenAI
+HOST-SUFFIX,oaiusercontent.com, OpenAI
