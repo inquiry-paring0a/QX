@@ -10,8 +10,8 @@
 # USER-AGENT: 46
 # TOTAL: 38448
 
-HOST-KEYWORD,solflare.com,GLOBAL
-HOST-KEYWORD,solanart.io,GLOBAL
+HOST-KEYWORD,solflare.com,DIRECT
+HOST-KEYWORD,solanart.io,DIRECT
 
 HOST-SUFFIX,ff.com,Global
 HOST-SUFFIX,faradayfuturecn.com,Global
