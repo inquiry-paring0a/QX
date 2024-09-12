@@ -19,6 +19,13 @@ HOST-KEYWORD,solanart.io,DIRECT
 HOST-SUFFIX,ff.com,Global
 HOST-SUFFIX,faradayfuturecn.com,Global
 
+
+HOST-SUFFIX, shopify.com ,Global
+HOST-SUFFIX, bblcdn.com ,Global
+HOST-SUFFIX, bambulab.com ,Global
+HOST-SUFFIX, makerworld.com ,Global
+
+
 HOST-KEYWORD,bing,GLOBAL
 HOST-KEYWORD,adobe,GLOBAL
 HOST-KEYWORD,bankofamerica,GLOBAL
