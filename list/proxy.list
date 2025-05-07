@@ -4,7 +4,8 @@ HOST-KEYWORD,bing,GLOBAL
 HOST-KEYWORD,adobe,GLOBAL
 HOST-KEYWORD,bankofamerica,GLOBAL
 HOST-KEYWORD,bankofamerica,GLOBAL
+HOST-SUFFIX,translate.googleapis.com,GLOBAL
 
 
 
-HOST-SUFFIX,meta.com, 美国2X
+HOST-SUFFIX,meta.com, GLOBAL
