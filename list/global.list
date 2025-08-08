@@ -19,13 +19,16 @@ HOST-KEYWORD,solanart.io,DIRECT
 HOST-SUFFIX,ff.com,Global
 HOST-SUFFIX,faradayfuturecn.com,Global
 
+HOST-SUFFIX,app-measurement.com,Global
+HOST-SUFFIX,whatsapp.net,Global
+
 
 HOST-SUFFIX, shopify.com ,Global
 HOST-SUFFIX, bblcdn.com ,Global
 HOST-SUFFIX, bambulab.com ,Global
 HOST-SUFFIX, makerworld.com ,Global
 
-
+HOST-KEYWORD,whatsapp,GLOBAL
 HOST-KEYWORD,bing,GLOBAL
 HOST-KEYWORD,adobe,GLOBAL
 HOST-KEYWORD,bankofamerica,GLOBAL
