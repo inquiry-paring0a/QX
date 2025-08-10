@@ -119,7 +119,6 @@ HOST,sms.imagetasks.com,DIRECT
 HOST,smtp.office365.com,DIRECT
 HOST,steamcommunity-a.akamaihd.net,DIRECT
 HOST,265.com,DIRECT
-HOST,app-measurement.com,DIRECT
 HOST,beacons.gcp.gvt2.com,DIRECT
 HOST,beacons.gvt2.com,DIRECT
 HOST,beacons2.gvt2.com,DIRECT
