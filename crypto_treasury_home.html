@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Treasury - C10 Index Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="h-8 w-8 rounded-xl gradient-bg grid place-items-center shadow">
+                    <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+                </div>
+                <div class="font-semibold tracking-wide">Crypto Treasury</div>
+                
+            </div>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
+                <a href="crypto_treasury_home.html" class="hover:text-slate-900 font-bold">Home</a>
+                <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
+                <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
+                <a href="crypto_treasury_home.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+            </nav>
+            <!-- Right-side Menu Button -->
+<button id="openRightMenu"
+  class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50"
+  aria-label="Open menu" aria-haspopup="dialog" aria-controls="rightDrawer">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+  </svg>
+</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
+
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+                    <i data-lucide="sparkles" class="h-4 w-4"></i> Official C10 Top 10 Crypto Index
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-semibold leading-tight">
+                    Track the Top 10 Cryptocurrencies
+                    <span class="block gradient-text">with the C10 Index</span>
+                </h1>
+                <p class="mt-4 text-slate-600 max-w-xl">
+                    A transparent, rules-based index capturing the performance of the largest digital assets by free-float market capitalization.
+                </p>
+                <div class="mt-6 flex flex-wrap items-center gap-3">
+                     <button class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                         C10 Treasury Details <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                     </button>
+                 </div>
+            </div>
+
+            <!-- Chart Card -->
+            <div class="bg-white border border-slate-200 rounded-xl p-6" id="index">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="line-chart" class="h-5 w-5"></i>
+                    <h3 class="font-semibold">C10 Index — Realtime Snapshot</h3>
+                    <span class="ml-auto bg-slate-900 text-white px-2 py-1 rounded text-sm">2,891.42</span>
+                    <span class="bg-emerald-100 text-emerald-600 px-2 py-1 rounded text-sm">+2.13%</span>
+                </div>
+                <div class="flex gap-2 mb-4">
+                    <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
+                    <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
+                    <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
+                    <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
+                    <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button>
+                </div>
+                <div class="h-64">
+                    <canvas id="indexChart" class="w-full h-full"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Business -->
+    <section id="business" class="py-14 border-t border-slate-200 bg-slate-100">
+
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="grid md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="layers" class="h-5 w-5"></i>
+                        <h3 class="font-semibold">Asset Management</h3>
+                    </div>
+                    <p class="text-slate-600">Institutional-grade portfolio construction and disciplined index methodology built for long-term allocation.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="globe-2" class="h-5 w-5"></i>
+                        <h3 class="font-semibold">Transparency</h3>
+                    </div>
+                    <p class="text-slate-600">Rules-based, publicly documented; constituents and weights are verifiable at any time.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="book-open" class="h-5 w-5"></i>
+                        <h3 class="font-semibold">Research</h3>
+                    </div>
+                    <p class="text-slate-600">Regular insights and backtests to support data-driven decisions for treasury teams.</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-slate-100 to-white border border-slate-200 rounded-xl p-6">
+                <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">Why C10 Index?</h3>
+                        <ul class="space-y-2 text-slate-700">
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                Diversification across leading assets reduces single-coin risk.
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                Lower turnover with scheduled rebalances keeps costs predictable.
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                Transparent, auditable methodology and public disclosures.
+                            </li>
+                        </ul>
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                            <button class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                                C10 Index Details <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="h-48 sm:h-60">
+                        <canvas id="trendChart" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Constituents Table -->
+    <section class="py-14 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                <h3 class="text-2xl font-semibold">C10 Index — Constituents</h3>
+            </div>
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                The C10 Index section showcases the top ten cryptocurrencies that make up the index and their respective weight distributions. The weights and prices of each cryptocurrency adjust dynamically with market fluctuations, providing investors with a diversified and broad-based crypto asset portfolio reference.
+            </p>
+
+            <!-- Chart and Table Layout -->
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Pie Chart -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <h4 class="font-semibold mb-4 text-center">Weight Distribution</h4>
+                    <div class="h-80 flex items-center justify-center">
+                        <canvas id="pieChart" class="max-w-full max-h-full"></canvas>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #f59e0b;"></div>
+                            <span>BTC (35.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #3b82f6;"></div>
+                            <span>ETH (30.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #10b981;"></div>
+                            <span>USDT (9.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #f97316;"></div>
+                            <span>BNB (6.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #8b5cf6;"></div>
+                            <span>SOL (5.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #06b6d4;"></div>
+                            <span>USDC (4.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #ef4444;"></div>
+                            <span>XRP (4.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #84cc16;"></div>
+                            <span>ADA (3.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #f59e0b;"></div>
+                            <span>DOGE (2.0%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: #6366f1;"></div>
+                            <span>TON (2.0%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100 text-slate-600">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-medium">Rank</th>
+                                <th class="px-4 py-3 text-left font-medium">Symbol</th>
+                                <th class="px-4 py-3 text-left font-medium">Name</th>
+                                <th class="px-4 py-3 text-left font-medium">Weight</th>
+                                <th class="px-4 py-3 text-left font-medium">Price</th>
+                                <th class="px-4 py-3 text-left font-medium">Market Cap</th>
+                                <th class="px-4 py-3 text-left font-medium">24h %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="constituentsTable">
+                            <!-- Table rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">*Weights shown are illustrative. Actual weights follow the published methodology.</p>
+        </div>
+    </section>
+
+    <!-- Tech & Security -->
+    <section id="security" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+            <div>
+                <h3 class="text-2xl font-semibold mb-2">Technology & Security</h3>
+                <p class="text-slate-600 mb-6">We combine MPC custody, hardware isolation, and multi-layer approvals for institutional security.</p>
+                <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-white border border-slate-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="shield" class="h-5 w-5"></i>
+                            <h4 class="font-semibold">MPC Wallet</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm">Key shares distributed across secure enclaves; no single point of compromise.</p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="lock" class="h-5 w-5"></i>
+                            <h4 class="font-semibold">Policy Engine</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm">Role-based approvals, velocity limits, and address allowlists.</p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="layers" class="h-5 w-5"></i>
+                            <h4 class="font-semibold">Cold + Warm</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm">Tiered storage design balancing security and accessibility.</p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="globe-2" class="h-5 w-5"></i>
+                            <h4 class="font-semibold">Audit & Compliance</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm">SOC 2 Type II, regular third-party reviews and on-chain attestations.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-6">
+                <h4 class="font-semibold mb-4">Custody Architecture (Illustration)</h4>
+                <div class="rounded-2xl border border-slate-200 p-4 text-sm text-slate-700">
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li>Transaction intent created in Treasury Console</li>
+                        <li>Policy engine evaluates limits & signers</li>
+                        <li>MPC shares sign in isolated enclaves</li>
+                        <li>On-chain broadcast & real-time monitoring</li>
+                        <li>Funds settlement & reconciliation across accounts</li>
+                        <li>Comprehensive audit logging & compliance reporting</li>
+                    </ol>
+                    <div class="mt-4 grid grid-cols-3 gap-3">
+                        <div class="h-14 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700">BitGo</div>
+                        <div class="h-14 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700">Fireblocks</div>
+                        <div class="h-14 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700">Ledger Enterprise</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C10 ETF Section -->
+    <div id="ETF"></div>
+<section id="etf" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-50 to-white">
+  <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+    
+    <!-- Left Content -->
+    <div>
+      <h3 class="text-2xl font-semibold mb-3">C10 ETF — Index Investing Made Simple</h3>
+      <p class="text-slate-600 mb-6">
+        The C10 ETF offers investors a regulated, exchange-traded product that mirrors the performance of the C10 Index. 
+        Combining the diversification of the top ten cryptocurrencies with institutional-grade custody, the ETF enables 
+        seamless access to the digital asset market without the complexities of direct wallet management.
+      </p>
+      <ul class="space-y-3 text-slate-700">
+        <li class="flex gap-2">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+          Fully backed by underlying assets held in secure custody.
+        </li>
+        <li class="flex gap-2">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+          Transparent daily NAV publication and on-chain proof-of-reserves.
+        </li>
+        <li class="flex gap-2">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+          Tradable through major brokerage platforms just like a stock.
+        </li>
+      </ul>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <button class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+          Learn More <i data-lucide="arrow-right" class="h-4 w-4"></i>
+        </button>
+        <button class="border border-slate-300 px-6 py-3 rounded-lg font-medium hover:bg-slate-100 transition-colors flex items-center gap-2">
+          ETF Factsheet
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Illustration -->
+    <div class="bg-white border border-slate-200 rounded-xl p-6">
+      <h4 class="font-semibold mb-4">ETF Highlights</h4>
+      <div class="grid grid-cols-2 gap-4 text-sm text-slate-700">
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">Ticker</div>
+          <div>C10X</div>
+        </div>
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">Exchange</div>
+          <div>NASDAQ</div>
+        </div>
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">Expense Ratio</div>
+          <div>0.45%</div>
+        </div>
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">Custodian</div>
+          <div>Fireblocks MPC</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- News & Insights 
+    <section id="insights" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-semibold">News & Insights</h3>
+                <button class="border border-slate-300 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors hidden sm:inline-flex">
+                    All posts
+                </button>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">Index Update</span>
+                        <span class="text-xs text-slate-500">2025-07-01</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">C10 Index Quarterly Rebalance Announced</h4>
+                    <p class="text-slate-600 text-sm mb-4">Weights adjusted based on free-float market cap; methodology unchanged.</p>
+                    <button class="text-slate-700 hover:text-slate-900 text-sm flex items-center gap-2">
+                        Read more <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">Partnership</span>
+                        <span class="text-xs text-slate-500">2025-06-18</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Crypto Treasury Partners with Fireblocks for MPC</h4>
+                    <p class="text-slate-600 text-sm mb-4">Enhancing institutional-grade security with multi-party computation custody.</p>
+                    <button class="text-slate-700 hover:text-slate-900 text-sm flex items-center gap-2">
+                        Read more <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">Research</span>
+                        <span class="text-xs text-slate-500">2025-05-29</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Research: Diversified Crypto Baskets vs BTC Only</h4>
+                    <p class="text-slate-600 text-sm mb-4">Backtest indicates lower drawdowns and improved risk-adjusted returns.</p>
+                    <button class="text-slate-700 hover:text-slate-900 text-sm flex items-center gap-2">
+                        Read more <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-slate-200 bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="h-8 w-8 rounded-xl gradient-bg grid place-items-center shadow">
+                        <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+                    </div>
+                    <div class="font-semibold">Crypto Treasury</div>
+                </div>
+                <p>Rules-based digital asset indices for institutions.</p>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Company</div>
+                <ul class="space-y-1">
+                    <li><a class="hover:text-slate-900" href="#business">About</a></li>
+                    <li><a class="hover:text-slate-900" href="#insights">Research</a></li>
+                    <li><a class="hover:text-slate-900" href="#security">Security</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Contact</div>
+                <ul class="space-y-1">
+                    <li>Email: hello@c10index.com</li>
+                    <li>Telegram: @C10Index</li>
+                    <li>Twitter/X: @C10_Index</li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Legal</div>
+                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mock data for charts and table
+        const indexData = [
+            { t: "09:30", v: 2821 },
+            { t: "10:00", v: 2836 },
+            { t: "10:30", v: 2849 },
+            { t: "11:00", v: 2832 },
+            { t: "11:30", v: 2854 },
+            { t: "12:00", v: 2861 },
+            { t: "12:30", v: 2853 },
+            { t: "13:00", v: 2869 },
+            { t: "13:30", v: 2876 },
+            { t: "14:00", v: 2868 },
+            { t: "14:30", v: 2882 },
+            { t: "15:00", v: 2891 }
+        ];
+
+        const constituents = [
+            { rank: 1, symbol: "BTC", name: "Bitcoin", weight: 35.0, price: 65320, marketCap: 1290000000000, change: 2.14 },
+            { rank: 2, symbol: "ETH", name: "Ethereum", weight: 30.0, price: 3520, marketCap: 423000000000, change: 1.25 },
+            { rank: 3, symbol: "USDT", name: "Tether", weight: 9.0, price: 1.0, marketCap: 118000000000, change: 0.01 },
+            { rank: 4, symbol: "BNB", name: "BNB", weight: 6.0, price: 610, marketCap: 88500000000, change: -0.42 },
+            { rank: 5, symbol: "SOL", name: "Solana", weight: 5.0, price: 148, marketCap: 69800000000, change: 0.88 },
+            { rank: 6, symbol: "USDC", name: "USD Coin", weight: 4.0, price: 1.0, marketCap: 34200000000, change: -0.01 },
+            { rank: 7, symbol: "XRP", name: "XRP", weight: 4.0, price: 0.62, marketCap: 35400000000, change: 0.44 },
+            { rank: 8, symbol: "ADA", name: "Cardano", weight: 3.0, price: 0.39, marketCap: 13700000000, change: -1.31 },
+            { rank: 9, symbol: "DOGE", name: "Dogecoin", weight: 2.0, price: 0.12, marketCap: 17800000000, change: 0.18 },
+            { rank: 10, symbol: "TON", name: "Toncoin", weight: 2.0, price: 7.21, marketCap: 18300000000, change: 0.71 }
+        ];
+
+        // Create index chart
+        const ctx1 = document.getElementById('indexChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: indexData.map(d => d.t),
+                datasets: [{
+                    label: 'C10 Index',
+                    data: indexData.map(d => d.v),
+                    borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(34, 211, 238, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Create trend chart
+        const ctx2 = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: indexData.map(d => d.t),
+                datasets: [{
+                    label: 'Trend',
+                    data: indexData.map(d => d.v),
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Create pie chart for weight distribution
+        const ctx3 = document.getElementById('pieChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: constituents.map(c => c.symbol),
+                datasets: [{
+                    data: constituents.map(c => c.weight),
+                    backgroundColor: [
+                        '#f59e0b', // BTC - amber
+                        '#3b82f6', // ETH - blue
+                        '#10b981', // USDT - emerald
+                        '#f97316', // BNB - orange
+                        '#8b5cf6', // SOL - violet
+                        '#06b6d4', // USDC - cyan
+                        '#ef4444', // XRP - red
+                        '#84cc16', // ADA - lime
+                        '#f59e0b', // DOGE - amber
+                        '#6366f1'  // TON - indigo
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                rotation: 0, // 从顶部开始
+                circumference: 360, // 圆
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                return `${label}: ${value.toFixed(1)}%`;
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        // Populate constituents table
+        const tableBody = document.getElementById('constituentsTable');
+        constituents.forEach(c => {
+            const row = document.createElement('tr');
+            row.className = 'border-t border-slate-200 hover:bg-slate-50';
+            row.innerHTML = `
+                <td class="px-4 py-3">${c.rank}</td>
+                <td class="px-4 py-3 font-semibold">${c.symbol}</td>
+                <td class="px-4 py-3">${c.name}</td>
+                <td class="px-4 py-3">${c.weight.toFixed(1)}%</td>
+                <td class="px-4 py-3">$${typeof c.price === 'number' ? c.price.toLocaleString() : c.price}</td>
+                <td class="px-4 py-3">$${(c.marketCap / 1000000000).toFixed(1)}B</td>
+                <td class="px-4 py-3 ${c.change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${c.change >= 0 ? '+' : ''}${c.change.toFixed(2)}%</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <!-- Right Drawer Overlay -->
+<div id="rightDrawerBackdrop"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 z-[70]"></div>
+
+<!-- Right Drawer Panel -->
+<aside id="rightDrawer" role="dialog" aria-modal="true" aria-labelledby="rightDrawerTitle"
+  class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0c0d0e] text-slate-200 z-[80]
+         translate-x-full transition-transform duration-300 will-change-transform">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
+    <h2 id="rightDrawerTitle" class="text-sm tracking-wide text-white/80">Menu</h2>
+    <button id="closeRightMenu" aria-label="Close menu"
+      class="h-8 w-8 inline-grid place-items-center rounded-md hover:bg-white/5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/80" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable Menu -->
+  <nav class="px-3 py-2 overflow-y-auto h-[calc(100vh-56px)] text-sm">
+    <ul class="space-y-1">
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">My Account</a></li>
+      <li class="pt-2 pb-1 text-xs uppercase tracking-wide text-white/40">Sites</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Faraday X Home</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FX Super One</a></li>
+      <li><a class="block rounded-md px-3 py-2 bg-white/10" href="#">Faraday Future Home</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">FF 91 2.0</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist Alliance</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF 91 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHypercar+</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHyper 6×4 Architecture 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">All‑Ability aiHypercar</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Platform</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Labs</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Open Platform</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Programs</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">YT Jia’s 10‑Punch Combo</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Co‑Creation</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Live & Event</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Company</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Press Room</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Investor Relations</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Get Updates</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Support</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Charging</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Service</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Shop</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Other</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Contact Us</a></li>
+    </ul>
+  </nav>
+</aside>
+<script>
+  (function () {
+    const openBtn = document.getElementById('openRightMenu');
+    const closeBtn = document.getElementById('closeRightMenu');
+    const drawer  = document.getElementById('rightDrawer');
+    const backdrop = document.getElementById('rightDrawerBackdrop');
+
+    const open = () => {
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('pointer-events-none', 'opacity-0');
+      document.body.classList.add('overflow-hidden');
+      // focus the first link for accessibility
+      const firstLink = drawer.querySelector('a,button');
+      if (firstLink) firstLink.focus();
+    };
+
+    const close = () => {
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('pointer-events-none', 'opacity-0');
+      document.body.classList.remove('overflow-hidden');
+      openBtn?.focus();
+    };
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  })();
+</script>
+
+</body>
+</html>
