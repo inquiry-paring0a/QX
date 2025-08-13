@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFAI Crypto Treasury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="h-8 w-8 rounded-xl gradient-bg grid place-items-center shadow">
+                    <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+                </div>
+                <div class="font-bold tracking-wide text-xl hidden md:block">FFAI Crypto Treasury</div>
+                
+            </a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-6">
+                <nav class="flex items-center gap-6 text-sm text-slate-600">
+                    <a href="index.html" class="hover:text-slate-900 font-bold gradient-text">首页</a>
+                <a href="c10_treasury.html" class="hover:text-slate-900">C10资产管理</a>
+                <a href="c10_index.html" class="hover:text-slate-900">C10指数</a>
+                <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+                </nav>
+                <a href="#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+          投资C10
+        </a>
+                <!-- Language Switcher -->
+                <div class="relative">
+                    <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+                        <span class="hidden md:inline">中文</span>
+                        <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                        <a href="../en/index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
+                         <a href="index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Buttons -->
+            <div class="md:hidden flex items-center gap-2">
+                <a href="#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+          投资C10
+        </a>
+                <!-- Mobile Language Switcher -->
+                <div class="relative">
+                    <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+                    </button>
+                    <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                        <a href="../en/index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
+                         <a href="index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+            <nav class="px-4 py-3 space-y-1">
+                <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">首页</a>
+                <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10资产管理</a>
+                <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10指数</a>
+                <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
+
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+            <div>
+
+                <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+                    EAI+Crypto双飞轮驱动
+                    <span class="block gradient-text">为全球投资者架设双桥梁</span>
+                </h1>
+                <p class="mt-4 text-slate-600 max-w-xl">
+                    FF启动首创的"EAI+Crypto"双飞轮&双桥梁生态战略，发布美股首个加密资产一篮子组合C10指数，以及基于此指数进行资产配置的Crypto Treasury计划，并同步申请加密资产指数基金ETF牌照。力图打造加密资产时代下的先锋领航。
+                </p>
+                <div class="mt-6 flex flex-wrap items-center gap-3">
+                     <a href="c10_treasury.html" class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                         C10资产管理详情 <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                     </a>
+                 </div>
+            </div>
+
+            <!-- Simplified Chart -->
+            <div class="h-80 w-full" id="index">
+                <canvas id="indexChart" class="w-full h-full"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- FFAI Crypto Treasury Strategy -->
+    <section class="py-16 bg-gradient-to-br from-slate-50 to-white border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 mb-4">
+                    <i data-lucide="shield-check" class="h-4 w-4"></i>
+                    FFAI Crypto Treasury 战略
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+                    公司级加密资产财库策略
+                </h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    FFAI 的 Crypto Treasury 是由全资子公司独立运营、以FFAI C10 指数为被动底仓（单一币权重≤50%）并配 20% 主动管理、在合规托管与质押增益的框架下，按节奏融资购置与持有流通市值前十大的主流加密货币、并设置多重下行机制以稳定现金流与增厚净资产、与 EAI EV 飞轮相互赋能的公司级加密资产财库策略。
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- 核心策略 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="h-5 w-5 text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">核心策略</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>以C10指数为被动底仓</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>单一币种权重≤50%</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>配置20%主动管理</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 运营框架 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="shield" class="h-5 w-5 text-green-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">运营框架</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>全资子公司独立运营</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>合规托管与质押增益</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>多重下行保护机制</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 战略目标 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="h-5 w-5 text-purple-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">战略目标</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>稳定现金流</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>增厚净资产</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>与EAI EV飞轮相互赋能</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 行动按钮 -->
+            <div class="text-center mt-12">
+                <a href="c10_treasury.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    了解更多 Crypto Treasury 详情
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Business -->
+    <section id="business" class="py-14 border-t border-slate-200 bg-slate-100">
+
+        <div class="mx-auto max-w-7xl px-4">
+            <!-- 核心价值主张 -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">抗周期资本结构</h2>
+                <p class="text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
+                    以全球首个可在美股主板交易的C10指数化产品为资本引擎，配合透明托管、动态调仓、收益管理和多种下行保护机制，打造抗周期资本结构，形成稳定且可持续的现金流与增值潜力。
+                </p>
+            </div>
+
+            <!-- 核心机制 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="trending-up" class="h-6 w-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">C10指数化产品</h3>
+                    <p class="text-slate-600 text-sm">全球首个美股主板交易的加密货币指数产品</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="shield-check" class="h-6 w-6 text-green-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">透明托管</h3>
+                    <p class="text-slate-600 text-sm">机构级托管服务，确保资产安全透明</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="refresh-cw" class="h-6 w-6 text-purple-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">动态调仓</h3>
+                    <p class="text-slate-600 text-sm">智能化投资组合管理与风险控制</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="umbrella" class="h-6 w-6 text-orange-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">下行保护</h3>
+                    <p class="text-slate-600 text-sm">多重保护机制降低市场波动风险</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-slate-100 to-white border border-slate-200 rounded-xl p-6">
+                <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">为什么选择C10指数？</h3>
+                        <ul class="space-y-2 text-slate-700">
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                跨领先资产的多元化降低单币种风险。
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                定期再平衡的低换手率保持成本可预测。
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                透明、可审计的方法论和公开披露。
+                            </li>
+                        </ul>
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                            <a href="c10_index.html" class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                                C10指数详情 <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="h-48 sm:h-60">
+                        <canvas id="trendChart" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Constituents Table -->
+    <section class="py-14 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <!-- C10 Index Definition -->
+            <div class="mb-8">
+                <div class="text-center mb-6">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">C10 Index 核心定义</h3>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- 主要描述和统计 -->
+                    <div class="text-center">
+                        <p class="text-lg text-slate-700 leading-relaxed mb-6">
+                            以比特币和以太币为核心，囊括除稳定币外流通市值排名前十的加密资产，按流通市值加权平均等规则计算，单一币种权重不超过 50%。
+                        </p>
+                        
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="bg-white border border-blue-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-blue-600 mb-1">10</div>
+                                <div class="text-sm text-slate-600">核心资产</div>
+                            </div>
+                            <div class="bg-white border border-green-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-green-600 mb-1">≤50%</div>
+                                <div class="text-sm text-slate-600">单币权重上限</div>
+                            </div>
+                            <div class="bg-white border border-emerald-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-emerald-600 mb-1">80%</div>
+                                <div class="text-sm text-slate-600">按市值比例投资</div>
+                            </div>
+                            <div class="bg-white border border-amber-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-amber-600 mb-1">20%</div>
+                                <div class="text-sm text-slate-600">按市场表现投资</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 核心特性 -->
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="bitcoin" class="h-5 w-5 text-orange-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900">比特币 & 以太币</div>
+                                <div class="text-sm text-slate-600">核心基础资产</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="bar-chart-3" class="h-5 w-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900">市值加权</div>
+                                <div class="text-sm text-slate-600">动态权重分配</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="shield-check" class="h-5 w-5 text-purple-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900">排除稳定币</div>
+                                <div class="text-sm text-slate-600">专注主流加密资产</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                C10指数部分展示了构成指数的十大加密货币及其各自的权重分布。每种加密货币的权重和价格随市场波动动态调整，为投资者提供多元化和广泛的加密资产投资组合参考。
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Pie -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+                    <h4 class="font-semibold mb-4 text-center">权重分布</h4>
+                    <div class="h-96 w-full min-w-0 flex items-center justify-center">
+                        <div id="pieChart" class="w-full h-full"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-3 text-center">* 显示的权重仅供说明；请参考已公布的方法论获取官方数值。</p>
+                </div>
+
+                <!-- Table -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100 text-slate-600">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-medium">排名</th>
+                                <th class="px-4 py-3 text-left font-medium">代码</th>
+                                <th class="px-4 py-3 text-right font-medium">权重</th>
+                                <th class="px-4 py-3 text-right font-medium">价格</th>
+                                <th class="px-4 py-3 text-right font-medium">市值</th>
+                                <th class="px-4 py-3 text-left font-medium">24小时%</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech & Security -->
+    <section id="security" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-slate-900 mb-4">Technology & Security</h3>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    通过多层级安全架构、动态风险管理和全面合规体系，为数字资产提供机构级保护与优化。
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <!-- 多层级冷、热钱包分离与多签机制 -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="shield" class="h-6 w-6 text-blue-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">多层级冷、热钱包分离与多签机制</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>大额资产长期存储于离线冷钱包，减少黑客攻击风险</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>热钱包仅用于必要的流动性操作，并配备多重签名（Multi-Sig）审批流程</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 动态杠杆与债务管理 -->
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="h-6 w-6 text-green-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">动态杠杆与债务管理</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>参考 MicroStrategy 模式，在市场高估值阶段以低成本可转债或定向贷款增加持仓</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>在市场低估值阶段通过部分资产变现或债务回购，优化资产负债结构</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 定期压力测试与情景模拟 -->
+                <div class="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="activity" class="h-6 w-6 text-purple-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">定期压力测试与情景模拟</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>每季度进行资产组合的压力测试，包括极端价格波动、流动性枯竭、交易所风险等多种情景</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>提前制定应对方案，确保在各种市场环境下的风险可控</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 合规与税务优化 -->
+                <div class="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="file-check" class="h-6 w-6 text-orange-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">合规与税务优化</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>持续监控并遵守相关国家与地区的数字资产监管法规</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>必要时通过信托或境外SPV（Special Purpose Vehicle）实现税务与合规优化</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 技术合作伙伴 -->
+            <div class="bg-white border border-slate-200 rounded-xl p-8">
+                <h4 class="text-xl font-semibold text-center mb-6">技术合作伙伴</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">BitGo</div>
+                        <p class="text-sm text-slate-600">机构级托管</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">Fireblocks</div>
+                        <p class="text-sm text-slate-600">MPC钱包技术</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">Ledger</div>
+                        <p class="text-sm text-slate-600">硬件安全模块</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">Chainlink</div>
+                        <p class="text-sm text-slate-600">价格预言机</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C10 ETF Section -->
+    <div id="ETF"></div>
+<section id="etf" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-50 to-white">
+  <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+    
+    <!-- Left Content -->
+    <div>
+      <h3 class="text-2xl font-semibold mb-3">C10 ETF — 指数投资变得简单</h3>
+      <p class="text-slate-600 mb-4">
+        C10 ETF为投资者提供受监管的交易所交易产品，镜像C10指数的表现。
+        结合十大加密货币的多元化和机构级托管，ETF使投资者能够
+        无缝进入数字资产市场，无需直接钱包管理的复杂性。
+      </p>
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+        <div class="flex items-start gap-3">
+          <i data-lucide="info" class="h-5 w-5 text-blue-600 mt-0.5 shrink-0"></i>
+          <p class="text-blue-800 text-sm">
+            <strong>最新进展：</strong>FF正在同步申请加密资产指数基金ETF牌照，获批后将在公开市场推出公众可认购的C10 ETF产品。
+          </p>
+        </div>
+      </div>
+      <ul class="space-y-3 text-slate-700">
+        <li class="flex gap-2">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+          完全由安全托管的基础资产支持。
+        </li>
+        <li class="flex gap-2">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+          透明的每日净值公布和链上储备证明。
+        </li>
+        <li class="flex gap-2">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+          可通过主要经纪平台交易，就像股票一样。
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- Right Illustration -->
+    <div class="bg-white border border-slate-200 rounded-xl p-6">
+      <h4 class="font-semibold mb-4">ETF亮点</h4>
+      <div class="grid grid-cols-2 gap-4 text-sm text-slate-700">
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">代码</div>
+          <div>C10X</div>
+        </div>
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">交易所</div>
+          <div>纳斯达克</div>
+        </div>
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">费用比率</div>
+          <div>0.45%</div>
+        </div>
+        <div class="p-4 border border-slate-200 rounded-lg">
+          <div class="font-semibold">托管方</div>
+          <div>Fireblocks MPC</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- News & Insights 
+    <section id="insights" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-semibold">News & Insights</h3>
+                <button class="border border-slate-300 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors hidden sm:inline-flex">
+                    All posts
+                </button>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">Index Update</span>
+                        <span class="text-xs text-slate-500">2025-07-01</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">C10 Index Quarterly Rebalance Announced</h4>
+                    <p class="text-slate-600 text-sm mb-4">Weights adjusted based on free-float market cap; methodology unchanged.</p>
+                    <button class="text-slate-700 hover:text-slate-900 text-sm flex items-center gap-2">
+                        Read more <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">Partnership</span>
+                        <span class="text-xs text-slate-500">2025-06-18</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Crypto Treasury Partners with Fireblocks for MPC</h4>
+                    <p class="text-slate-600 text-sm mb-4">Enhancing institutional-grade security with multi-party computation custody.</p>
+                    <button class="text-slate-700 hover:text-slate-900 text-sm flex items-center gap-2">
+                        Read more <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">Research</span>
+                        <span class="text-xs text-slate-500">2025-05-29</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Research: Diversified Crypto Baskets vs BTC Only</h4>
+                    <p class="text-slate-600 text-sm mb-4">Backtest indicates lower drawdowns and improved risk-adjusted returns.</p>
+                    <button class="text-slate-700 hover:text-slate-900 text-sm flex items-center gap-2">
+                        Read more <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Newsletter Signup Section -->
+    <section id="invest" class="bg-slate-100 py-16">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">投资C10</h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        注册了解更多关于FF ETF的信息——连接传统市场和区块链资产的Web3原生投资工具。
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        您将收到独家更新、指数表现洞察以及FF最新发展的早期访问权限。
+                    </p>
+                </div>
+                
+                <!-- Right Form -->
+                <div class="bg-white rounded-2xl p-8">
+                    <form class="space-y-6">
+                        <div>
+                            <input 
+                                type="text" 
+                                placeholder="名" 
+                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                required
+                            >
+                        </div>
+                        
+                        <div>
+                            <input 
+                                type="text" 
+                                placeholder="姓" 
+                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                required
+                            >
+                        </div>
+                        
+                        <div>
+                            <input 
+                                type="email" 
+                                placeholder="邮箱地址" 
+                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                required
+                            >
+                        </div>
+                        
+                        <div>
+                            <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent bg-white">
+                                <option value="">选择您的角色</option>
+                                <option value="individual">个人投资者</option>
+                                <option value="crypto-professional">加密货币专业人士</option>
+                                <option value="institutional">机构/家族办公室</option>
+                                <option value="media">媒体/分析师</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        
+                        <div class="text-xs text-slate-500 leading-relaxed">
+                            当您与FF互动时，我们可能会根据适用的Web3隐私标准和法规收集和存储匿名和/或许可数据。我们的
+                            <a href="#" class="text-cyan-600 hover:text-cyan-700 underline">隐私声明</a> 
+                            解释了我们如何使用和保护您的数据，无论是链上还是链下。
+                        </div>
+                        
+                        <button 
+                            type="submit" 
+                            class="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-slate-800 transition-colors"
+                        >
+                            立即订阅
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-slate-200 bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+            <div>
+                <a href="index.html" class="flex items-center gap-2 mb-2">
+                    <div class="h-8 w-8 rounded-xl gradient-bg grid place-items-center shadow">
+                        <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+                    </div>
+                    <div class="font-bold text-lg">FFAI Crypto Treasury</div>
+                </a>
+                <p>面向机构的基于规则的数字资产指数。</p>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">公司</div>
+                <ul class="space-y-1">
+                    <li><a class="hover:text-slate-900" href="#business">关于我们</a></li>
+                    <li><a class="hover:text-slate-900" href="#insights">研究</a></li>
+                    <li><a class="hover:text-slate-900" href="#security">安全</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">联系方式</div>
+                <ul class="space-y-1">
+                    <li>邮箱: hello@c10index.com</li>
+                    <li>Telegram: @C10Index</li>
+                    <li>Twitter/X: @C10_Index</li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">法律声明</div>
+                <p class="text-xs">所有内容仅供信息参考，不构成投资建议。数字资产具有波动性并存在风险。过往表现不代表未来结果。</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 加密资产管理。保留所有权利。</div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mock data for charts and table
+        const indexData = [
+            { t: "09:30", v: 2821 },
+            { t: "10:00", v: 2836 },
+            { t: "10:30", v: 2849 },
+            { t: "11:00", v: 2832 },
+            { t: "11:30", v: 2854 },
+            { t: "12:00", v: 2861 },
+            { t: "12:30", v: 2853 },
+            { t: "13:00", v: 2869 },
+            { t: "13:30", v: 2876 },
+            { t: "14:00", v: 2868 },
+            { t: "14:30", v: 2882 },
+            { t: "15:00", v: 2891 }
+        ];
+
+        const constituents = [
+            { rank: 1, symbol: "BTC", name: "Bitcoin", weight: 35.0, price: 119383.71, marketCap: 2380000000000, change: 0.36 },
+            { rank: 2, symbol: "ETH", name: "Ethereum", weight: 25.0, price: 4578.78, marketCap: 552900000000, change: 6.88 },
+            { rank: 3, symbol: "XRP", name: "XRP", weight: 12.0, price: 3.22, marketCap: 191500000000, change: 2.34 },
+            { rank: 4, symbol: "BNB", name: "Binance Coin", weight: 8.0, price: 830.93, marketCap: 115700000000, change: 2.26 },
+            { rank: 5, symbol: "SOL", name: "Solana", weight: 7.0, price: 192.63, marketCap: 103900000000, change: 9.76 },
+            { rank: 6, symbol: "DOGE", name: "Dogecoin", weight: 5.0, price: 0.2343, marketCap: 35200000000, change: 4.15 },
+            { rank: 7, symbol: "ADA", name: "Cardano", weight: 3.5, price: 0.8368, marketCap: 29800000000, change: 7.12 },
+            { rank: 8, symbol: "TRX", name: "Tron", weight: 2.5, price: 0.3522, marketCap: 33300000000, change: 1.22 },
+            { rank: 9, symbol: "AVAX", name: "Avalanche", weight: 1.5, price: 24.55, marketCap: 10900000000, change: 3.45 },
+            { rank: 10, symbol: "DOT", name: "Polkadot", weight: 0.5, price: 4.14, marketCap: 6200000000, change: -1.23 }
+        ];
+
+        // Create index chart
+        const ctx1 = document.getElementById('indexChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: indexData.map(d => d.t),
+                datasets: [{
+                    label: 'C10 Index',
+                    data: indexData.map(d => d.v),
+                    borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(34, 211, 238, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#374151',
+                        bodyColor: '#374151',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return '时间: ' + context[0].label;
+                            },
+                            label: function(context) {
+                                return 'C10指数: ' + context.parsed.y.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Create trend chart
+        const ctx2 = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: indexData.map(d => d.t),
+                datasets: [{
+                    label: 'Trend',
+                    data: indexData.map(d => d.v),
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.08)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Create pie chart for weight distribution using ECharts
+        const pieChart = echarts.init(document.getElementById('pieChart'));
+        const pieData = constituents.map((c, index) => ({
+            name: c.symbol,
+            value: c.weight,
+            itemStyle: {
+                color: [
+                    '#f59e0b','#3b82f6','#10b981','#f97316','#8b5cf6',
+                    '#06b6d4','#ef4444','#84cc16','#f59e0b','#6366f1'
+                ][index % 10]
+            }
+        }));
+        
+        pieChart.setOption({
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c}%'
+            },
+            series: [{
+                type: 'pie',
+                radius: ['60%', '90%'],
+                center: ['50%', '50%'],
+                data: pieData,
+                label: {
+                    show: true,
+                    position: 'outside',
+                    formatter: '{b}',
+                    fontSize: 12,
+                    color: '#374151'
+                },
+                labelLine: {
+                    show: true,
+                    length: 5,
+                    length2: 15,
+                    lineStyle: {
+                        color: '#9ca3af',
+                        width: 1
+                    }
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        });
+
+        // Populate constituents table
+        const tbody = document.getElementById('tableBody');
+        constituents.forEach(c=>{
+            const tr = document.createElement('tr');
+            tr.className = 'border-t border-slate-200 hover:bg-slate-50';
+            tr.innerHTML = `
+                <td class="px-4 py-3">${c.rank}</td>
+                <td class="px-4 py-3 font-semibold">${c.symbol}</td>
+                <td class="px-4 py-3 text-right">${c.weight.toFixed(1)}%</td>
+                <td class="px-4 py-3 text-right">$${c.price.toFixed(2)}</td>
+                <td class="px-4 py-3 text-right">$${(c.marketCap/1e9).toFixed(1)}B</td>
+                <td class="px-4 py-3 ${c.change>=0?'text-emerald-600':'text-rose-600'}">${c.change>=0?'+':''}${c.change.toFixed(2)}%</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // 窗口大小变化时重新调整图表大小
+        window.addEventListener('resize', function() {
+            pieChart.resize();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+                
+                // Close menu on escape key
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape') {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+        })();
+    </script>
+
+    <!-- Language Switcher JavaScript -->
+    <script>
+        (function() {
+            // Desktop language switcher
+            const langSwitcher = document.getElementById('langSwitcher');
+            const langDropdown = document.getElementById('langDropdown');
+            
+            if (langSwitcher && langDropdown) {
+                langSwitcher.addEventListener('click', function() {
+                    langDropdown.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
+                        langDropdown.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // Mobile language switcher
+            const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
+            const mobileLangDropdown = document.getElementById('mobileLangDropdown');
+            
+            if (mobileLangSwitcher && mobileLangDropdown) {
+                mobileLangSwitcher.addEventListener('click', function() {
+                    mobileLangDropdown.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
+                        mobileLangDropdown.classList.add('hidden');
+                    }
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

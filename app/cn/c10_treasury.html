@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FFAI Crypto Treasury</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+    }
+    .gradient-text{
+      background: linear-gradient(to right,#06b6d4,#2563eb);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    /* Note: The .chip class assumes Tailwind @apply via a build step */
+    .chip{ @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
+          <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+        </div>
+        <div class="font-bold tracking-wide text-xl hidden md:block">FFAI Crypto Treasury</div>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        <nav class="flex items-center gap-6 text-sm text-slate-600">
+          <a href="index.html" class="hover:text-slate-900">首页</a>
+                <a href="c10_treasury.html" class="hover:text-slate-900 font-bold gradient-text">C10资产管理</a>
+                <a href="c10_index.html" class="hover:text-slate-900">C10指数</a>
+                <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+        </nav>
+        <a href="index.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+           投资C10
+         </a>
+        <!-- Language Switcher -->
+        <div class="relative">
+            <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+                <span class="hidden md:inline">中文</span>
+                <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
+            </button>
+            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                <a href="../en/c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
+                <a href="c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+            </div>
+        </div>
+      </div>
+      
+      <!-- Mobile Buttons -->
+      <div class="md:hidden flex items-center gap-2">
+        <a href="index.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+           投资C10
+         </a>
+        <!-- Mobile Language Switcher -->
+        <div class="relative">
+            <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+            </button>
+            <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                <a href="../en/c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
+                <a href="c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+            </div>
+        </div>
+        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+      <nav class="px-4 py-3 space-y-1">
+        <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">首页</a>
+                <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">C10资产管理</a>
+                <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10指数</a>
+                <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+          <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury — Rules‑Based Crypto Basket
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+          规则驱动的资产配置<br>
+          <span class="gradient-text">平衡增长与风险</span>
+        </h1>
+        <p class="mt-4 text-slate-700 max-w-2xl">
+          FF C10 Treasury计划采用"80% 被动 + 20% 主动"的组合配置构建。"80%被动"部分严格按照C10指数被动配置，"20%主动"部分由人工配置前十大流通市值的加密货币（除稳定币和虚假币外），按月度动态调整。
+        </p>
+        <p class="mt-3 text-slate-700 max-w-2xl">
+          我们的第一阶段资产管理规模目标为5-10亿美元（约半年内完成）；第二阶段将冲击100亿美元规模；第三与第四阶段，若ETF牌照获批，资产规模有望实现加速跃升，进入数百亿至千亿美元的增长通道。
+        </p>
+
+      </div>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+          <div class="text-xs text-slate-500">管理资产规模 (USD)</div>
+          <div class="text-2xl font-semibold mt-1">$38.6M</div>
+          <div class="text-emerald-600 text-xs mt-2">本周+2.1%</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+          <div class="text-xs text-slate-500">年初至今收益</div>
+          <div class="text-2xl font-semibold mt-1">+18.4%</div>
+          <div class="text-slate-500 text-xs mt-2">vs BTC: -3.2%</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+          <div class="text-xs text-slate-500">年化波动率</div>
+          <div class="text-2xl font-semibold mt-1">31.7%</div>
+          <div class="text-slate-500 text-xs mt-2">比BTC低6.4%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section id="s1" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-100">
+    <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">概览</h2>
+        <p class="text-slate-700 mb-4">C10资产管理采用被动指数+主动部分的双引擎模式：</p>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-2"><i data-lucide="layers" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+            <span><b>被动部分(C10)</b>：基于规则跟踪自由流通市值前10大加密资产，定期再平衡；目标：市场贝塔。</span>
+          </li>
+          <li class="flex gap-2"><i data-lucide="activity-square" class="h-5 w-5 text-blue-600 shrink-0"></i>
+            <span><b>主动部分(C0)</b>：20%部分用于事件驱动机会、相关性交易、对冲和流动性管理；目标：改善回撤和夏普比率。</span>
+          </li>
+          <li class="flex gap-2"><i data-lucide="shield" class="h-5 w-5 text-cyan-600 shrink-0"></i>
+            <span>全栈合规和安全：MPC托管、分层权限、白名单、链上监控和审计日志。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-6">
+        <h4 class="font-semibold mb-3">流程概览</h4>
+        <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700">
+          <li>策略设计和风险预算</li>
+          <li>在控制台创建交易意图并运行合规检查</li>
+          <li>MPC签名和分层冷/热资金转移</li>
+          <li>执行、结算和对账</li>
+          <li>周报告和公开披露</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Returns & Simulated History -->
+  <section id="s2" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">收益与模拟历史</h2>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm" data-range="1Y">1Y</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="3Y">3Y</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="ALL">ALL</button>
+        </div>
+      </div>
+      <p class="text-slate-600 mb-4">资本团队提供的方法论：以美元计价的净值；回测使用已公布权重进行月度再平衡；基准为BTC。</p>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="line-chart" class="h-5 w-5"></i><h4 class="font-semibold">投资组合净值 vs BTC</h4>
+          </div>
+          <div class="h-72"><canvas id="navChart"></canvas></div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <h4 class="font-semibold mb-3">回撤与风险指标</h4>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li class="flex justify-between"><span>最大回撤</span><span class="font-semibold">-33.8%</span></li>
+            <li class="flex justify-between"><span>年化波动率</span><span class="font-semibold">31.7%</span></li>
+            <li class="flex justify-between"><span>夏普比率 (rf = 0)</span><span class="font-semibold">0.86</span></li>
+            <li class="flex justify-between"><span>月度胜率</span><span class="font-semibold">58%</span></li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-4">* 回测仅供说明，不代表未来结果。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Weekly Buys & Holdings -->
+  <section id="s3" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
+    <div class="mx-auto max-w-7xl px-4">
+      <h2 class="text-2xl font-semibold mb-4">周度购买与投资组合状态</h2>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-white border border-slate-200 rounded-xl p-6 overflow-x-auto">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="shopping-cart" class="h-5 w-5"></i><h4 class="font-semibold">周度购买记录</h4>
+          </div>
+          <table class="min-w-full text-sm">
+            <thead class="bg-slate-100 text-slate-600">
+              <tr>
+                <th class="px-4 py-2 text-left">日期</th>
+                <th class="px-4 py-2 text-left">资产</th>
+                <th class="px-4 py-2 text-left">数量</th>
+                <th class="px-4 py-2 text-left">名义价值</th>
+                <th class="px-4 py-2 text-left">备注</th>
+              </tr>
+            </thead>
+            <tbody id="buyTable"></tbody>
+          </table>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="pie-chart" class="h-5 w-5"></i><h4 class="font-semibold">当前持仓</h4>
+          </div>
+          <div class="h-80"><canvas id="holdingPie"></canvas></div>
+          <p class="text-xs text-slate-500 mt-2">* 权重随再平衡和净流量变化。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: FF C10 Treasury Advantages -->
+  <section id="s4" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">FF C10 Treasury 优势</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">专业的加密资产指数投资解决方案，为您提供全方位的投资保障与便利</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- 一站式便捷投资 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="zap" class="h-6 w-6 text-blue-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">一站式便捷投资</h3>
+              <p class="text-slate-600 leading-relaxed">省去个人研究、购买、存储、监控和调整多个币种的巨大精力与操作成本，提供便捷高效的一站式投资体验。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 自动调仓与专业维护 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="refresh-cw" class="h-6 w-6 text-emerald-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">自动调仓与专业维护</h3>
+              <p class="text-slate-600 leading-relaxed">C10 Treasury每月自动调整持仓结构，严格跟踪市值排名前十的币种。个人投资者手动完成此操作不仅繁琐耗时，且容易出错或滞后。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 透明托管与安全保障 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="shield-check" class="h-6 w-6 text-purple-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">透明托管与安全保障</h3>
+              <p class="text-slate-600 leading-relaxed">提供透明的托管机制，解决个人保管大量加密资产的安全隐患和信任问题。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 专业收益管理与风控 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="trending-up" class="h-6 w-6 text-orange-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">专业收益管理与风控</h3>
+              <p class="text-slate-600 leading-relaxed">包含专业的收益管理策略，并内置多种下行保护机制，这些是个人投资者通常难以独立设计和执行的复杂风险管理手段。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+    <footer id="contact" class="border-t border-slate-200 bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+            <div>
+                <a href="index.html" class="flex items-center gap-2 mb-2">
+                    <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
+                        <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+                    </div>
+                    <div class="font-bold text-lg">FFAI Crypto Treasury</div>
+                </a>
+                <p>面向机构的基于规则的数字资产指数。</p>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">公司</div>
+                <ul class="space-y-1">
+                    <li><a class="hover:text-slate-900" href="#business">关于我们</a></li>
+                    <li><a class="hover:text-slate-900" href="#insights">研究</a></li>
+                    <li><a class="hover:text-slate-900" href="#security">安全</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">联系方式</div>
+                <ul class="space-y-1">
+                    <li>Email: hello@c10index.com</li>
+                    <li>Telegram: @C10Index</li>
+                    <li>Twitter/X: @C10_Index</li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">法律声明</div>
+                <p class="text-xs">所有内容仅供参考，不构成投资建议。数字资产具有波动性并存在风险。过往表现不代表未来结果。</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+    </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // --- Section 2: NAV vs BTC (mock) ---
+    const navCtx = document.getElementById('navChart').getContext('2d');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const navSeries = [100,103,108,104,111,117,121,118,126,132,135,139];
+    const btcSeries = [100,106,114,107,118,126,134,126,140,151,154,160];
+    new Chart(navCtx,{
+      type:'line',
+      data:{
+        labels:months,
+        datasets:[
+          {label:'C10 Treasury NAV', data:navSeries, borderColor:'#0ea5e9', backgroundColor:'rgba(14,165,233,0.08)', fill:true, tension:0.35},
+          {label:'BTC = 100', data:btcSeries, borderColor:'#64748b', backgroundColor:'transparent', fill:false, borderDash:[6,4], tension:0.35}
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:true, labels:{boxWidth:10}}},
+        scales:{y:{beginAtZero:false, grid:{color:'rgba(0,0,0,0.08)'}}, x:{grid:{color:'rgba(0,0,0,0.06)'}}}
+      }
+    });
+
+    // --- Section 3: weekly buys (mock) ---
+    const buys = [
+      {d:'2025-07-04', a:'BTC', q:'5.3', v:'$345,000', note:'Rebalance: increased weight'},
+      {d:'2025-07-04', a:'ETH', q:'120', v:'$422,000', note:'Passive creation'},
+      {d:'2025-06-27', a:'SOL', q:'8,400', v:'$1,240,000', note:'Allocate new inflow'},
+      {d:'2025-06-20', a:'USDC', q:'1,100,000', v:'$1,100,000', note:'Liquidity buffer'},
+      {d:'2025-06-13', a:'BNB', q:'1,100', v:'$671,000', note:'Weight calibration'}
+    ];
+    const tbody = document.getElementById('buyTable');
+    buys.forEach(b=>{
+      const tr = document.createElement('tr');
+      tr.className='border-t border-slate-200 hover:bg-slate-50';
+      tr.innerHTML = `<td class="px-4 py-2">${b.d}</td>
+                      <td class="px-4 py-2 font-semibold">${b.a}</td>
+                      <td class="px-4 py-2">${b.q}</td>
+                      <td class="px-4 py-2">${b.v}</td>
+                      <td class="px-4 py-2">${b.note}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    // Holdings pie (mock weights)
+    const pieCtx = document.getElementById('holdingPie').getContext('2d');
+    const holding = [
+      {k:'BTC', w:35}, {k:'ETH', w:30}, {k:'USDT', w:9}, {k:'BNB', w:6}, {k:'SOL', w:5},
+      {k:'USDC', w:4}, {k:'XRP', w:4}, {k:'ADA', w:3}, {k:'DOGE', w:2}, {k:'TON', w:2}
+    ];
+    new Chart(pieCtx,{
+      type:'doughnut',
+      data:{
+        labels:holding.map(h=>h.k),
+        datasets:[{
+          data:holding.map(h=>h.w),
+          backgroundColor:['#f59e0b','#3b82f6','#10b981','#f97316','#8b5cf6','#06b6d4','#ef4444','#84cc16','#f59e0b','#6366f1'],
+          borderWidth:2, borderColor:'#fff'
+        }]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false, cutout:'60%',
+        plugins:{legend:{display:false}, tooltip:{callbacks:{label:(c)=>`${c.label}: ${c.parsed}%`}}}
+      }
+    });
+
+    // Backtest chart removed for cleaner design
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+
+  <!-- Right Drawer Overlay -->
+<div id="rightDrawerBackdrop"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 z-[70]"></div>
+
+<!-- Right Drawer Panel -->
+<aside id="rightDrawer" role="dialog" aria-modal="true" aria-labelledby="rightDrawerTitle"
+  class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0c0d0e] text-slate-200 z-[80]
+         translate-x-full transition-transform duration-300 will-change-transform">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
+    <h2 id="rightDrawerTitle" class="text-sm tracking-wide text-white/80">Menu</h2>
+    <button id="closeRightMenu" aria-label="Close menu"
+      class="h-8 w-8 inline-grid place-items-center rounded-md hover:bg-white/5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/80" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable Menu -->
+  <nav class="px-3 py-2 overflow-y-auto h-[calc(100vh-56px)] text-sm">
+    <ul class="space-y-1">
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">My Account</a></li>
+      <li class="pt-2 pb-1 text-xs uppercase tracking-wide text-white/40">Sites</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Faraday X Home</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FX Super One</a></li>
+      <li><a class="block rounded-md px-3 py-2 bg-white/10" href="#">Faraday Future Home</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">FF 91 2.0</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist Alliance</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF 91 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHypercar+</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHyper 6×4 Architecture 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">All‑Ability aiHypercar</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Platform</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Labs</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Open Platform</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Programs</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">YT Jia's 10‑Punch Combo</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Co‑Creation</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Live & Event</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Company</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Press Room</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Investor Relations</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Get Updates</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Support</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Charging</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Service</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Shop</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Other</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Contact Us</a></li>
+    </ul>
+  </nav>
+</aside>
+<script>
+  (function () {
+    const openBtn = document.getElementById('openRightMenu');
+    const closeBtn = document.getElementById('closeRightMenu');
+    const drawer  = document.getElementById('rightDrawer');
+    const backdrop = document.getElementById('rightDrawerBackdrop');
+
+    const open = () => {
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('pointer-events-none', 'opacity-0');
+      document.body.classList.add('overflow-hidden');
+      // focus the first link for accessibility
+      const firstLink = drawer.querySelector('a,button');
+      if (firstLink) firstLink.focus();
+    };
+
+    const close = () => {
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('pointer-events-none', 'opacity-0');
+      document.body.classList.remove('overflow-hidden');
+      openBtn?.focus();
+    };
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  })();
+
+  // Mobile menu functionality
+  (function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+    }
+
+    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+  })();
+
+  // Language switcher functionality
+  (function() {
+    // Desktop language switcher
+    const langSwitcher = document.getElementById('langSwitcher');
+    const langDropdown = document.getElementById('langDropdown');
+    
+    if (langSwitcher && langDropdown) {
+      langSwitcher.addEventListener('click', function() {
+        langDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
+          langDropdown.classList.add('hidden');
+        }
+      });
+    }
+    
+    // Mobile language switcher
+    const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
+    const mobileLangDropdown = document.getElementById('mobileLangDropdown');
+    
+    if (mobileLangSwitcher && mobileLangDropdown) {
+      mobileLangSwitcher.addEventListener('click', function() {
+        mobileLangDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
+          mobileLangDropdown.classList.add('hidden');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
