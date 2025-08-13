@@ -18,49 +18,28 @@
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800">
   <!-- Top Navigation -->
-  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
+      <a href="ccrypto_treasury_home.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
           <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
         </div>
         <div class="font-semibold tracking-wide">Crypto Treasury</div>
-      </div>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-6">
-        <nav class="flex items-center gap-6 text-sm text-slate-600">
-          <a href="crypto_treasury_home.html" class="hover:text-slate-900">Home</a>
-          <a href="c10_treasury.html" class="hover:text-slate-900 font-bold">C10 Treasury</a>
-          <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
-          <a href="crypto_treasury_home.html#ETF" class="hover:text-slate-900">C10 ETF</a>
-        </nav>
-        <a href="crypto_treasury_home.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-      </div>
-      
-      <!-- Mobile Buttons -->
-      <div class="md:hidden flex items-center gap-2">
-        <a href="crypto_treasury_home.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Mobile Navigation Menu -->
-    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
-      <nav class="px-4 py-3 space-y-1">
-        <a href="crypto_treasury_home.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
-        <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold transition-colors">C10 Treasury</a>
-        <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
-        <a href="crypto_treasury_home.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
-      </nav>
+       
+      </a>
+       <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
+                <a href="crypto_treasury_home.html" class="hover:text-slate-900">Home</a>
+                <a href="c10_treasury.html" class="hover:text-slate-900 font-bold">C10 Treasury</a>
+                <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
+                <a href="crypto_treasury_home.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+            </nav>
+      <button id="openRightMenu"
+  class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50"
+  aria-label="Open menu" aria-haspopup="dialog" aria-controls="rightDrawer">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+  </svg>
+</button>
     </div>
   </header>
 
@@ -460,36 +439,6 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close();
-    });
-  })();
-
-  // Mobile menu functionality
-  (function() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    function toggleMobileMenu() {
-      mobileMenu.classList.toggle('hidden');
-    }
-
-    function closeMobileMenu() {
-      mobileMenu.classList.add('hidden');
-    }
-
-    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-        closeMobileMenu();
-      }
-    });
-
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeMobileMenu();
-      }
     });
   })();
 </script>

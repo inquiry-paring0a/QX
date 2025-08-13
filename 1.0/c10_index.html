@@ -19,49 +19,28 @@
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800">
   <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
+      <a href="crypto_treasury_home.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
           <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
         </div>
         <div class="font-semibold tracking-wide">Crypto Treasury</div>
-      </div>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-6">
-        <nav class="flex items-center gap-6 text-sm text-slate-600">
-          <a href="crypto_treasury_home.html" class="hover:text-slate-900">Home</a>
-          <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
-          <a href="c10_index.html" class="hover:text-slate-900 font-bold">C10 Index</a>
-          <a href="crypto_treasury_home.html#ETF" class="hover:text-slate-900">C10 ETF</a>
-        </nav>
-        <a href="crypto_treasury_home.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-      </div>
-      
-      <!-- Mobile Buttons -->
-      <div class="md:hidden flex items-center gap-2">
-        <a href="crypto_treasury_home.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Mobile Navigation Menu -->
-    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
-      <nav class="px-4 py-3 space-y-1">
-        <a href="crypto_treasury_home.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
-        <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Treasury</a>
-        <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold transition-colors">C10 Index</a>
-        <a href="crypto_treasury_home.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
-      </nav>
+        
+      </a>
+       <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
+                <a href="crypto_treasury_home.html" class="hover:text-slate-900">Home</a>
+                <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
+                <a href="c10_index.html" class="hover:text-slate-900 font-bold">C10 Index</a>
+                <a href="crypto_treasury_home.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+            </nav>
+      <button id="openRightMenu"
+  class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50"
+  aria-label="Open menu" aria-haspopup="dialog" aria-controls="rightDrawer">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+  </svg>
+</button>
     </div>
   </header>
 
@@ -87,7 +66,7 @@
       </div>
 
       <!-- Snapshot Card -->
-      <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto" id="realtime">
+      <div class="bg-white border border-slate-200 rounded-xl p-6" id="realtime">
         <div class="flex items-center gap-2 mb-4">
           <i data-lucide="line-chart" class="h-5 w-5"></i>
           <h3 class="font-semibold">Realtime Snapshot</h3>
@@ -101,8 +80,8 @@
           <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
           <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button>
         </div>
-        <div class="h-64 w-full min-w-0">
-          <canvas id="indexChart" class="w-full h-full"></canvas>
+        <div class="h-64">
+          <canvas id="indexChart"></canvas>
         </div>
         <p class="text-[11px] text-slate-500 mt-3">Section 1 · Realtime data and index chart. Constituents and weights are provided by the Capital Team.</p>
       </div>
@@ -113,7 +92,7 @@
   <section id="methodology" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-100">
     <div class="mx-auto max-w-7xl px-4">
       <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-        <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
           <div class="flex items-center gap-2 mb-3">
             <i data-lucide="book-open" class="h-5 w-5"></i>
             <h3 class="font-semibold">About the C10 Index</h3>
@@ -127,12 +106,12 @@
           <p class="text-[11px] text-slate-500 mt-3">Section 2 · Definition, weighting rules, trend chart, and a full constituent list. Outputs maintained by the Capital Team.</p>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
           <div class="flex items-center gap-2 mb-3">
             <i data-lucide="trending-up" class="h-5 w-5"></i>
             <h4 class="font-semibold">Index Trend (Illustrative)</h4>
           </div>
-          <div class="h-72 w-full min-w-0"><canvas id="trendChart" class="w-full h-full"></canvas></div>
+          <div class="h-72"><canvas id="trendChart"></canvas></div>
         </div>
       </div>
     </div>
@@ -149,10 +128,10 @@
 
       <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
         <!-- Pie -->
-        <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
           <h4 class="font-semibold mb-4 text-center">Weight Distribution</h4>
-          <div class="h-80 w-full min-w-0 flex items-center justify-center">
-            <canvas id="pieChart" class="max-w-full max-h-full"></canvas>
+          <div class="h-80 flex items-center justify-center">
+            <canvas id="pieChart"></canvas>
           </div>
           <p class="text-[11px] text-slate-500 mt-3 text-center">* Weights shown are illustrative; refer to the published methodology for official values.</p>
         </div>
@@ -445,36 +424,6 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close();
-    });
-  })();
-
-  // Mobile menu functionality
-  (function() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    function toggleMobileMenu() {
-      mobileMenu.classList.toggle('hidden');
-    }
-
-    function closeMobileMenu() {
-      mobileMenu.classList.add('hidden');
-    }
-
-    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-        closeMobileMenu();
-      }
-    });
-
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeMobileMenu();
-      }
     });
   })();
 </script>
