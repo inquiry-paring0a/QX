@@ -29,75 +29,7 @@
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800">
     <!-- Navigation -->
-    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
-        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="h-8 w-8 rounded-xl gradient-bg grid place-items-center shadow">
-                    <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
-                </div>
-                <div class="font-bold tracking-wide text-xl hidden md:block">FFAI Crypto Treasury</div>
-                
-            </a>
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center gap-6">
-                <nav class="flex items-center gap-6 text-sm text-slate-600">
-                    <a href="index.html" class="hover:text-slate-900 font-bold gradient-text">Home</a>
-                    <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
-                    <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
-                    <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
-                    <a href="https://www.ff.com/us/" class="hover:text-slate-900" target="_blank">FF</a>
-                </nav>
-                <a href="#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-          Invest in C10
-        </a>
-                <!-- Language Switcher -->
-                <div class="relative">
-                    <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-                        <span class="hidden md:inline">English</span>
-                        <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
-                    </button>
-                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                        <a href="index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
-                        <a href="../cn/index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mobile Buttons -->
-            <div class="md:hidden flex items-center gap-2">
-                <a href="#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-          Invest in C10
-        </a>
-                <!-- Mobile Language Switcher -->
-                <div class="relative">
-                    <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-                    </button>
-                    <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                        <a href="index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
-                        <a href="../cn/index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-                    </div>
-                </div>
-                <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Navigation Menu -->
-        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
-            <nav class="px-4 py-3 space-y-1">
-                <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">Home</a>
-                <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Treasury</a>
-                <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
-                <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
-                <a href="https://www.ff.com/us/" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors" target="_blank">FF</a>
-            </nav>
-        </div>
-    </header>
+
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
