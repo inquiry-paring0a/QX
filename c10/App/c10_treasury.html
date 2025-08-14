@@ -7,9 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon_light.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="../favicon_dark.svg" media="(prefers-color-scheme: dark)">
   <style>
     body {
       font-family: 'Roboto', 'Noto Sans SC', sans-serif;
@@ -18,85 +21,25 @@
       background: linear-gradient(to right,#06b6d4,#2563eb);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
     }
-    /* Note: The .chip class assumes Tailwind @apply via a build step */
-    .chip{ @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border; }
+    /* Chip class with standard CSS instead of @apply */
+    .chip{ 
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      border: 1px solid;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800">
-  <!-- Top Navigation -->
-  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
-    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2">
-        <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
-          <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
-        </div>
-        <div class="font-bold tracking-wide text-xl hidden md:block">FFAI Crypto Treasury</div>
-      </a>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-6">
-        <nav class="flex items-center gap-6 text-sm text-slate-600">
-          <a href="index.html" class="hover:text-slate-900">Home</a>
-          <a href="c10_treasury.html" class="hover:text-slate-900 font-bold gradient-text">C10 Treasury</a>
-          <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
-          <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
-          <a href="https://www.ff.com/us/" class="hover:text-slate-900" target="_blank">FF</a>
-        </nav>
-        <a href="index.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-        <!-- Language Switcher -->
-        <div class="relative">
-            <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-                <span class="hidden md:inline">English</span>
-                <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
-            </button>
-            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                <a href="c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
-                <a href="../cn/c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-            </div>
-        </div>
-      </div>
-      
-      <!-- Mobile Buttons -->
-      <div class="md:hidden flex items-center gap-2">
-        <a href="index.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-        <!-- Mobile Language Switcher -->
-        <div class="relative">
-            <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-            </button>
-            <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                <a href="c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
-                <a href="../cn/c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-            </div>
-        </div>
-        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Mobile Navigation Menu -->
-    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
-      <nav class="px-4 py-3 space-y-1">
-        <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
-        <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">C10 Treasury</a>
-        <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
-        <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
-        <a href="https://www.ff.com/us/" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors" target="_blank">FF</a>
-      </nav>
-    </div>
-  </header>
+
 
   <!-- Hero -->
   <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
-    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
+    <div class="mx-auto max-w-7xl px-4 pt-20 pb-10 sm:pt-24 sm:pb-14 lg:pt-30 lg:pb-20 grid lg:grid-cols-2 gap-8 items-center">
       <div>
         <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
           <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury — Rules‑Based Crypto Basket
@@ -113,23 +56,24 @@
         </p>
 
       </div>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-5">
-          <div class="text-xs text-slate-500">AUM (USD)</div>
-          <div class="text-2xl font-semibold mt-1">$38.6M</div>
-          <div class="text-emerald-600 text-xs mt-2">+2.1% this week</div>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-5">
-          <div class="text-xs text-slate-500">YTD Return</div>
-          <div class="text-2xl font-semibold mt-1">+18.4%</div>
-          <div class="text-slate-500 text-xs mt-2">vs BTC: -3.2%</div>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-5">
-          <div class="text-xs text-slate-500">Annualized Volatility</div>
-          <div class="text-2xl font-semibold mt-1">31.7%</div>
-          <div class="text-slate-500 text-xs mt-2">6.4% lower than BTC</div>
-        </div>
-      </div>
+      <div class="grid grid-cols-2 gap-4"> 
+                            <div class="bg-white border border-blue-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-blue-600 mb-1">10</div>
+                                <div class="text-sm text-slate-600">Core Assets</div>
+                            </div>
+                            <div class="bg-white border border-green-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-green-600 mb-1">≤50%</div>
+                                <div class="text-sm text-slate-600">Single Asset Cap</div>
+                            </div>
+                            <div class="bg-white border border-emerald-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-emerald-600 mb-1">80%</div>
+                                <div class="text-sm text-slate-600">Market Cap Investment</div>
+                            </div>
+                            <div class="bg-white border border-amber-200 rounded-lg p-4 text-center">
+                                <div class="text-3xl font-bold text-amber-600 mb-1">20%</div>
+                                <div class="text-sm text-slate-600">Performance Investment</div>
+                            </div>
+                        </div>
     </div>
   </section>
 
@@ -141,10 +85,10 @@
         <p class="text-slate-700 mb-4">C10 Treasury operates a dual‑engine model of passive index + active sleeve:</p>
         <ul class="space-y-3 text-slate-700">
           <li class="flex gap-2"><i data-lucide="layers" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-            <span><b>Passive (C10)</b>: Rules‑based tracking of the free‑float market cap top 10 crypto assets with scheduled rebalances; objective: market beta.</span>
+            <span><b>Passive</b>: Rules‑based tracking of the free‑float market cap top 10 crypto assets with scheduled rebalances; objective: market beta.</span>
           </li>
           <li class="flex gap-2"><i data-lucide="activity-square" class="h-5 w-5 text-blue-600 shrink-0"></i>
-            <span><b>Active (C0)</b>: 20% sleeve for event‑driven opportunities, correlation trades, hedging, and liquidity management; objective: improve drawdowns and Sharpe.</span>
+            <span><b>Active</b>: 20% sleeve for event‑driven opportunities, correlation trades, hedging, and liquidity management; objective: improve drawdowns and Sharpe.</span>
           </li>
           <li class="flex gap-2"><i data-lucide="shield" class="h-5 w-5 text-cyan-600 shrink-0"></i>
             <span>Full‑stack compliance and security: MPC custody, tiered permissions, allowlists, on‑chain monitoring, and audit logs.</span>
@@ -198,36 +142,208 @@
     </div>
   </section>
 
-  <!-- Section 3: Weekly Buys & Holdings -->
-  <section id="s3" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
-    <div class="mx-auto max-w-7xl px-4">
-      <h2 class="text-2xl font-semibold mb-4">Weekly Purchases & Portfolio Status</h2>
-      <div class="grid lg:grid-cols-2 gap-6">
-        <div class="bg-white border border-slate-200 rounded-xl p-6 overflow-x-auto">
-          <div class="flex items-center gap-2 mb-3">
-            <i data-lucide="shopping-cart" class="h-5 w-5"></i><h4 class="font-semibold">Weekly Purchase Log</h4>
+
+  <!-- Investment Structure Section -->
+  <section id="investment-structure" class="py-12 sm:py-16 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Investment Structure</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">Comprehensive asset allocation strategy with passive and active management components</p>
+      </div>
+      
+      <!-- Pie Charts Row -->
+      <div class="grid lg:grid-cols-3 gap-8 mb-12">
+        <!-- 80% Passive Chart -->
+        <div class="bg-slate-50 rounded-xl p-3">
+          <div class="text-center mb-6">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">80% Passive</h3>
+            <p class="text-sm text-slate-600">Passive tracking C10 index asset allocation</p>
           </div>
-          <table class="min-w-full text-sm">
-            <thead class="bg-slate-100 text-slate-600">
-              <tr>
-                <th class="px-4 py-2 text-left">Date</th>
-                <th class="px-4 py-2 text-left">Asset</th>
-                <th class="px-4 py-2 text-left">Quantity</th>
-                <th class="px-4 py-2 text-left">Notional</th>
-                <th class="px-4 py-2 text-left">Notes</th>
-              </tr>
-            </thead>
-            <tbody id="buyTable"></tbody>
-          </table>
+          <div class="h-80 mb-4 flex items-center justify-center">
+            <canvas id="passive80Chart" style="width: 320px; height: 320px; margin: 0 auto; display: block;"></canvas>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/btc.png" alt="BTC" class="w-4 h-4">
+                <span>BTC</span>
+              </div>
+              <span class="font-medium">35.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/eth.png" alt="ETH" class="w-4 h-4">
+                <span>ETH</span>
+              </div>
+              <span class="font-medium">30.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/xrp.png" alt="XRP" class="w-4 h-4">
+                <span>XRP</span>
+              </div>
+              <span class="font-medium">9.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/bnb.png" alt="BNB" class="w-4 h-4">
+                <span>BNB</span>
+              </div>
+              <span class="font-medium">6.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/sol.png" alt="SOL" class="w-4 h-4">
+                <span>SOL</span>
+              </div>
+              <span class="font-medium">5.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/doge.png" alt="DOGE" class="w-4 h-4">
+                <span>DOGE</span>
+              </div>
+              <span class="font-medium">4.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/ada.png" alt="ADA" class="w-4 h-4">
+                <span>ADA</span>
+              </div>
+              <span class="font-medium">3.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/trx.png" alt="TRX" class="w-4 h-4">
+                <span>TRX</span>
+              </div>
+              <span class="font-medium">2.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/avax.png" alt="AVAX" class="w-4 h-4">
+                <span>AVAX</span>
+              </div>
+              <span class="font-medium">2.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/dot.png" alt="DOT" class="w-4 h-4">
+                <span>DOT</span>
+              </div>
+              <span class="font-medium">1.5%</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-3">* Passive tracking index, rebalanced quarterly</div>
+          </div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-6">
-          <div class="flex items-center gap-2 mb-3">
-            <i data-lucide="pie-chart" class="h-5 w-5"></i><h4 class="font-semibold">Current Holdings</h4>
+
+        <!-- 20% Active Chart -->
+        <div class="bg-slate-50 rounded-xl p-3">
+          <div class="text-center mb-6">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">20% Active</h3>
+            <p class="text-sm text-slate-600">Active management for enhanced returns</p>
           </div>
-          <div class="h-80"><canvas id="holdingPie"></canvas></div>
-          <p class="text-xs text-slate-500 mt-2">* Weights change with rebalances and net flows.</p>
+          <div class="h-80 mb-4 flex items-center justify-center">
+            <canvas id="active20Chart" style="width: 320px; height: 320px; margin: 0 auto; display: block;"></canvas>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/eth.png" alt="ETH" class="w-4 h-4">
+                <span>ETH</span>
+              </div>
+              <span class="font-medium">100.0%</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-3">* Active management, adjusted based on market conditions</div>
+          </div>
+        </div>
+
+        <!-- 100% Total Weight Chart -->
+        <div class="bg-slate-50 rounded-xl p-3">
+          <div class="text-center mb-6">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Total Weight 100%</h3>
+            <p class="text-sm text-slate-600">Combined allocation</p>
+          </div>
+          <div class="h-80 mb-4 flex items-center justify-center">
+            <canvas id="total100Chart" style="width: 320px; height: 320px; margin: 0 auto; display: block;"></canvas>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/btc.png" alt="BTC" class="w-4 h-4">
+                <span>BTC</span>
+              </div>
+              <span class="font-medium">28.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/eth.png" alt="ETH" class="w-4 h-4">
+                <span>ETH</span>
+              </div>
+              <span class="font-medium">44.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/xrp.png" alt="XRP" class="w-4 h-4">
+                <span>XRP</span>
+              </div>
+              <span class="font-medium">7.2%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/bnb.png" alt="BNB" class="w-4 h-4">
+                <span>BNB</span>
+              </div>
+              <span class="font-medium">4.8%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/sol.png" alt="SOL" class="w-4 h-4">
+                <span>SOL</span>
+              </div>
+              <span class="font-medium">4.0%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/doge.png" alt="DOGE" class="w-4 h-4">
+                <span>DOGE</span>
+              </div>
+              <span class="font-medium">3.2%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/ada.png" alt="ADA" class="w-4 h-4">
+                <span>ADA</span>
+              </div>
+              <span class="font-medium">2.4%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/trx.png" alt="TRX" class="w-4 h-4">
+                <span>TRX</span>
+              </div>
+              <span class="font-medium">1.6%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/avax.png" alt="AVAX" class="w-4 h-4">
+                <span>AVAX</span>
+              </div>
+              <span class="font-medium">1.6%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="../crypto-logos/logos/dot.png" alt="DOT" class="w-4 h-4">
+                <span>DOT</span>
+              </div>
+              <span class="font-medium">1.2%</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-3">* Combined passive and active allocations</div>
+          </div>
         </div>
       </div>
+
+
     </div>
   </section>
 
@@ -296,40 +412,7 @@
   </section>
 
   <!-- Footer -->
-    <footer id="contact" class="border-t border-slate-200 bg-white/60">
-        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
-            <div>
-                <a href="index.html" class="flex items-center gap-2 mb-2">
-                    <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
-                        <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
-                    </div>
-                    <div class="font-bold text-lg">FFAI Crypto Treasury</div>
-                </a>
-                <p>Rules-based digital asset indices for institutions.</p>
-            </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Company</div>
-                <ul class="space-y-1">
-                    <li><a class="hover:text-slate-900" href="#business">About</a></li>
-                    <li><a class="hover:text-slate-900" href="#insights">Research</a></li>
-                    <li><a class="hover:text-slate-900" href="#security">Security</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Contact</div>
-                <ul class="space-y-1">
-                    <li>Email: hello@c10index.com</li>
-                    <li>Telegram: @C10Index</li>
-                    <li>Twitter/X: @C10_Index</li>
-                </ul>
-            </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Legal</div>
-                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results.</p>
-            </div>
-        </div>
-        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
-    </footer>
+
 
   <script>
     lucide.createIcons();
@@ -355,47 +438,187 @@
       }
     });
 
-    // --- Section 3: weekly buys (mock) ---
-    const buys = [
-      {d:'2025-07-04', a:'BTC', q:'5.3', v:'$345,000', note:'Rebalance: increased weight'},
-      {d:'2025-07-04', a:'ETH', q:'120', v:'$422,000', note:'Passive creation'},
-      {d:'2025-06-27', a:'SOL', q:'8,400', v:'$1,240,000', note:'Allocate new inflow'},
-      {d:'2025-06-20', a:'USDC', q:'1,100,000', v:'$1,100,000', note:'Liquidity buffer'},
-      {d:'2025-06-13', a:'BNB', q:'1,100', v:'$671,000', note:'Weight calibration'}
+// Investment Structure Charts using ECharts
+    // 80% Passive Chart (70-360 degrees)
+    console.log('Initializing charts...');
+    const passive80Element = document.getElementById('passive80Chart');
+    console.log('passive80Element:', passive80Element);
+    if (!passive80Element) {
+      console.error('passive80Chart element not found!');
+    } else {
+    const passive80Chart = echarts.init(passive80Element, null, {
+      devicePixelRatio: window.devicePixelRatio || 2,
+      renderer: 'canvas'
+    });
+    console.log('passive80Chart initialized:', passive80Chart);
+    const passive80Data = [
+      { name: 'BTC', value: 35.0, itemStyle: { color: '#f7931a' } },
+      { name: 'ETH', value: 30.0, itemStyle: { color: '#627eea' } },
+      { name: 'XRP', value: 9.0, itemStyle: { color: '#23292f' } },
+      { name: 'BNB', value: 6.0, itemStyle: { color: '#f0b90b' } },
+      { name: 'SOL', value: 5.0, itemStyle: { color: '#8950f5' } },
+      { name: 'DOGE', value: 4.0, itemStyle: { color: '#ba9f33' } },
+      { name: 'ADA', value: 3.0, itemStyle: { color: '#0033ad' } },
+      { name: 'TRX', value: 2.0, itemStyle: { color: '#ff0013' } },
+      { name: 'AVAX', value: 2.0, itemStyle: { color: '#e84142' } },
+      { name: 'DOT', value: 1.5, itemStyle: { color: '#e6007a' } }
     ];
-    const tbody = document.getElementById('buyTable');
-    buys.forEach(b=>{
-      const tr = document.createElement('tr');
-      tr.className='border-t border-slate-200 hover:bg-slate-50';
-      tr.innerHTML = `<td class="px-4 py-2">${b.d}</td>
-                      <td class="px-4 py-2 font-semibold">${b.a}</td>
-                      <td class="px-4 py-2">${b.q}</td>
-                      <td class="px-4 py-2">${b.v}</td>
-                      <td class="px-4 py-2">${b.note}</td>`;
-      tbody.appendChild(tr);
+    
+    passive80Chart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          return params.name + ': ' + params.value + '%';
+        }
+      },
+      series: [{
+        type: 'pie',
+        radius: ['45%', '68%'],
+        center: ['50%', '50%'],
+        data: passive80Data,
+        label: {
+          show: true,
+          position: 'outside',
+          formatter: '{b}',
+          fontSize: 11,
+          color: '#374151'
+        },
+        labelLine: {
+          show: true,
+          length: 5,
+          length2: 10,
+          lineStyle: {
+            color: '#9ca3af',
+            width: 1
+          }
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
     });
 
-    // Holdings pie (mock weights)
-    const pieCtx = document.getElementById('holdingPie').getContext('2d');
-    const holding = [
-      {k:'BTC', w:35}, {k:'ETH', w:30}, {k:'USDT', w:9}, {k:'BNB', w:6}, {k:'SOL', w:5},
-      {k:'USDC', w:4}, {k:'XRP', w:4}, {k:'ADA', w:3}, {k:'DOGE', w:2}, {k:'TON', w:2}
-    ];
-    new Chart(pieCtx,{
-      type:'doughnut',
-      data:{
-        labels:holding.map(h=>h.k),
-        datasets:[{
-          data:holding.map(h=>h.w),
-          backgroundColor:['#f59e0b','#3b82f6','#10b981','#f97316','#8b5cf6','#06b6d4','#ef4444','#84cc16','#f59e0b','#6366f1'],
-          borderWidth:2, borderColor:'#fff'
-        }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false, cutout:'60%',
-        plugins:{legend:{display:false}, tooltip:{callbacks:{label:(c)=>`${c.label}: ${c.parsed}%`}}}
-      }
+    // 20% Active Chart (full circle, ETH only)
+    const active20Chart = echarts.init(document.getElementById('active20Chart'), null, {
+      devicePixelRatio: window.devicePixelRatio || 2,
+      renderer: 'canvas'
     });
+    const active20Data = [
+      { name: 'ETH', value: 100, itemStyle: { color: '#627eea' } }
+    ];
+    
+    active20Chart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          return params.name + ': ' + params.value + '%';
+        }
+      },
+      series: [{
+        type: 'pie',
+        radius: ['45%', '68%'],
+        center: ['50%', '50%'],
+        data: active20Data,
+        label: {
+          show: true,
+          position: 'outside',
+          formatter: '{b}',
+          fontSize: 11,
+          color: '#374151'
+        },
+        labelLine: {
+          show: true,
+          length: 8,
+          length2: 15,
+          lineStyle: {
+            color: '#9ca3af',
+            width: 1
+          }
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
+    });
+
+    // 100% Total Weight Chart (0-360 degrees)
+    const total100Chart = echarts.init(document.getElementById('total100Chart'), null, {
+      devicePixelRatio: window.devicePixelRatio || 2,
+      renderer: 'canvas'
+    });
+    // Calculate combined data: 80% passive + 20% active (ETH)
+    const total100Data = [
+        { name: 'BTC', value: 28.0, itemStyle: { color: '#f7931a' } }, // 35 * 0.8
+      { name: 'ETH', value: 44.0, itemStyle: { color: '#627eea' } }, // 30 * 0.8 + 20
+      { name: 'XRP', value: 7.2, itemStyle: { color: '#23292f' } }, // 9 * 0.8
+      { name: 'BNB', value: 4.8, itemStyle: { color: '#f0b90b' } }, // 6 * 0.8
+      { name: 'SOL', value: 4.0, itemStyle: { color: '#8950f5' } }, // 5 * 0.8
+      { name: 'DOGE', value: 3.2, itemStyle: { color: '#ba9f33' } }, // 4 * 0.8
+      { name: 'ADA', value: 2.4, itemStyle: { color: '#0033ad' } }, // 3 * 0.8
+      { name: 'TRX', value: 1.6, itemStyle: { color: '#ff0013' } }, // 2 * 0.8
+      { name: 'AVAX', value: 1.6, itemStyle: { color: '#e84142' } }, // 2 * 0.8
+      { name: 'DOT', value: 1.2, itemStyle: { color: '#e6007a' } } // 1.5 * 0.8
+    ];
+    
+    total100Chart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          return params.name + ': ' + params.value + '%';
+        }
+      },
+      series: [{
+        type: 'pie',
+        radius: ['45%', '68%'],
+        center: ['50%', '50%'],
+        data: total100Data,
+        label: {
+          show: true,
+          position: 'outside',
+          formatter: '{b}',
+          fontSize: 11,
+          color: '#374151'
+        },
+        labelLine: {
+          show: true,
+          length: 5,
+          length2: 10,
+          lineStyle: {
+            color: '#9ca3af',
+            width: 1
+          }
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
+    });
+
+    // Resize all charts after initialization
+    passive80Chart.resize();
+    active20Chart.resize();
+    total100Chart.resize();
+
+    // Window resize handler for charts
+    window.addEventListener('resize', function() {
+      passive80Chart.resize();
+      active20Chart.resize();
+      total100Chart.resize();
+    });
+
+    } // End of else block
 
     // Backtest chart removed for cleaner design
 
@@ -431,46 +654,7 @@
     </button>
   </div>
 
-  <!-- Scrollable Menu -->
-  <nav class="px-3 py-2 overflow-y-auto h-[calc(100vh-56px)] text-sm">
-    <ul class="space-y-1">
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">My Account</a></li>
-      <li class="pt-2 pb-1 text-xs uppercase tracking-wide text-white/40">Sites</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Faraday X Home</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FX Super One</a></li>
-      <li><a class="block rounded-md px-3 py-2 bg-white/10" href="#">Faraday Future Home</a></li>
-
-      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">FF 91 2.0</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist Alliance</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF 91 2.0</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHypercar+</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHyper 6×4 Architecture 2.0</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">All‑Ability aiHypercar</a></li>
-
-      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Platform</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Labs</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Open Platform</a></li>
-
-      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Programs</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">YT Jia's 10‑Punch Combo</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Co‑Creation</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Live & Event</a></li>
-
-      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Company</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Press Room</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Investor Relations</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Get Updates</a></li>
-
-      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Support</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Charging</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Service</a></li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Shop</a></li>
-
-      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Other</li>
-      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Contact Us</a></li>
-    </ul>
-  </nav>
+  
 </aside>
 <script>
   (function () {
