@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FFAI Crypto Treasury</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+    }
+    .gradient-text{
+      background: linear-gradient(to right,#06b6d4,#2563eb);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    /* Note: The .chip class assumes Tailwind @apply via a build step */
+    .chip{ @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <svg width="69" height="30" viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_8174_38274)">
+<path d="M14.26 0.570312H13.1626C12.8598 0.570312 12.6143 0.813358 12.6143 1.11317V10.8875C12.6143 11.1873 12.8598 11.4303 13.1626 11.4303H14.26C14.5629 11.4303 14.8084 11.1873 14.8084 10.8875V1.11317C14.8084 0.813358 14.5629 0.570312 14.26 0.570312Z" fill="black"/>
+<path d="M28.0001 6.67886V5.32114C27.7837 5.24971 27.5666 5.17829 27.3502 5.10686C27.2919 4.75714 27.1995 4.41886 27.0765 4.09543C27.2284 3.92629 27.3796 3.75714 27.5314 3.588C27.3028 3.196 27.0742 2.804 26.8456 2.41257C26.6211 2.45829 26.396 2.50343 26.1714 2.54914C26.06 2.41429 25.9417 2.28514 25.817 2.16171C25.6923 2.03829 25.5624 1.92114 25.4256 1.81086C25.4718 1.58857 25.5174 1.36571 25.5636 1.14343C25.1676 0.917143 24.7716 0.690857 24.3762 0.464571C24.2053 0.614857 24.0344 0.764571 23.8636 0.914857C23.5369 0.793143 23.1951 0.701714 22.8424 0.644571C22.7703 0.429714 22.6975 0.214857 22.6254 0H21.2538C21.1817 0.214286 21.1095 0.429143 21.0368 0.643429C20.6835 0.701143 20.3418 0.792571 20.0151 0.914286C19.8442 0.764 19.6733 0.614286 19.5025 0.464C19.1065 0.690286 18.7105 0.916571 18.3151 1.14286C18.3613 1.36514 18.4069 1.588 18.453 1.81029C18.3168 1.92057 18.1863 2.03771 18.0617 2.16114C17.937 2.28457 17.8186 2.41314 17.7072 2.54857C17.4827 2.50286 17.2576 2.45771 17.033 2.412C16.8044 2.804 16.5758 3.196 16.3472 3.58743C16.499 3.75657 16.6503 3.92571 16.8021 4.09486C16.6792 4.41829 16.5868 4.75657 16.5291 5.10629C16.312 5.17771 16.095 5.24971 15.8779 5.32114V6.67886C16.0944 6.75029 16.3114 6.82171 16.5279 6.89371C16.5862 7.24343 16.6786 7.58171 16.8015 7.90514C16.6497 8.07429 16.4985 8.24343 16.3467 8.41257C16.5752 8.80457 16.8038 9.19657 17.0324 9.588C17.257 9.54229 17.4821 9.49714 17.7067 9.45143C17.8181 9.58629 17.9364 9.71543 18.0611 9.83886C18.1858 9.96229 18.3156 10.0794 18.4525 10.1897C18.4063 10.412 18.3607 10.6349 18.3145 10.8571C18.7105 11.0834 19.1065 11.3097 19.5019 11.536C19.6728 11.3857 19.8436 11.236 20.0145 11.0857C20.3412 11.2074 20.6829 11.2989 21.0362 11.356C21.1084 11.5709 21.1811 11.7857 21.2533 12.0006H22.6248C22.697 11.7863 22.7691 11.5714 22.8419 11.3571C23.1951 11.2994 23.5369 11.208 23.8636 11.0863C24.0344 11.2366 24.2053 11.3863 24.3762 11.5366C24.7722 11.3103 25.1682 11.084 25.5636 10.8577C25.5174 10.6354 25.4718 10.4126 25.4256 10.1903C25.5618 10.08 25.6923 9.96286 25.817 9.83943C25.9417 9.716 26.06 9.58743 26.1714 9.452C26.396 9.49771 26.6211 9.54286 26.8456 9.58857C27.0742 9.19657 27.3028 8.80457 27.5314 8.41314C27.3796 8.244 27.2284 8.07486 27.0765 7.90571C27.1995 7.58229 27.2919 7.244 27.3496 6.89486C27.5666 6.82343 27.7837 6.75143 28.0007 6.68L28.0001 6.67886ZM24.9725 7.26571C24.8062 7.65486 24.5644 8.00686 24.2653 8.30286C23.9663 8.59886 23.6107 8.83829 23.2176 9.00286C22.8263 9.16686 22.3939 9.25829 21.939 9.25829C21.4842 9.25829 21.0524 9.16743 20.6604 9.00286C20.2673 8.83829 19.9117 8.59886 19.6127 8.30286C19.3137 8.00686 19.0718 7.65486 18.9056 7.26571C18.7399 6.87829 18.6476 6.45029 18.6476 6C18.6476 5.54971 18.7393 5.12229 18.9056 4.73429C19.0718 4.34514 19.3137 3.99314 19.6127 3.69714C19.9117 3.40114 20.2673 3.16171 20.6604 2.99714C21.0518 2.83314 21.4842 2.74171 21.939 2.74171C22.3939 2.74171 22.8257 2.83257 23.2176 2.99714C23.6107 3.16171 23.9663 3.40114 24.2653 3.69714C24.5644 3.99314 24.8062 4.34514 24.9725 4.73429C25.1381 5.12171 25.2305 5.54971 25.2305 6C25.2305 6.45029 25.1387 6.87771 24.9725 7.26571Z" fill="black"/>
+<path d="M5.02862 6.18751C5.01996 6.30865 4.97436 6.40408 4.89297 6.47379C4.81158 6.54351 4.70421 6.57836 4.57087 6.57836C4.4254 6.57836 4.31053 6.52979 4.22683 6.43265C4.14312 6.33551 4.10156 6.20236 4.10156 6.03265V5.96408C4.10156 5.85608 4.12061 5.76065 4.15929 5.67836C4.19796 5.59608 4.2528 5.53265 4.32438 5.48865C4.39596 5.44465 4.47908 5.42236 4.57375 5.42236C4.70479 5.42236 4.81042 5.45722 4.89066 5.52693C4.9709 5.59665 5.01708 5.69436 5.02978 5.82008H4.79542C4.78964 5.74751 4.76944 5.69493 4.73423 5.66179C4.69901 5.62922 4.64533 5.61265 4.57375 5.61265C4.49582 5.61265 4.43694 5.64008 4.39827 5.69551C4.35959 5.75093 4.33939 5.83665 4.33881 5.95265V6.03779C4.33881 6.15893 4.35728 6.24808 4.3948 6.30408C4.43175 6.36008 4.49063 6.38808 4.57087 6.38808C4.64302 6.38808 4.69728 6.37151 4.73307 6.33893C4.76886 6.30636 4.78907 6.25608 4.79426 6.18751H5.02862Z" fill="black"/>
+<path d="M6.09662 6.09121C6.16474 6.06093 6.21554 6.01979 6.24902 5.96893C6.2825 5.9175 6.29924 5.8535 6.29924 5.77693C6.29924 5.66893 6.26287 5.58493 6.19014 5.52607C6.1174 5.46664 6.0135 5.4375 5.87958 5.4375H5.45703V6.56264H5.69139V6.15007H5.87785C5.94885 6.28779 6.01985 6.42493 6.09085 6.56264H6.34253V6.55179C6.21958 6.3215 6.09662 6.09179 6.09662 6.09179V6.09121ZM6.01696 5.9175C5.98464 5.94721 5.93903 5.9615 5.88015 5.9615H5.69139V5.62493H5.87958C5.9425 5.62493 5.98925 5.64036 6.01985 5.67007C6.05044 5.70036 6.06545 5.74207 6.06545 5.79464C6.06545 5.84721 6.04929 5.88721 6.01696 5.91693V5.9175Z" fill="black"/>
+<path d="M7.14376 5.94436C7.22284 5.77521 7.30135 5.60664 7.38043 5.4375H7.63673C7.51204 5.67636 7.38794 5.91579 7.26325 6.15464V6.56264H7.02485V6.15464C6.90016 5.91579 6.77605 5.67636 6.65137 5.4375H6.90824C6.98675 5.60664 7.06468 5.77521 7.14318 5.94436H7.14376Z" fill="black"/>
+<path d="M8.83261 5.61579C8.79797 5.55864 8.74775 5.51464 8.6831 5.48379C8.61845 5.45293 8.54341 5.4375 8.45797 5.4375H8.01465V6.56264H8.24901V6.16721H8.45451C8.58959 6.16721 8.69465 6.13521 8.77142 6.07179C8.84762 6.00779 8.88572 5.92093 8.88572 5.81064C8.88572 5.73807 8.8684 5.67293 8.83319 5.61579H8.83261ZM8.59998 5.93579C8.56765 5.96493 8.52032 5.97921 8.45797 5.97921H8.24843V5.6255H8.46317C8.52089 5.62664 8.5665 5.64379 8.59882 5.67807C8.63173 5.71236 8.64789 5.75693 8.64789 5.81179C8.64789 5.86664 8.63173 5.90664 8.59882 5.93579H8.59998Z" fill="black"/>
+<path d="M10.1759 5.6255H9.82783V6.56264H9.59346V5.6255H9.25V5.4375H10.1759V5.6255Z" fill="black"/>
+<path d="M11.4568 5.68351C11.4164 5.59951 11.3593 5.53493 11.286 5.48979C11.2121 5.44465 11.1278 5.42236 11.0331 5.42236C10.9385 5.42236 10.8542 5.44465 10.7803 5.48979C10.7064 5.53493 10.6498 5.59951 10.6094 5.68351C10.569 5.76751 10.5488 5.86522 10.5488 5.97608V6.03151C10.5488 6.13951 10.5702 6.23551 10.6106 6.31836C10.651 6.40179 10.7087 6.46522 10.7826 6.51036C10.8565 6.55493 10.9408 6.57779 11.0349 6.57779C11.129 6.57779 11.2144 6.55493 11.2883 6.50979C11.3622 6.46465 11.4187 6.40008 11.458 6.31665C11.4978 6.23322 11.5175 6.13608 11.5175 6.02522V5.97493C11.5175 5.86465 11.4972 5.76751 11.4568 5.68351ZM11.2802 6.02979C11.2802 6.14636 11.2583 6.23551 11.2161 6.29665C11.174 6.35779 11.1134 6.38808 11.0349 6.38808C10.9564 6.38808 10.8934 6.35665 10.8507 6.29322C10.808 6.22979 10.7867 6.14065 10.7867 6.02636V5.97151C10.7867 5.85493 10.8086 5.76579 10.8513 5.70579C10.894 5.64579 10.9546 5.61493 11.0331 5.61493C11.1116 5.61493 11.1734 5.64579 11.2161 5.70693C11.2588 5.76808 11.2802 5.85779 11.2802 5.97551V6.03036V6.02979Z" fill="black"/>
+<path d="M10.4951 2.84595C10.5973 2.64309 10.7 2.44024 10.8022 2.23738C10.479 1.91738 10.1557 1.59738 9.83245 1.27738C9.62752 1.37909 9.42202 1.48024 9.2171 1.58195C8.93194 1.37909 8.626 1.20367 8.30332 1.05852C8.28946 0.832237 8.27561 0.606523 8.26233 0.380237C7.82074 0.263094 7.37914 0.145951 6.93755 0.0288086C6.81171 0.217951 6.68529 0.407094 6.55945 0.596237C6.3857 0.578523 6.20964 0.570523 6.03127 0.570523C5.8529 0.570523 5.67684 0.579094 5.50308 0.596237C5.37724 0.407094 5.25083 0.217951 5.12499 0.0288086C4.68339 0.145951 4.2418 0.263094 3.8002 0.380237C3.78635 0.605951 3.77307 0.831666 3.75922 1.05795C3.43654 1.20367 3.13059 1.37967 2.84543 1.58252C2.64051 1.48081 2.43501 1.37967 2.23009 1.27795C1.90683 1.59795 1.58357 1.91795 1.26031 2.23795C1.36306 2.44081 1.46523 2.64424 1.56798 2.84709C1.36306 3.12938 1.18585 3.43224 1.03922 3.75167C0.810634 3.76538 0.582621 3.77852 0.354031 3.79224C0.235695 4.22938 0.117359 4.66652 -0.000976562 5.10367C0.190093 5.22824 0.381162 5.35338 0.572231 5.47795C0.554336 5.64995 0.546255 5.82424 0.546255 6.00081C0.546255 6.17738 0.554913 6.35167 0.572231 6.52367C0.381162 6.64824 0.190093 6.77338 -0.000976562 6.89795C0.117359 7.33509 0.235695 7.77224 0.354031 8.20938C0.582044 8.22309 0.810057 8.23624 1.03865 8.24995C1.18585 8.56938 1.36364 8.87224 1.56856 9.15452C1.46581 9.35738 1.36364 9.56081 1.26089 9.76367C1.58415 10.0837 1.90741 10.4037 2.23066 10.7237C2.43559 10.622 2.64109 10.5208 2.84601 10.4191C3.13117 10.622 3.43711 10.7974 3.7598 10.9425C3.77365 11.1688 3.7875 11.3945 3.80078 11.6208C4.24237 11.738 4.68397 11.8551 5.12556 11.9722C5.2514 11.7831 5.37782 11.594 5.50366 11.4048C5.67741 11.4225 5.85347 11.4305 6.03184 11.4305C6.21021 11.4305 6.38627 11.422 6.56003 11.4048C6.68587 11.594 6.81228 11.7831 6.93812 11.9722C7.37972 11.8551 7.82131 11.738 8.26291 11.6208C8.27676 11.3951 8.29004 11.1694 8.30389 10.9431C8.62657 10.7974 8.93252 10.6214 9.21768 10.4185C9.4226 10.5202 9.6281 10.6214 9.83302 10.7231C10.1563 10.4031 10.4795 10.0831 10.8028 9.76309C10.7006 9.56024 10.5979 9.35738 10.4957 9.15452C10.5246 9.11509 10.5523 9.07509 10.58 9.03509C10.6787 8.89052 10.7705 8.74138 10.8548 8.58709C10.8698 8.56024 10.8842 8.53281 10.898 8.50538C11.006 8.29681 10.9073 8.03738 10.6816 7.94252C10.2781 7.77224 9.87401 7.60195 9.47051 7.43224C9.25 7.33909 8.99082 7.43452 8.86729 7.64995C8.83438 7.70709 8.79975 7.76367 8.7628 7.81795C8.64447 7.99224 8.50882 8.15395 8.35815 8.30309C8.05683 8.60138 7.70644 8.83738 7.31045 9.00309C6.91619 9.16824 6.49018 9.25852 6.03184 9.25852C5.57351 9.25852 5.1475 9.16824 4.75324 9.00309C4.35725 8.83738 4.00686 8.60138 3.70553 8.30309C3.40421 8.00481 3.16581 7.65795 2.9984 7.26595C2.83158 6.87567 2.74037 6.45395 2.74037 6.00024C2.74037 5.54652 2.831 5.12481 2.9984 4.73452C3.16581 4.34252 3.40421 3.99567 3.70553 3.69738C4.00686 3.39909 4.35725 3.16309 4.75324 2.99738C5.1475 2.83224 5.57351 2.74195 6.03184 2.74195C6.49018 2.74195 6.91619 2.83224 7.31045 2.99738C7.70644 3.16309 8.05683 3.39909 8.35815 3.69738C8.50882 3.84652 8.64389 4.00881 8.7628 4.18252C8.79975 4.23681 8.83438 4.29338 8.86729 4.35052C8.99082 4.56595 9.25 4.66081 9.47051 4.56824C9.87401 4.39795 10.2781 4.22824 10.6816 4.05795C10.9073 3.96309 11.006 3.70367 10.898 3.49509C10.8836 3.46767 10.8692 3.44024 10.8548 3.41338C10.7705 3.25967 10.6787 3.10995 10.58 2.96538C10.5523 2.92538 10.5246 2.88538 10.4957 2.84595H10.4951Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="clip0_8174_38274">
+<rect width="28" height="12" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+        <div class="font-bold tracking-wide hidden md:block" style="font-size: 24px; font-family: 'Roboto', sans-serif; font-weight: 400;">FFAI Crypto Treasury</div>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        <nav class="flex items-center gap-6 text-sm text-slate-600">
+          <a href="index.html" class="hover:text-slate-900">首页</a>
+                <a href="c10_treasury.html" class="hover:text-slate-900 font-bold gradient-text">C10资产管理</a>
+                <a href="c10_index.html" class="hover:text-slate-900">C10指数</a>
+                <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+                <a href="https://www.faradayfuturecn.com/cn/" class="hover:text-slate-900" target="_blank">FF</a>
+        </nav>
+        <a href="index.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+           投资C10
+         </a>
+        <!-- Language Switcher -->
+        <div class="relative">
+            <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+                <span class="hidden md:inline">中文</span>
+                <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
+            </button>
+            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                <a href="../en/c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
+                <a href="c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+            </div>
+        </div>
+      </div>
+      
+      <!-- Mobile Buttons -->
+      <div class="md:hidden flex items-center gap-2">
+        <a href="index.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+           投资C10
+         </a>
+        <!-- Mobile Language Switcher -->
+        <div class="relative">
+            <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+            </button>
+            <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                <a href="../en/c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
+                <a href="c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+            </div>
+        </div>
+        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+      <nav class="px-4 py-3 space-y-1">
+        <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">首页</a>
+                <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">C10资产管理</a>
+                <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10指数</a>
+                <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
+                <a href="https://www.faradayfuturecn.com/cn/" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors" target="_blank">FF</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+          <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury — Rules‑Based Crypto Basket
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+          规则驱动的资产配置<br>
+          <span class="gradient-text">平衡增长与风险</span>
+        </h1>
+        <p class="mt-4 text-slate-700 max-w-2xl">
+          FF C10 Treasury计划采用"80% 被动 + 20% 主动"的组合配置构建。"80%被动"部分严格按照C10指数被动配置，"20%主动"部分由人工配置前十大流通市值的加密货币（除稳定币和虚假币外），按月度动态调整。
+        </p>
+        <p class="mt-3 text-slate-700 max-w-2xl">
+          我们的第一阶段资产管理规模目标为5-10亿美元（约半年内完成）；第二阶段将冲击100亿美元规模；第三与第四阶段，若ETF牌照获批，资产规模有望实现加速跃升，进入数百亿至千亿美元的增长通道。
+        </p>
+
+      </div>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+          <div class="text-xs text-slate-500">管理资产规模 (USD)</div>
+          <div class="text-2xl font-semibold mt-1">$38.6M</div>
+          <div class="text-emerald-600 text-xs mt-2">本周+2.1%</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+          <div class="text-xs text-slate-500">年初至今收益</div>
+          <div class="text-2xl font-semibold mt-1">+18.4%</div>
+          <div class="text-slate-500 text-xs mt-2">vs BTC: -3.2%</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+          <div class="text-xs text-slate-500">年化波动率</div>
+          <div class="text-2xl font-semibold mt-1">31.7%</div>
+          <div class="text-slate-500 text-xs mt-2">比BTC低6.4%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section id="s1" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-100">
+    <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">概览</h2>
+        <p class="text-slate-700 mb-4">C10资产管理采用被动指数+主动部分的双引擎模式：</p>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-2"><i data-lucide="layers" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+            <span><b>被动部分(C10)</b>：基于规则跟踪自由流通市值前10大加密资产，定期再平衡；目标：市场贝塔。</span>
+          </li>
+          <li class="flex gap-2"><i data-lucide="activity-square" class="h-5 w-5 text-blue-600 shrink-0"></i>
+            <span><b>主动部分(C0)</b>：20%部分用于事件驱动机会、相关性交易、对冲和流动性管理；目标：改善回撤和夏普比率。</span>
+          </li>
+          <li class="flex gap-2"><i data-lucide="shield" class="h-5 w-5 text-cyan-600 shrink-0"></i>
+            <span>全栈合规和安全：MPC托管、分层权限、白名单、链上监控和审计日志。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-6">
+        <h4 class="font-semibold mb-3">流程概览</h4>
+        <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700">
+          <li>策略设计和风险预算</li>
+          <li>在控制台创建交易意图并运行合规检查</li>
+          <li>MPC签名和分层冷/热资金转移</li>
+          <li>执行、结算和对账</li>
+          <li>周报告和公开披露</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Returns & Simulated History -->
+  <section id="s2" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">收益与模拟历史</h2>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm" data-range="1Y">1Y</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="3Y">3Y</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="ALL">ALL</button>
+        </div>
+      </div>
+      <p class="text-slate-600 mb-4">资本团队提供的方法论：以美元计价的净值；回测使用已公布权重进行月度再平衡；基准为BTC。</p>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="line-chart" class="h-5 w-5"></i><h4 class="font-semibold">投资组合净值 vs BTC</h4>
+          </div>
+          <div class="h-72"><canvas id="navChart"></canvas></div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <h4 class="font-semibold mb-3">回撤与风险指标</h4>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li class="flex justify-between"><span>最大回撤</span><span class="font-semibold">-33.8%</span></li>
+            <li class="flex justify-between"><span>年化波动率</span><span class="font-semibold">31.7%</span></li>
+            <li class="flex justify-between"><span>夏普比率 (rf = 0)</span><span class="font-semibold">0.86</span></li>
+            <li class="flex justify-between"><span>月度胜率</span><span class="font-semibold">58%</span></li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-4">* 回测仅供说明，不代表未来结果。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Weekly Buys & Holdings -->
+  <section id="s3" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
+    <div class="mx-auto max-w-7xl px-4">
+      <h2 class="text-2xl font-semibold mb-4">周度购买与投资组合状态</h2>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-white border border-slate-200 rounded-xl p-6 overflow-x-auto">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="shopping-cart" class="h-5 w-5"></i><h4 class="font-semibold">周度购买记录</h4>
+          </div>
+          <table class="min-w-full text-sm">
+            <thead class="bg-slate-100 text-slate-600">
+              <tr>
+                <th class="px-4 py-2 text-left">日期</th>
+                <th class="px-4 py-2 text-left">资产</th>
+                <th class="px-4 py-2 text-left">数量</th>
+                <th class="px-4 py-2 text-left">名义价值</th>
+                <th class="px-4 py-2 text-left">备注</th>
+              </tr>
+            </thead>
+            <tbody id="buyTable"></tbody>
+          </table>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="pie-chart" class="h-5 w-5"></i><h4 class="font-semibold">当前持仓</h4>
+          </div>
+          <div class="h-80"><canvas id="holdingPie"></canvas></div>
+          <p class="text-xs text-slate-500 mt-2">* 权重随再平衡和净流量变化。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: FF C10 Treasury Advantages -->
+  <section id="s4" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">FF C10 Treasury 优势</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">专业的加密资产指数投资解决方案，为您提供全方位的投资保障与便利</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- 一站式便捷投资 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="zap" class="h-6 w-6 text-blue-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">一站式便捷投资</h3>
+              <p class="text-slate-600 leading-relaxed">省去个人研究、购买、存储、监控和调整多个币种的巨大精力与操作成本，提供便捷高效的一站式投资体验。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 自动调仓与专业维护 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="refresh-cw" class="h-6 w-6 text-emerald-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">自动调仓与专业维护</h3>
+              <p class="text-slate-600 leading-relaxed">C10 Treasury每月自动调整持仓结构，严格跟踪市值排名前十的币种。个人投资者手动完成此操作不仅繁琐耗时，且容易出错或滞后。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 透明托管与安全保障 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="shield-check" class="h-6 w-6 text-purple-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">透明托管与安全保障</h3>
+              <p class="text-slate-600 leading-relaxed">提供透明的托管机制，解决个人保管大量加密资产的安全隐患和信任问题。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 专业收益管理与风控 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center shrink-0">
+              <i data-lucide="trending-up" class="h-6 w-6 text-orange-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">专业收益管理与风控</h3>
+              <p class="text-slate-600 leading-relaxed">包含专业的收益管理策略，并内置多种下行保护机制，这些是个人投资者通常难以独立设计和执行的复杂风险管理手段。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+    <footer id="contact" class="border-t border-slate-200 bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+            <div>
+                <a href="index.html" class="flex items-center gap-2 mb-2">
+                    <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center shadow">
+                        <i data-lucide="bar-chart-3" class="h-5 w-5 text-white"></i>
+                    </div>
+                    <div class="font-bold text-lg">FFAI Crypto Treasury</div>
+                </a>
+                <p>面向机构的基于规则的数字资产指数。</p>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">公司</div>
+                <ul class="space-y-1">
+                    <li><a class="hover:text-slate-900" href="#business">关于我们</a></li>
+                    <li><a class="hover:text-slate-900" href="#insights">研究</a></li>
+                    <li><a class="hover:text-slate-900" href="#security">安全</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">联系方式</div>
+                <ul class="space-y-1">
+                    <li>Email: hello@c10index.com</li>
+                    <li>Telegram: @C10Index</li>
+                    <li>Twitter/X: @C10_Index</li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">法律声明</div>
+                <p class="text-xs">所有内容仅供参考，不构成投资建议。数字资产具有波动性并存在风险。过往表现不代表未来结果。</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+    </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // --- Section 2: NAV vs BTC (mock) ---
+    const navCtx = document.getElementById('navChart').getContext('2d');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const navSeries = [100,103,108,104,111,117,121,118,126,132,135,139];
+    const btcSeries = [100,106,114,107,118,126,134,126,140,151,154,160];
+    new Chart(navCtx,{
+      type:'line',
+      data:{
+        labels:months,
+        datasets:[
+          {label:'C10 Treasury NAV', data:navSeries, borderColor:'#0ea5e9', backgroundColor:'rgba(14,165,233,0.08)', fill:true, tension:0.35},
+          {label:'BTC = 100', data:btcSeries, borderColor:'#64748b', backgroundColor:'transparent', fill:false, borderDash:[6,4], tension:0.35}
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:true, labels:{boxWidth:10}}},
+        scales:{y:{beginAtZero:false, grid:{color:'rgba(0,0,0,0.08)'}}, x:{grid:{color:'rgba(0,0,0,0.06)'}}}
+      }
+    });
+
+    // --- Section 3: weekly buys (mock) ---
+    const buys = [
+      {d:'2025-07-04', a:'BTC', q:'5.3', v:'$345,000', note:'Rebalance: increased weight'},
+      {d:'2025-07-04', a:'ETH', q:'120', v:'$422,000', note:'Passive creation'},
+      {d:'2025-06-27', a:'SOL', q:'8,400', v:'$1,240,000', note:'Allocate new inflow'},
+      {d:'2025-06-20', a:'USDC', q:'1,100,000', v:'$1,100,000', note:'Liquidity buffer'},
+      {d:'2025-06-13', a:'BNB', q:'1,100', v:'$671,000', note:'Weight calibration'}
+    ];
+    const tbody = document.getElementById('buyTable');
+    buys.forEach(b=>{
+      const tr = document.createElement('tr');
+      tr.className='border-t border-slate-200 hover:bg-slate-50';
+      tr.innerHTML = `<td class="px-4 py-2">${b.d}</td>
+                      <td class="px-4 py-2 font-semibold">${b.a}</td>
+                      <td class="px-4 py-2">${b.q}</td>
+                      <td class="px-4 py-2">${b.v}</td>
+                      <td class="px-4 py-2">${b.note}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    // Holdings pie (mock weights)
+    const pieCtx = document.getElementById('holdingPie').getContext('2d');
+    const holding = [
+      {k:'BTC', w:35}, {k:'ETH', w:30}, {k:'USDT', w:9}, {k:'BNB', w:6}, {k:'SOL', w:5},
+      {k:'USDC', w:4}, {k:'XRP', w:4}, {k:'ADA', w:3}, {k:'DOGE', w:2}, {k:'TON', w:2}
+    ];
+    new Chart(pieCtx,{
+      type:'doughnut',
+      data:{
+        labels:holding.map(h=>h.k),
+        datasets:[{
+          data:holding.map(h=>h.w),
+          backgroundColor:['#f59e0b','#3b82f6','#10b981','#f97316','#8b5cf6','#06b6d4','#ef4444','#84cc16','#f59e0b','#6366f1'],
+          borderWidth:2, borderColor:'#fff'
+        }]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false, cutout:'60%',
+        plugins:{legend:{display:false}, tooltip:{callbacks:{label:(c)=>`${c.label}: ${c.parsed}%`}}}
+      }
+    });
+
+    // Backtest chart removed for cleaner design
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+
+  <!-- Right Drawer Overlay -->
+<div id="rightDrawerBackdrop"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 z-[70]"></div>
+
+<!-- Right Drawer Panel -->
+<aside id="rightDrawer" role="dialog" aria-modal="true" aria-labelledby="rightDrawerTitle"
+  class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0c0d0e] text-slate-200 z-[80]
+         translate-x-full transition-transform duration-300 will-change-transform">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
+    <h2 id="rightDrawerTitle" class="text-sm tracking-wide text-white/80">Menu</h2>
+    <button id="closeRightMenu" aria-label="Close menu"
+      class="h-8 w-8 inline-grid place-items-center rounded-md hover:bg-white/5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/80" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable Menu -->
+  <nav class="px-3 py-2 overflow-y-auto h-[calc(100vh-56px)] text-sm">
+    <ul class="space-y-1">
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">My Account</a></li>
+      <li class="pt-2 pb-1 text-xs uppercase tracking-wide text-white/40">Sites</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Faraday X Home</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FX Super One</a></li>
+      <li><a class="block rounded-md px-3 py-2 bg-white/10" href="#">Faraday Future Home</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">FF 91 2.0</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist Alliance</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF 91 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHypercar+</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHyper 6×4 Architecture 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">All‑Ability aiHypercar</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Platform</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Labs</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Open Platform</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Programs</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">YT Jia's 10‑Punch Combo</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Co‑Creation</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Live & Event</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Company</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Press Room</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Investor Relations</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Get Updates</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Support</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Charging</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Service</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Shop</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Other</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Contact Us</a></li>
+    </ul>
+  </nav>
+</aside>
+<script>
+  (function () {
+    const openBtn = document.getElementById('openRightMenu');
+    const closeBtn = document.getElementById('closeRightMenu');
+    const drawer  = document.getElementById('rightDrawer');
+    const backdrop = document.getElementById('rightDrawerBackdrop');
+
+    const open = () => {
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('pointer-events-none', 'opacity-0');
+      document.body.classList.add('overflow-hidden');
+      // focus the first link for accessibility
+      const firstLink = drawer.querySelector('a,button');
+      if (firstLink) firstLink.focus();
+    };
+
+    const close = () => {
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('pointer-events-none', 'opacity-0');
+      document.body.classList.remove('overflow-hidden');
+      openBtn?.focus();
+    };
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  })();
+
+  // Mobile menu functionality
+  (function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+    }
+
+    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+  })();
+
+  // Language switcher functionality
+  (function() {
+    // Desktop language switcher
+    const langSwitcher = document.getElementById('langSwitcher');
+    const langDropdown = document.getElementById('langDropdown');
+    
+    if (langSwitcher && langDropdown) {
+      langSwitcher.addEventListener('click', function() {
+        langDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
+          langDropdown.classList.add('hidden');
+        }
+      });
+    }
+    
+    // Mobile language switcher
+    const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
+    const mobileLangDropdown = document.getElementById('mobileLangDropdown');
+    
+    if (mobileLangSwitcher && mobileLangDropdown) {
+      mobileLangSwitcher.addEventListener('click', function() {
+        mobileLangDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
+          mobileLangDropdown.classList.add('hidden');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
