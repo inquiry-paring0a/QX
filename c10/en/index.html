@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KZP3ZNTW');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FFAI Crypto Treasury</title>
@@ -9,90 +20,100 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
     <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Roboto', 'Noto Sans SC', sans-serif;
         }
+
         .gradient-text {
             background: linear-gradient(to right, #06b6d4, #2563eb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
         .gradient-bg {
             background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
         }
     </style>
 </head>
+
 <body class="min-h-screen bg-slate-50 text-slate-800">
     <!-- Navigation -->
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
         <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2">
-                <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
+                <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
             </a>
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center gap-6">
                 <nav class="flex items-center gap-6 text-sm text-slate-600">
                     <a href="index.html" class="hover:text-slate-900 font-bold gradient-text">Home</a>
-                    <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
                     <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
+                    <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
                     <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
-                    <a href="https://www.ff.com/us/" class="hover:text-slate-900" target="_blank">FFAI</a>
                 </nav>
-                <a href="#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-          Invest in C10
-        </a>
-                <!-- Language Switcher -->
-                <div class="relative">
-                    <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-                        <span class="hidden md:inline">English</span>
-                        <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
-                    </button>
-                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                        <a href="index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
-                        <a href="../cn/index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-                    </div>
+                <div class="flex items-center gap-4">
+                    <a href="#invest"
+                        class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+                        Invest in C10
+                    </a>
+                    <a href="https://www.ff.com/us/" target="_blank" class="hover:opacity-80 transition-opacity">
+                        <img src="../assets/icons/brand/FF.svg" width="32" height="24" alt="FF Logo">
+                    </a>
                 </div>
             </div>
-            
+
             <!-- Mobile Buttons -->
             <div class="md:hidden flex items-center gap-2">
-                <a href="#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-          Invest in C10
-        </a>
-                <!-- Mobile Language Switcher -->
-                <div class="relative">
-                    <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-                    </button>
-                    <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                        <a href="index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
-                        <a href="../cn/index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-                    </div>
-                </div>
-                <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                <a href="#invest"
+                    class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+                    Invest in C10
+                </a>
+                <button id="mobileMenuBtn"
+                    class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50"
+                    aria-label="Toggle menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
-        
+
         <!-- Mobile Navigation Menu -->
-        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+        <div id="mobileMenu"
+            class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
             <nav class="px-4 py-3 space-y-1">
-                <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">Home</a>
-                <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Treasury</a>
-                <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
-                <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
-                <a href="https://www.ff.com/us/" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors" target="_blank">FFAI</a>
+                <a href="index.html"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">Home</a>
+                <a href="c10_index.html"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+                    Index</a>
+                <a href="c10_treasury.html"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+                    Treasury</a>
+                <a href="index.html#ETF"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+                    ETF</a>
+                <a href="https://www.ff.com/us/"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
+                    target="_blank">FF</a>
             </nav>
         </div>
     </header>
@@ -104,25 +125,96 @@
             <div>
 
                 <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
-                    EAI+Crypto Dual-Flywheel Driven
-                    <span class="block gradient-text">Building Dual Bridges for Global Investors</span>
+                    EAI + Crypto: The Dual-Flywheel Powering the Future
+                    <span class="block gradient-text">Launching the First C10 Treasury Portfolio</span>
                 </h1>
                 <p class="mt-4 text-slate-600 max-w-xl">
-                    FF launches the pioneering "EAI+Crypto" dual-flywheel & dual-bridge ecosystem strategy, releasing the first crypto asset basket C10 Index on US stock markets, along with the Crypto Treasury plan for asset allocation based on this index, while simultaneously applying for crypto asset index fund ETF licenses. Aiming to build the vanguard navigation in the crypto asset era.
+                    Faraday Future has launched the industry’s first “EAI + Crypto” Dual-Flywheel & Dual-Bridge
+                    Ecosystem Strategy, introducing the C10 Index—the first U.S.-listed basket index of crypto
+                    assets—and unveiling the Crypto C10 Treasury plan, an asset allocation plan based on this index. In
+                    parallel, the company has applied for a crypto asset index fund ETF license. These initiatives aim
+                    to position us as a pioneer and market leader in the era of digital assets.
                 </p>
                 <div class="mt-6 flex flex-wrap items-center gap-3">
-                     <a href="c10_treasury.html" class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
-                         C10 Treasury <i data-lucide="arrow-right" class="h-4 w-4"></i>
-                     </a>
-                     <a href="c10_index.html" class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
-                         C10 Index <i data-lucide="arrow-right" class="h-4 w-4"></i>
-                     </a>
-                 </div>
+                    <a href="c10_index.html"
+                        class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                        C10 Index <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                    <a href="c10_treasury.html"
+                        class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                        C10 Treasury <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
             </div>
 
             <!-- Simplified Chart -->
             <div class="h-80 w-full" id="index">
                 <canvas id="indexChart" class="w-full h-full"></canvas>
+            </div>
+            
+            <div></div>
+            <!-- Assets Display -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4">
+                <!-- BTC -->
+                <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">BTC</div>
+                    <div class="text-xs text-slate-600 font-semibold">28.5%</div>
+                </div>
+
+                <!-- ETH -->
+                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">ETH</div>
+                    <div class="text-xs text-slate-600 font-semibold">22.1%</div>
+                </div>
+
+                <!-- XRP -->
+                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">XRP</div>
+                    <div class="text-xs text-slate-600 font-semibold">8.3%</div>
+                </div>
+
+                <!-- SOL -->
+                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">SOL</div>
+                    <div class="text-xs text-slate-600 font-semibold">7.9%</div>
+                </div>
+
+                <!-- BNB -->
+                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">BNB</div>
+                    <div class="text-xs text-slate-600 font-semibold">6.2%</div>
+                </div>
+
+                <!-- DOGE -->
+                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">DOGE</div>
+                    <div class="text-xs text-slate-600 font-semibold">5.4%</div>
+                </div>
+
+                <!-- ADA -->
+                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">ADA</div>
+                    <div class="text-xs text-slate-600 font-semibold">4.7%</div>
+                </div>
+
+                <!-- AVAX -->
+                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">AVAX</div>
+                    <div class="text-xs text-slate-600 font-semibold">4.1%</div>
+                </div>
+
+                <!-- TRX -->
+                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">TRX</div>
+                    <div class="text-xs text-slate-600 font-semibold">3.8%</div>
+                </div>
+
+                <!-- DOT -->
+                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                    <div class="text-xs font-medium text-slate-900">DOT</div>
+                    <div class="text-xs text-slate-600 font-semibold">3.2%</div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -131,7 +223,8 @@
     <section class="py-16 bg-gradient-to-br from-slate-50 to-white border-t border-slate-200">
         <div class="mx-auto max-w-7xl px-4">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 mb-4">
+                <div
+                    class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 mb-4">
                     <i data-lucide="shield-check" class="h-4 w-4"></i>
                     FFAI Crypto Treasury Strategy
                 </div>
@@ -139,11 +232,18 @@
                     Corporate-Level Crypto Asset Treasury Strategy
                 </h2>
                 <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                    FFAI's Crypto Treasury is independently operated by a wholly-owned subsidiary, using the FFAI C10 Index as a passive base position (single coin weight ≤50%) with 20% active management. Under a framework of compliant custody and staking yields, it rhythmically finances the acquisition and holding of the top ten mainstream cryptocurrencies by market cap, with multiple downside protection mechanisms to stabilize cash flow and enhance net assets, creating synergy with the EAI EV flywheel in a corporate-level crypto asset treasury strategy.
+                    The FFAI Crypto Treasury is operated independently by a wholly owned subsidiary. It uses the FFAI
+                    C10 Index as a passive core position (with any single asset capped at 50% weight) and supplements it
+                    with 20% actively managed positions. Within a framework of compliant custody and staking yield
+                    generation, the strategy involves raising capital in stages to acquire and hold the top ten
+                    mainstream cryptocurrencies by circulating market capitalization. Multiple downside-protection
+                    mechanisms are built in to stabilize cash flow and enhance net assets. This corporate-level digital
+                    asset treasury is designed to work in synergy with the EAI EV Flywheel, creating mutual
+                    reinforcement between the two growth engines.
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-8">
+            <div class="grid lg:grid-cols-4 gap-8">
                 <!-- Core Strategy -->
                 <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                     <div class="flex items-center gap-3 mb-4">
@@ -155,15 +255,15 @@
                     <ul class="space-y-3 text-slate-600">
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>C10 Index as passive base position</span>
+                            <span>Passive core portfolio based on the C10 Index</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Single coin weight ≤50%</span>
+                            <span>Maximum 50% allocation to any single cryptocurrency</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>20% active management allocation</span>
+                            <span>20% allocation to actively managed positions</span>
                         </li>
                     </ul>
                 </div>
@@ -179,15 +279,15 @@
                     <ul class="space-y-3 text-slate-600">
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Independent subsidiary operation</span>
+                            <span>Managed independently by a wholly owned subsidiary</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Compliant custody & staking yields</span>
+                            <span>Compliant custody with staking yield enhancement</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Multiple downside protection mechanisms</span>
+                            <span>Layered downside-protection mechanisms</span>
                         </li>
                     </ul>
                 </div>
@@ -203,106 +303,81 @@
                     <ul class="space-y-3 text-slate-600">
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Stabilize cash flow</span>
+                            <span>Maintain stable cash flow</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Enhance net assets</span>
+                            <span>Strengthen net asset value</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Synergy with EAI EV flywheel</span>
+                            <span>Drive mutual growth with the EAI EV Flywheel</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Key indicators -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="bar-chart-3" class="h-5 w-5 text-orange-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Key indicators</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>AFY (Annual Fixed Yield)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>FAY (Find Annual Yield)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>CNAV (Crypto Net Asset Value)</span>
                         </li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Call to Action -->
-            <div class="text-center mt-12">
-                <a href="c10_treasury.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
-                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
-                    Learn More About Crypto Treasury
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Business -->
-    <section id="business" class="py-14 border-t border-slate-200 bg-slate-100">
-
-        <div class="mx-auto max-w-7xl px-4">
-            <!-- Core Value Proposition -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Counter-Cyclical Capital Structure</h2>
-                <p class="text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
-                    Powered by the world's first C10 index product tradable on US stock exchanges as the capital engine, combined with transparent custody, dynamic rebalancing, yield management, and multiple downside protection mechanisms to create a counter-cyclical capital structure that generates stable and sustainable cash flows with growth potential.
-                </p>
-            </div>
-
-            <!-- Core Mechanisms -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="trending-up" class="h-6 w-6 text-blue-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">C10 Index Product</h3>
-                    <p class="text-slate-600 text-sm">World's first crypto index product tradable on US stock exchanges</p>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="shield-check" class="h-6 w-6 text-green-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Transparent Custody</h3>
-                    <p class="text-slate-600 text-sm">Institutional-grade custody services ensuring asset security and transparency</p>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="refresh-cw" class="h-6 w-6 text-purple-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Dynamic Rebalancing</h3>
-                    <p class="text-slate-600 text-sm">Intelligent portfolio management and risk control</p>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-xl p-6 text-center">
-                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="umbrella" class="h-6 w-6 text-orange-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Downside Protection</h3>
-                    <p class="text-slate-600 text-sm">Multiple protection mechanisms to reduce market volatility risks</p>
-                </div>
-            </div>
-
-            <div class="bg-gradient-to-br from-slate-100 to-white border border-slate-200 rounded-xl p-6">
+            <div class="mt-6 bg-gradient-to-br from-slate-100 to-white border border-slate-200 rounded-xl p-6">
                 <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
                     <div>
                         <h3 class="text-2xl font-semibold mb-2">Why C10 Index?</h3>
                         <ul class="space-y-2 text-slate-700">
                             <li class="flex gap-2">
                                 <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-                                Diversification across leading assets reduces single-coin risk.
+                                Diversification across leading assets reduces single-asset risk
                             </li>
                             <li class="flex gap-2">
                                 <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-                                Lower turnover with scheduled rebalances keeps costs predictable.
+                                Low turnover through periodic rebalancing keeps costs predictable
                             </li>
                             <li class="flex gap-2">
                                 <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-                                Transparent, auditable methodology and public disclosures.
+                                Transparent, auditable methodology with public disclosures
                             </li>
                         </ul>
-                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                            <a href="c10_index.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
-                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
-                    Learn More About C10 Index
-                </a>
-                        </div>
+
                     </div>
                     <div class="h-48 sm:h-60">
                         <canvas id="trendChart" class="w-full h-full"></canvas>
                     </div>
                 </div>
+
             </div>
+            <div class="text-center mt-12">
+                <a href="c10_index.html"
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    Learn More
+                </a>
+            </div>
+
         </div>
     </section>
+
+    
 
     <!-- Constituents Table -->
     <section class="py-14 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
@@ -312,17 +387,19 @@
                 <div class="text-center mb-6">
                     <h3 class="text-3xl font-bold text-slate-900 mb-4">C10 Index Core Definition</h3>
                 </div>
-                
+
                 <div class="space-y-6">
                     <!-- Main Description and Statistics -->
                     <div class="text-center">
                         <p class="text-lg text-slate-700 leading-relaxed mb-6">
-                            Centered on Bitcoin and Ethereum as core assets, encompassing the top ten non-stablecoin crypto assets by circulating market capitalization, calculated using market cap weighted average rules, with a single asset weight cap of 50%.
+                            Centered on Bitcoin and Ethereum as core assets, encompassing the top ten non-stablecoin
+                            crypto assets by circulating market capitalization, calculated using market cap weighted
+                            average rules, with a single asset weight cap of 50%.
                         </p>
-                        
-                        
+
+
                     </div>
-                    
+
                     <!-- Core Features -->
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
@@ -334,7 +411,7 @@
                                 <div class="text-sm text-slate-600">Core Foundation Assets</div>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
                             <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                                 <i data-lucide="bar-chart-3" class="h-5 w-5 text-blue-600"></i>
@@ -344,7 +421,7 @@
                                 <div class="text-sm text-slate-600">Dynamic Weight Allocation</div>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
                             <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                                 <i data-lucide="shield-check" class="h-5 w-5 text-purple-600"></i>
@@ -357,10 +434,12 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <p class="text-slate-600 mb-6 leading-relaxed">
-                The C10 Index section showcases the top ten cryptocurrencies that make up the index and their respective weight distributions. The weights and prices of each cryptocurrency adjust dynamically with market fluctuations, providing investors with a diversified and broad-based crypto asset portfolio reference.
+                The C10 Index section showcases the top ten cryptocurrencies that make up the index and their respective
+                weight distributions. The weights and prices of each cryptocurrency adjust dynamically with market
+                fluctuations, providing investors with a diversified and broad-based crypto asset portfolio reference.
             </p>
 
             <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
@@ -370,7 +449,8 @@
                     <div class="h-96 w-full min-w-0 flex items-center justify-center">
                         <div id="pieChart" class="w-full h-full"></div>
                     </div>
-                    <p class="text-[11px] text-slate-500 mt-3 text-center">* Weights shown are illustrative; refer to published methodology for official values.</p>
+                    <p class="text-[11px] text-slate-500 mt-3 text-center">* Weights shown are illustrative; refer to
+                        published methodology for official values.</p>
                 </div>
 
                 <!-- Table -->
@@ -390,6 +470,14 @@
                     </table>
                 </div>
             </div>
+            <!-- Call to Action -->
+            <div class="text-center mt-12">
+                <a href="c10_treasury.html"
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    Learn More
+                </a>
+            </div>
         </div>
     </section>
 
@@ -399,10 +487,11 @@
             <div class="text-center mb-12">
                 <h3 class="text-3xl font-bold text-slate-900 mb-4">Technology & Security</h3>
                 <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                    Providing institutional-grade protection and optimization for digital assets through multi-layered security architecture, dynamic risk management, and comprehensive compliance systems.
+                    Providing institutional-grade protection and optimization for digital assets through multi-layered
+                    security architecture, dynamic risk management, and comprehensive compliance systems.
                 </p>
             </div>
-            
+
             <div class="grid lg:grid-cols-2 gap-8 mb-12">
                 <!-- Multi-tier Cold/Hot Wallet Separation & Multi-Sig Mechanism -->
                 <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
@@ -410,7 +499,8 @@
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                             <i data-lucide="shield" class="h-6 w-6 text-blue-600"></i>
                         </div>
-                        <h4 class="text-xl font-semibold text-slate-900">Multi-tier Cold/Hot Wallet Separation & Multi-Sig</h4>
+                        <h4 class="text-xl font-semibold text-slate-900">Multi-tier Cold/Hot Wallet Separation &
+                            Multi-Sig</h4>
                     </div>
                     <div class="space-y-3 text-slate-700">
                         <div class="flex items-start gap-2">
@@ -419,11 +509,12 @@
                         </div>
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Hot wallets used only for necessary liquidity operations with multi-signature approval processes</span>
+                            <span>Hot wallets used only for necessary liquidity operations with multi-signature approval
+                                processes</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Dynamic Leverage & Debt Management -->
                 <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6">
                     <div class="flex items-center gap-3 mb-4">
@@ -435,35 +526,40 @@
                     <div class="space-y-3 text-slate-700">
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Following MicroStrategy model, increase holdings through low-cost convertible bonds or targeted loans during high market valuations</span>
+                            <span>Following MicroStrategy model, increase holdings through low-cost convertible bonds or
+                                targeted loans during high market valuations</span>
                         </div>
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Optimize asset-liability structure through partial asset liquidation or debt buybacks during low market valuations</span>
+                            <span>Optimize asset-liability structure through partial asset liquidation or debt buybacks
+                                during low market valuations</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Regular Stress Testing & Scenario Simulation -->
                 <div class="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-6">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                             <i data-lucide="activity" class="h-6 w-6 text-purple-600"></i>
                         </div>
-                        <h4 class="text-xl font-semibold text-slate-900">Regular Stress Testing & Scenario Simulation</h4>
+                        <h4 class="text-xl font-semibold text-slate-900">Regular Stress Testing & Scenario Simulation
+                        </h4>
                     </div>
                     <div class="space-y-3 text-slate-700">
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Quarterly portfolio stress testing including extreme price volatility, liquidity depletion, exchange risks, and other scenarios</span>
+                            <span>Quarterly portfolio stress testing including extreme price volatility, liquidity
+                                depletion, exchange risks, and other scenarios</span>
                         </div>
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Proactive contingency planning to ensure risk control across various market environments</span>
+                            <span>Proactive contingency planning to ensure risk control across various market
+                                environments</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Compliance & Tax Optimization -->
                 <div class="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-6">
                     <div class="flex items-center gap-3 mb-4">
@@ -475,35 +571,14 @@
                     <div class="space-y-3 text-slate-700">
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Continuous monitoring and compliance with digital asset regulations across relevant countries and regions</span>
+                            <span>Continuous monitoring and compliance with digital asset regulations across relevant
+                                countries and regions</span>
                         </div>
                         <div class="flex items-start gap-2">
                             <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
-                            <span>Tax and compliance optimization through trusts or offshore SPVs (Special Purpose Vehicles) when necessary</span>
+                            <span>Tax and compliance optimization through trusts or offshore SPVs (Special Purpose
+                                Vehicles) when necessary</span>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Technology Partners -->
-            <div class="bg-white border border-slate-200 rounded-xl p-8">
-                <h4 class="text-xl font-semibold text-center mb-6">Technology Partners</h4>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">BitGo</div>
-                        <p class="text-sm text-slate-600">Institutional Custody</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">Fireblocks</div>
-                        <p class="text-sm text-slate-600">MPC Wallet Technology</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">Ledger</div>
-                        <p class="text-sm text-slate-600">Hardware Security Module</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="h-16 rounded-xl bg-gradient-to-br from-slate-100 to-white grid place-items-center border border-slate-200 text-slate-700 font-semibold mb-2">Chainlink</div>
-                        <p class="text-sm text-slate-600">Price Oracle</p>
                     </div>
                 </div>
             </div>
@@ -512,70 +587,53 @@
 
     <!-- C10 ETF Section -->
     <div id="ETF"></div>
-<section id="etf" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-50 to-white">
-  <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-    
-    <!-- Left Content -->
-    <div>
-      <h3 class="text-2xl font-semibold mb-3">C10 ETF — Index Investing Made Simple</h3>
-      <p class="text-slate-600 mb-4">
-        The C10 ETF offers investors a regulated, exchange-traded product that mirrors the performance of the C10 Index. 
-        Combining the diversification of the top ten cryptocurrencies with institutional-grade custody, the ETF enables 
-        seamless access to the digital asset market without the complexities of direct wallet management.
-      </p>
-      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <div class="flex items-start gap-3">
-          <i data-lucide="info" class="h-5 w-5 text-blue-600 mt-0.5 shrink-0"></i>
-          <p class="text-blue-800 text-sm">
-            <strong>Latest Update:</strong> FF is currently applying for crypto asset index fund ETF licenses. Upon approval, publicly tradable C10 ETF products will be launched in the open market.
-          </p>
-        </div>
-      </div>
-      <ul class="space-y-3 text-slate-700">
-        <li class="flex gap-2">
-          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-          Fully backed by underlying assets held in secure custody.
-        </li>
-        <li class="flex gap-2">
-          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-          Transparent daily NAV publication and on-chain proof-of-reserves.
-        </li>
-        <li class="flex gap-2">
-          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-          Tradable through major brokerage platforms just like a stock.
-        </li>
-      </ul>
+    <section id="etf"
+        class="py-10 sm:py-14 lg:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-50 to-white">
+        <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
 
-    </div>
+            <!-- Left Content -->
 
-    <!-- Right Illustration -->
-    <div class="bg-white border border-slate-200 rounded-xl p-6">
-      <h4 class="font-semibold mb-4">ETF Highlights</h4>
-      <div class="grid grid-cols-2 gap-4 text-sm text-slate-700">
-        <div class="p-4 border border-slate-200 rounded-lg">
-          <div class="font-semibold">Ticker</div>
-          <div>C10X</div>
-        </div>
-        <div class="p-4 border border-slate-200 rounded-lg">
-          <div class="font-semibold">Exchange</div>
-          <div>NASDAQ</div>
-        </div>
-        <div class="p-4 border border-slate-200 rounded-lg">
-          <div class="font-semibold">Expense Ratio</div>
-          <div>0.45%</div>
-        </div>
-        <div class="p-4 border border-slate-200 rounded-lg">
-          <div class="font-semibold">Custodian</div>
-          <div>Fireblocks MPC</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
+            <h3 class="text-2xl font-semibold mb-3">C10 ETF — Index Investing Made Simple</h3>
+            <p class="text-slate-600 mb-4">
+                The C10 ETF offers investors a regulated, exchange-traded product that mirrors the performance of
+                the C10 Index.
+                Combining the diversification of the top ten cryptocurrencies with institutional-grade custody, the
+                ETF enables
+                seamless access to the digital asset market without the complexities of direct wallet management.
+            </p>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="info" class="h-5 w-5 text-blue-600 mt-0.5 shrink-0"></i>
+                    <p class="text-blue-800 text-sm">
+                        <strong>Latest Update:</strong> FF is currently applying for crypto asset index fund ETF
+                        licenses. Upon approval, publicly tradable C10 ETF products will be launched in the open
+                        market.
+                    </p>
+                </div>
+            </div>
+            <ul class="space-y-3 text-slate-700">
+                <li class="flex gap-2">
+                    <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                    Fully backed by underlying assets held in secure custody.
+                </li>
+                <li class="flex gap-2">
+                    <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                    Transparent daily NAV publication and on-chain proof-of-reserves.
+                </li>
+                <li class="flex gap-2">
+                    <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                    Tradable through major brokerage platforms just like a stock.
+                </li>
+            </ul>
 
 
- 
+
+
+        </div>
+    </section>
+
+
+
 
     <!-- Newsletter Signup Section -->
     <section id="invest" class="bg-slate-100 py-16">
@@ -585,65 +643,73 @@
                 <div>
                     <h2 class="text-3xl font-bold text-slate-900 mb-6">Invest in C10</h2>
                     <p class="text-slate-600 mb-6 text-lg leading-relaxed">
-                        Sign up to learn more about FF ETF — the Web3-native investment vehicle that bridges traditional markets and blockchain assets.
+                        Sign up to learn more about FF ETF — the Web3-native investment vehicle that bridges traditional
+                        markets and blockchain assets.
                     </p>
                     <p class="text-slate-600 leading-relaxed">
-                        You'll receive exclusive updates, index performance insights, and early access to FF's latest developments.
+                        You'll receive exclusive updates, index performance insights, and early access to FF's latest
+                        developments.
                     </p>
                 </div>
-                
+
                 <!-- Right Form -->
                 <div class="bg-white rounded-2xl p-8">
                     <form class="space-y-6">
-                        <div>
-                            <input 
-                                type="text" 
-                                placeholder="First Name" 
-                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                                required
-                            >
+                        <!-- Two-column grid for form fields -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" placeholder="First Name"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div>
+                                <input type="text" placeholder="Last Name"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div>
+                                <input type="email" placeholder="Email Address"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div>
+                                <input type="tel" placeholder="Phone Number"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <input type="text" placeholder="Address"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <select
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent bg-white">
+                                    <option value="">Select Your Role</option>
+                                    <option value="individual">Individual Investor</option>
+                                    <option value="crypto-professional">Crypto Professional</option>
+                                    <option value="institutional">Institutional/Family Office</option>
+                                    <option value="media">Media/Analyst</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                         </div>
-                        
-                        <div>
-                            <input 
-                                type="text" 
-                                placeholder="Last Name" 
-                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                                required
-                            >
-                        </div>
-                        
-                        <div>
-                            <input 
-                                type="email" 
-                                placeholder="Email Address" 
-                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                                required
-                            >
-                        </div>
-                        
-                        <div>
-                            <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent bg-white">
-                                <option value="">Select Your Role</option>
-                                <option value="individual">Individual Investor</option>
-                                <option value="crypto-professional">Crypto Professional</option>
-                                <option value="institutional">Institutional / Family Office</option>
-                                <option value="media">Media / Analyst</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
+
                         <div class="text-xs text-slate-500 leading-relaxed">
-                            When you interact with FF, we may collect and store anonymized and/or permissioned data under applicable Web3 privacy standards and regulations. Our 
-                            <a href="#" class="text-cyan-600 hover:text-cyan-700 underline">Privacy Notice</a> 
+                            When you interact with FF, we may collect and store anonymized and/or permissioned data
+                            under applicable Web3 privacy standards and regulations. Our
+                            <a href="#" class="text-cyan-600 hover:text-cyan-700 underline">Privacy Notice</a>
                             explains how we use and protect your data, whether on-chain or off-chain.
                         </div>
-                        
-                        <button 
-                            type="submit" 
-                            class="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-slate-800 transition-colors"
-                        >
-                            Subscribe Now
+
+                        <button type="submit"
+                            class="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-slate-800 transition-colors">
+                            Request Early Access
                         </button>
                     </form>
                 </div>
@@ -657,18 +723,28 @@
             <div>
                 <a href="index.html" class="flex items-center gap-2">
                     <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="C10 Logo">
-                    <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto Treasury</div>
+                    <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
                 </a>
                 <p class="py-4">Rules-based digital asset indices for institutions</p>
+
+                <!-- Language Switcher -->
+                <div class="mt-2 relative">
+                    <button id="langSwitcher"
+                        class="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>English</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
+                    <div id="langDropdown"
+                        class="absolute left-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50 hidden">
+                        <a href="index.html"
+                            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">English</a>
+                        <a href="../cn/index.html"
+                            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">中文</a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Company</div>
-                <ul class="space-y-1">
-                    <li><a class="hover:text-slate-900" href="#business">About</a></li>
-                    <li><a class="hover:text-slate-900" href="#insights">Research</a></li>
-                    <li><a class="hover:text-slate-900" href="#security">Security</a></li>
-                </ul>
-            </div>
+
             <div>
                 <div class="font-semibold text-slate-900 mb-2">Contact</div>
                 <ul class="space-y-1">
@@ -679,7 +755,9 @@
             </div>
             <div>
                 <div class="font-semibold text-slate-900 mb-2">Legal</div>
-                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results.</p>
+                <p class="text-xs">All content is for informational purposes only and does not constitute investment
+                    advice. Digital assets are volatile and carry risk. Past performance is not indicative of future
+                    results.</p>
             </div>
         </div>
         <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
@@ -689,199 +767,8 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Mock data for charts and table
-        const indexData = [
-            { t: "09:30", v: 2821 },
-            { t: "10:00", v: 2836 },
-            { t: "10:30", v: 2849 },
-            { t: "11:00", v: 2832 },
-            { t: "11:30", v: 2854 },
-            { t: "12:00", v: 2861 },
-            { t: "12:30", v: 2853 },
-            { t: "13:00", v: 2869 },
-            { t: "13:30", v: 2876 },
-            { t: "14:00", v: 2868 },
-            { t: "14:30", v: 2882 },
-            { t: "15:00", v: 2891 }
-        ];
-
-        const constituents = [
-            { rank: 1, symbol: "BTC", name: "Bitcoin", weight: 35.0, price: 119383.71, marketCap: 2380000000000, change: 0.36 },
-            { rank: 2, symbol: "ETH", name: "Ethereum", weight: 25.0, price: 4578.78, marketCap: 552900000000, change: 6.88 },
-            { rank: 3, symbol: "XRP", name: "XRP", weight: 12.0, price: 3.22, marketCap: 191500000000, change: 2.34 },
-            { rank: 4, symbol: "BNB", name: "Binance Coin", weight: 8.0, price: 830.93, marketCap: 115700000000, change: 2.26 },
-            { rank: 5, symbol: "SOL", name: "Solana", weight: 7.0, price: 192.63, marketCap: 103900000000, change: 9.76 },
-            { rank: 6, symbol: "DOGE", name: "Dogecoin", weight: 5.0, price: 0.2343, marketCap: 35200000000, change: 4.15 },
-            { rank: 7, symbol: "ADA", name: "Cardano", weight: 3.5, price: 0.8368, marketCap: 29800000000, change: 7.12 },
-            { rank: 8, symbol: "TRX", name: "Tron", weight: 2.5, price: 0.3522, marketCap: 33300000000, change: 1.22 },
-            { rank: 9, symbol: "AVAX", name: "Avalanche", weight: 1.5, price: 24.55, marketCap: 10900000000, change: 3.45 },
-            { rank: 10, symbol: "DOT", name: "Polkadot", weight: 0.5, price: 4.14, marketCap: 6200000000, change: -1.23 }
-        ];
-
-        // Create index chart
-        const ctx1 = document.getElementById('indexChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: indexData.map(d => d.t),
-                datasets: [{
-                    label: 'C10 Index',
-                    data: indexData.map(d => d.v),
-                    borderColor: '#0ea5e9',
-                    backgroundColor: 'rgba(34, 211, 238, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: true,
-                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                        titleColor: '#374151',
-                        bodyColor: '#374151',
-                        borderColor: '#e2e8f0',
-                        borderWidth: 1,
-                        cornerRadius: 8,
-                        displayColors: false,
-                        callbacks: {
-                            title: function(context) {
-                                return 'Time: ' + context[0].label;
-                            },
-                            label: function(context) {
-                                return 'C10 Index: ' + context.parsed.y.toFixed(2);
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        grid: {
-                            color: 'rgba(0,0,0,0.08)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: 'rgba(0,0,0,0.08)'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Create trend chart
-        const ctx2 = document.getElementById('trendChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: indexData.map(d => d.t),
-                datasets: [{
-                    label: 'Trend',
-                    data: indexData.map(d => d.v),
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'transparent',
-                    fill: false,
-                    tension: 0.4,
-                    pointRadius: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        grid: {
-                            color: 'rgba(0,0,0,0.08)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: 'rgba(0,0,0,0.08)'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Create pie chart for weight distribution using ECharts
-        const pieChart = echarts.init(document.getElementById('pieChart'));
-        const pieData = constituents.map((c, index) => ({
-            name: c.symbol,
-            value: c.weight,
-            itemStyle: {
-                color: [
-                    '#f59e0b','#3b82f6','#10b981','#f97316','#8b5cf6',
-                    '#06b6d4','#ef4444','#84cc16','#f59e0b','#6366f1'
-                ][index % 10]
-            }
-        }));
-        
-        pieChart.setOption({
-            tooltip: {
-                trigger: 'item',
-                formatter: '{b}: {c}%'
-            },
-            series: [{
-                type: 'pie',
-                radius: ['60%', '90%'],
-                center: ['50%', '50%'],
-                data: pieData,
-                label: {
-                    show: true,
-                    position: 'outside',
-                    formatter: '{b}',
-                    fontSize: 12,
-                    color: '#374151'
-                },
-                labelLine: {
-                    show: true,
-                    length: 5,
-                    length2: 15,
-                    lineStyle: {
-                        color: '#9ca3af',
-                        width: 1
-                    }
-                },
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }]
-        });
-
-        // Populate constituents table
-        const tbody = document.getElementById('tableBody');
-        constituents.forEach(c=>{
-            const tr = document.createElement('tr');
-            tr.className = 'border-t border-slate-200 hover:bg-slate-50';
-            tr.innerHTML = `
-                <td class="px-4 py-3">${c.rank}</td>
-                <td class="px-4 py-3 font-semibold">${c.symbol}</td>
-                <td class="px-4 py-3 text-right">${c.weight.toFixed(1)}%</td>
-                <td class="px-4 py-3 text-right">$${c.price.toFixed(2)}</td>
-                <td class="px-4 py-3 text-right">$${(c.marketCap/1e9).toFixed(1)}B</td>
-                <td class="px-4 py-3 ${c.change>=0?'text-emerald-600':'text-rose-600'}">${c.change>=0?'+':''}${c.change.toFixed(2)}%</td>
-            `;
-            tbody.appendChild(tr);
-        });
-
         // 窗口大小变化时重新调整图表大小
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             pieChart.resize();
         });
 
@@ -902,24 +789,24 @@
 
     <!-- Mobile Menu JavaScript -->
     <script>
-        (function() {
+        (function () {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
-            
+
             if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function() {
+                mobileMenuBtn.addEventListener('click', function () {
                     mobileMenu.classList.toggle('hidden');
                 });
-                
+
                 // Close menu when clicking outside
-                document.addEventListener('click', function(event) {
+                document.addEventListener('click', function (event) {
                     if (!mobileMenuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
                         mobileMenu.classList.add('hidden');
                     }
                 });
-                
+
                 // Close menu on escape key
-                document.addEventListener('keydown', function(event) {
+                document.addEventListener('keydown', function (event) {
                     if (event.key === 'Escape') {
                         mobileMenu.classList.add('hidden');
                     }
@@ -930,35 +817,35 @@
 
     <!-- Language Switcher JavaScript -->
     <script>
-        (function() {
+        (function () {
             // Desktop language switcher
             const langSwitcher = document.getElementById('langSwitcher');
             const langDropdown = document.getElementById('langDropdown');
-            
+
             if (langSwitcher && langDropdown) {
-                langSwitcher.addEventListener('click', function() {
+                langSwitcher.addEventListener('click', function () {
                     langDropdown.classList.toggle('hidden');
                 });
-                
+
                 // Close dropdown when clicking outside
-                document.addEventListener('click', function(event) {
+                document.addEventListener('click', function (event) {
                     if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
                         langDropdown.classList.add('hidden');
                     }
                 });
             }
-            
+
             // Mobile language switcher
             const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
             const mobileLangDropdown = document.getElementById('mobileLangDropdown');
-            
+
             if (mobileLangSwitcher && mobileLangDropdown) {
-                mobileLangSwitcher.addEventListener('click', function() {
+                mobileLangSwitcher.addEventListener('click', function () {
                     mobileLangDropdown.classList.toggle('hidden');
                 });
-                
+
                 // Close dropdown when clicking outside
-                document.addEventListener('click', function(event) {
+                document.addEventListener('click', function (event) {
                     if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
                         mobileLangDropdown.classList.add('hidden');
                     }
@@ -967,5 +854,76 @@
         })();
     </script>
 
+    <!-- URL Parameter Control JavaScript -->
+    <script>
+        (function () {
+            // Check URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const onlyApp = urlParams.get('ONLYAPP');
+            
+            if (onlyApp === '1') {
+                // Hide header
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.display = 'none';
+                }
+                
+                // Hide footer
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    footer.style.display = 'none';
+                }
+                
+                // Add 40px top padding to Hero section
+                const heroSection = document.querySelector('#hero');
+                if (heroSection) {
+                    const currentPadding = window.getComputedStyle(heroSection).paddingTop;
+                    const currentPaddingValue = parseInt(currentPadding) || 0;
+                    heroSection.style.paddingTop = (currentPaddingValue + 40) + 'px';
+                }
+                
+                // Add ONLYAPP=1 parameter to all links pointing to c10_index.html and c10_treasury.html
+                const links = document.querySelectorAll('a[href="c10_index.html"], a[href="c10_treasury.html"]');
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && (href === 'c10_index.html' || href === 'c10_treasury.html')) {
+                        link.setAttribute('href', href + '?ONLYAPP=1');
+                    }
+                });
+            }
+        })();
+    </script>
+    <script type="module">
+        import { loadData, loadIndexHistory } from '/script/datasource.js';
+        import { initChart } from '/script/c10_index_chart_2.js';
+        import { renderTable, renderWeightPie } from '/script/c10_latest_data_table_2.js';
+        import { updateHistoryChart } from '/script/c10_index_history.js';
+
+        await loadData((data, isFirst) => {
+            initChart(data.c10Index24h, {
+                cId: 'index',
+                bg: '#d6f1fe',
+                gdColor: '#c3e0ea',
+                axColor: '#b0c8d2',
+            })
+
+            if (isFirst) {
+                renderWeightPie(data.c10LatestMarketData);
+            }
+            renderTable(data.c10LatestMarketData)
+        });
+
+        await loadIndexHistory(data => {
+            updateHistoryChart(data.c10IndexHistory, {
+                cId: 'trendChart',
+            });
+        })
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZP3ZNTW" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 </body>
+
 </html>

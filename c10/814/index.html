@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF C10 - Redirecting...</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon_light.svg">
+    <script>
+        // 始终跳转到stay_tuned.html
+        window.location.href = '/stay_tuned.html';
+    </script>
+    <!-- Fallback meta refresh - 默认跳转到stay_tuned.html -->
+    <meta http-equiv="refresh" content="2; url=/stay_tuned.html">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        
+        .redirect-message {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #333;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: url('/assets/icons/brand/C10.svg') center/contain no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <div class="logo"></div>
+        <p>Redirecting to Stay Tuned...</p>
+        <p><a href="stay_tuned.html" style="color: #667eea;">Continue to Stay Tuned</a></p>
+    </div>
+</body>
+</html>

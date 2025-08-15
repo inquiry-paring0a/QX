@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FFAI Crypto Treasury</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
+  <style>
+    body {
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+    }
+    .gradient-text{
+      background: linear-gradient(to right,#06b6d4,#2563eb);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .feature-card {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       gap: 12px;
+       padding: 16px 20px;
+       background: rgba(255, 255, 255, 0.3);
+       border: 1px solid rgba(148, 163, 184, 0.3);
+       border-radius: 12px;
+       text-align: center;
+       min-height: 100px;
+       width: 240px;
+       color: #334155;
+       font-size: 14px;
+       transition: all 0.2s ease;
+     }
+     .feature-card:hover {
+       background: rgba(255, 255, 255, 0.5);
+       transform: translateY(-2px);
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+     }
+     
+
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        <nav class="flex items-center gap-6 text-sm text-slate-600">
+          <a href="index.html" class="hover:text-slate-900">Home</a>
+          <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
+          <a href="c10_index.html" class="hover:text-slate-900 font-bold gradient-text">C10 Index</a>
+          <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+          <a href="https://www.ff.com/us/" class="hover:text-slate-900" target="_blank">FFAI</a>
+        </nav>
+        <a href="index.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+           Invest in C10
+         </a>
+        <!-- Language Switcher -->
+        <div class="relative">
+            <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+                <span class="hidden md:inline">English</span>
+                <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
+            </button>
+            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                <a href="c10_index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
+                <a href="../cn/c10_index.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+            </div>
+        </div>
+      </div>
+      
+      <!-- Mobile Buttons -->
+      <div class="md:hidden flex items-center gap-2">
+        <a href="index.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+           Invest in C10
+         </a>
+        <!-- Mobile Language Switcher -->
+        <div class="relative">
+            <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
+                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+            </button>
+            <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                <a href="c10_index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
+                <a href="../cn/c10_index.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+            </div>
+        </div>
+        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+      <nav class="px-4 py-3 space-y-1">
+        <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
+        <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Treasury</a>
+        <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">C10 Index</a>
+        <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
+        <a href="https://www.ff.com/us/" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors" target="_blank">FFAI</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
+      <div class="max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+          <i data-lucide="sparkles" class="h-4 w-4"></i> Official Top‑10 Crypto Market Index
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+          Measure the Market
+          <span class="block gradient-text">with the C10 Index</span>
+        </h1>
+        <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
+          FF launches the pioneering "EAI+Crypto" dual-flywheel & dual-bridge ecosystem strategy, releasing the first crypto asset basket C10 Index on US stock markets, along with the Crypto Treasury plan for asset allocation based on this index, while simultaneously applying for crypto asset index fund ETF licenses. Aiming to build the vanguard navigation in the crypto asset era.
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-8">
+          <div class="feature-card">
+            <i data-lucide="target" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-lg">1000</div>
+              <div class="font-medium text-sm">Benchmark Value</div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <i data-lucide="calendar" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-sm">August 16th, PST</div>
+              <div class="font-bold text-sm">12:00 AM</div>
+              <div class="font-medium text-xs mt-1">Benchmark Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Realtime Snapshot Section -->
+  <section class="py-12 sm:py-16 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
+        <i data-lucide="line-chart" class="h-8 w-8"></i>
+        Realtime Snapshot
+      </h2>
+      <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto" id="realtime">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-2">
+            <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
+            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
+            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
+            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
+            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button>
+          </div>
+          <div class="flex gap-2">
+            <span class="bg-slate-900 text-white px-2 py-1 rounded text-sm" id="lastPrice">2,891.42</span>
+            <span class="bg-emerald-100 text-emerald-600 px-2 py-1 rounded text-sm" id="lastChange">+2.13%</span>
+          </div>
+        </div>
+        <div class="h-80 w-full min-w-0">
+          <div id="indexChart" class="w-full h-full"></div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3">Realtime data and index chart.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Section 2: About the C10 Index -->
+  <section id="methodology" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div class="mx-auto max-w-7xl px-4">
+      <!-- Main Title -->
+      <h1 class="text-4xl font-bold text-center mb-12 flex items-center justify-center gap-4">
+        <i data-lucide="book-open" class="h-10 w-10"></i>
+        About the C10 Index
+      </h1>
+      
+      <!-- 4 Theme Blocks, 1 Row 4 Columns Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- First Row -->
+        <!-- Definition Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="info" class="h-6 w-6 text-blue-600"></i>
+            <h3 class="font-semibold text-lg">Index Definition</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Centered on Bitcoin and Ethereum, encompassing the top ten crypto assets by circulating market cap excluding stablecoins, calculated using market cap weighted average rules.</p>
+        </div>
+        
+        <!-- Weighting Rules Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="balance-scale" class="h-6 w-6 text-green-600"></i>
+            <h3 class="font-semibold text-lg">Weighting Rules</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Single asset weight capped at 50%; periodic rebalancing restores target weights; constituents must meet liquidity and eligibility screening standards.</p>
+        </div>
+        
+        <!-- Methodology Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="trending-up" class="h-6 w-6 text-purple-600"></i>
+            <h3 class="font-semibold text-lg">Proven Methodology</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Our index algorithm references the mature methodologies of NASDAQ and S&P 500, ensuring scientific rigor while maintaining sufficient transparency and traceability.</p>
+        </div>
+        
+        <!-- Periodic Rebalancing Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="refresh-cw" class="h-6 w-6 text-orange-600"></i>
+            <h3 class="font-semibold text-lg">Periodic Rebalancing</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Monthly weight adjustments ensure the index composition always reflects the latest market conditions and circulating market cap rankings.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Constituents & Weights -->
+  <section id="constituents" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="flex items-center gap-2 mb-4">
+        <i data-lucide="layout-dashboard" class="h-5 w-5"></i>
+        <h3 class="text-2xl font-semibold">Constituents & Weights</h3>
+      </div>
+      <p class="text-slate-600 mb-6 max-w-3xl">Composition of the C10 Index, including a weight pie chart and a sortable list of assets. </p>
+
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        <!-- Pie -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+          <h4 class="font-semibold mb-4 text-center">Weight Distribution</h4>
+          <div class="h-96 w-full min-w-0 flex items-center justify-center">
+            <div id="pieChart" class="w-full h-full"></div>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-3 text-center">* Weights shown are illustrative; refer to the published methodology for official values.</p>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead class="bg-slate-100 text-slate-600">
+              <tr>
+                <th class="px-4 py-3 text-left font-medium">Rank</th>
+                <th class="px-4 py-3 text-left font-medium">Symbol</th>
+                <th class="px-4 py-3 text-right font-medium">Weight</th>
+                <th class="px-4 py-3 text-right font-medium">Price</th>
+                <th class="px-4 py-3 text-right font-medium">Market Cap</th>
+                <th class="px-4 py-3 text-left font-medium">24h %</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+
+    </div>
+  </section>
+
+<!-- Footer -->
+    <footer id="contact" class="border-t border-slate-200 bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+            <div>
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
+                    <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto Treasury</div>
+                </a>
+                <p class="py-4">Rules-based digital asset indices for institutions</p>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Company</div>
+                <ul class="space-y-1">
+                    <li><a class="hover:text-slate-900" href="#business">About</a></li>
+                    <li><a class="hover:text-slate-900" href="#insights">Research</a></li>
+                    <li><a class="hover:text-slate-900" href="#security">Security</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Contact</div>
+                <ul class="space-y-1">
+                    <li>Email: hello@c10index.com</li>
+                    <li>Telegram: @C10Index</li>
+                    <li>Twitter/X: @C10_Index</li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Legal</div>
+                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+    </footer>
+
+  <script>
+    // Icons
+    lucide.createIcons();
+
+    // ------- Mock data -------
+    const intraday = [
+      { t: "09:30", v: 2821 },
+      { t: "10:00", v: 2836 },
+      { t: "10:30", v: 2849 },
+      { t: "11:00", v: 2832 },
+      { t: "11:30", v: 2854 },
+      { t: "12:00", v: 2861 },
+      { t: "12:30", v: 2853 },
+      { t: "13:00", v: 2869 },
+      { t: "13:30", v: 2876 },
+      { t: "14:00", v: 2868 },
+      { t: "14:30", v: 2882 },
+      { t: "15:00", v: 2891 }
+    ];
+
+    const series = intraday.map(d=>d.v);
+
+    const constituents = [
+      { rank: 1, symbol: "BTC", name: "Bitcoin", weight: 35.0, price: 119523, marketCap: 2379441430804, change: 2.14 },
+      { rank: 2, symbol: "ETH", name: "Ethereum", weight: 30.0, price: 4655.05, marketCap: 561524972194, change: 1.25 },
+      { rank: 3, symbol: "XRP", name: "XRP", weight: 9.0, price: 3.24, marketCap: 192389714758, change: 0.44 },
+      { rank: 4, symbol: "BNB", name: "BNB", weight: 6.0, price: 837.02, marketCap: 116583126591, change: -0.42 },
+      { rank: 5, symbol: "SOL", name: "Solana", weight: 5.0, price: 198.14, marketCap: 106776607698, change: 0.88 },
+      { rank: 6, symbol: "DOGE", name: "Dogecoin", weight: 4.0, price: 0.239, marketCap: 35945639802, change: 0.18 },
+      { rank: 7, symbol: "TRX", name: "TRON", weight: 4.0, price: 0.355, marketCap: 33573703701, change: 0.71 },
+      { rank: 8, symbol: "ADA", name: "Cardano", weight: 3.0, price: 0.858, marketCap: 31179958844, change: -1.31 },
+      { rank: 9, symbol: "LINK", name: "Chainlink", weight: 2.0, price: 24.54, marketCap: 16635807163, change: 1.15 },
+      { rank: 10, symbol: "HYPE", name: "Hyperliquid", weight: 2.0, price: 44.50, marketCap: 14905902394, change: 3.25 }
+    ];
+
+    // ------- Charts -------
+    // Section 1: Realtime line
+    const indexChart = echarts.init(document.getElementById('indexChart'));
+    indexChart.setOption({
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        textStyle: {
+          color: '#374151'
+        },
+        formatter: function(params) {
+          const data = params[0];
+          return `时间: ${data.axisValue}<br/>指数: ${data.value.toFixed(2)}`;
+        }
+      },
+      xAxis: {
+        type: 'category',
+        data: intraday.map(d=>d.t),
+        axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
+        splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
+        axisLabel: { color: 'rgba(0,0,0,0.7)' }
+      },
+      yAxis: {
+        type: 'value',
+        scale: true,
+        axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
+        splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
+        axisLabel: { color: 'rgba(0,0,0,0.7)' }
+      },
+      series: [{
+        name: 'C10 Index',
+        type: 'line',
+        data: series,
+        smooth: false,
+        lineStyle: { color: '#0ea5e9', width: 2 },
+        symbol: 'circle',
+        symbolSize: 4,
+        itemStyle: {
+          color: '#0ea5e9',
+          borderColor: '#ffffff',
+          borderWidth: 2
+        },
+        emphasis: {
+          itemStyle: {
+            color: '#0ea5e9',
+            borderColor: '#ffffff',
+            borderWidth: 3,
+            shadowBlur: 10,
+            shadowColor: 'rgba(14, 165, 233, 0.3)'
+          },
+          symbolSize: 8
+        }
+      }]
+    });
+
+
+
+    // Section 3: Weights pie
+    const pieChart = echarts.init(document.getElementById('pieChart'));
+    const pieData = constituents.map((c, index) => ({
+      name: c.symbol,
+      value: c.weight,
+      itemStyle: {
+        color: [
+          '#f59e0b','#3b82f6','#10b981','#f97316','#8b5cf6',
+          '#06b6d4','#ef4444','#84cc16','#f59e0b','#6366f1'
+        ][index % 10]
+      }
+    }));
+    
+    pieChart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c}%'
+      },
+      series: [{
+        type: 'pie',
+        radius: ['60%', '90%'],
+        center: ['50%', '50%'],
+        data: pieData,
+        label: {
+          show: true,
+          position: 'outside',
+          formatter: '{b}',
+          fontSize: 12,
+          color: '#374151'
+        },
+        labelLine: {
+          show: true,
+          length: 5,
+          length2: 15,
+          lineStyle: {
+            color: '#9ca3af',
+            width: 1
+          }
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
+    });
+
+    // 窗口大小变化时重新调整图表大小
+    window.addEventListener('resize', function() {
+      indexChart.resize();
+      pieChart.resize();
+    });
+
+    // ------- Table -------
+    const tbody = document.getElementById('tableBody');
+    constituents.forEach(c=>{
+      const tr = document.createElement('tr');
+      tr.className = 'border-t border-slate-200 hover:bg-slate-50';
+      tr.innerHTML = `
+        <td class="px-4 py-3">${c.rank}</td>
+        <td class="px-4 py-3 font-semibold">${c.symbol}</td>
+        <td class="px-4 py-3 text-right">${c.weight.toFixed(1)}%</td>
+        <td class="px-4 py-3 text-right">$${c.price.toFixed(2)}</td>
+        <td class="px-4 py-3 text-right">$${(c.marketCap/1e9).toFixed(1)}B</td>
+        <td class="px-4 py-3 ${c.change>=0?'text-emerald-600':'text-rose-600'}">${c.change>=0?'+':''}${c.change.toFixed(2)}%</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+   <!-- Right Drawer Overlay -->
+<div id="rightDrawerBackdrop"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 z-[70]"></div>
+
+<!-- Right Drawer Panel -->
+<aside id="rightDrawer" role="dialog" aria-modal="true" aria-labelledby="rightDrawerTitle"
+  class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0c0d0e] text-slate-200 z-[80]
+         translate-x-full transition-transform duration-300 will-change-transform">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
+    <h2 id="rightDrawerTitle" class="text-sm tracking-wide text-white/80">Menu</h2>
+    <button id="closeRightMenu" aria-label="Close menu"
+      class="h-8 w-8 inline-grid place-items-center rounded-md hover:bg-white/5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/80" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable Menu -->
+  <nav class="px-3 py-2 overflow-y-auto h-[calc(100vh-56px)] text-sm">
+    <ul class="space-y-1">
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">My Account</a></li>
+      <li class="pt-2 pb-1 text-xs uppercase tracking-wide text-white/40">Sites</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Faraday X Home</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FX Super One</a></li>
+      <li><a class="block rounded-md px-3 py-2 bg-white/10" href="#">Faraday Future Home</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">FF 91 2.0</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist Alliance</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Futurist</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF 91 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHypercar+</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">aiHyper 6×4 Architecture 2.0</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">All‑Ability aiHypercar</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Platform</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Labs</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Open Platform</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Programs</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">YT Jia’s 10‑Punch Combo</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Co‑Creation</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Live & Event</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Company</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Press Room</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Investor Relations</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Get Updates</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Support</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Charging</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Service</a></li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">FF Shop</a></li>
+
+      <li class="pt-3 pb-1 text-xs uppercase tracking-wide text-white/40">Other</li>
+      <li><a class="block rounded-md px-3 py-2 hover:bg-white/5" href="#">Contact Us</a></li>
+    </ul>
+  </nav>
+</aside>
+<script>
+  (function () {
+    const openBtn = document.getElementById('openRightMenu');
+    const closeBtn = document.getElementById('closeRightMenu');
+    const drawer  = document.getElementById('rightDrawer');
+    const backdrop = document.getElementById('rightDrawerBackdrop');
+
+    const open = () => {
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('pointer-events-none', 'opacity-0');
+      document.body.classList.add('overflow-hidden');
+      // focus the first link for accessibility
+      const firstLink = drawer.querySelector('a,button');
+      if (firstLink) firstLink.focus();
+    };
+
+    const close = () => {
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('pointer-events-none', 'opacity-0');
+      document.body.classList.remove('overflow-hidden');
+      openBtn?.focus();
+    };
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  })();
+
+  // Mobile menu functionality
+  (function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+    }
+
+    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+  })();
+
+  // Language switcher functionality
+  (function() {
+    // Desktop language switcher
+    const langSwitcher = document.getElementById('langSwitcher');
+    const langDropdown = document.getElementById('langDropdown');
+    
+    if (langSwitcher && langDropdown) {
+      langSwitcher.addEventListener('click', function() {
+        langDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
+          langDropdown.classList.add('hidden');
+        }
+      });
+    }
+    
+    // Mobile language switcher
+    const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
+    const mobileLangDropdown = document.getElementById('mobileLangDropdown');
+    
+    if (mobileLangSwitcher && mobileLangDropdown) {
+      mobileLangSwitcher.addEventListener('click', function() {
+        mobileLangDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
+          mobileLangDropdown.classList.add('hidden');
+        }
+      });
+    }
+  })();
+
+  // Initialize Lucide icons
+  lucide.createIcons();
+</script>
+
+</body>
+</html>

@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KZP3ZNTW');</script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FFAI Crypto Treasury</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -10,19 +21,25 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
   <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
   <style>
     body {
       font-family: 'Roboto', 'Noto Sans SC', sans-serif;
     }
-    .gradient-text{
-      background: linear-gradient(to right,#06b6d4,#2563eb);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+
+    .gradient-text {
+      background: linear-gradient(to right, #06b6d4, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
+
     /* Chip class with standard CSS instead of @apply */
-    .chip{ 
+    .chip {
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
@@ -34,71 +51,75 @@
     }
   </style>
 </head>
+
 <body class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZP3ZNTW" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- Top Navigation -->
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2">
-        <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
+        <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
       </a>
-      
+
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center gap-6">
         <nav class="flex items-center gap-6 text-sm text-slate-600">
           <a href="index.html" class="hover:text-slate-900">Home</a>
-          <a href="c10_treasury.html" class="hover:text-slate-900 font-bold gradient-text">C10 Treasury</a>
           <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
+          <a href="c10_treasury.html" class="hover:text-slate-900 font-bold gradient-text">C10 Treasury</a>
           <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
-          <a href="https://www.ff.com/us/" class="hover:text-slate-900" target="_blank">FFAI</a>
         </nav>
-        <a href="index.html#invest" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-        <!-- Language Switcher -->
-        <div class="relative">
-            <button id="langSwitcher" class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-                <span class="hidden md:inline">English</span>
-                <i data-lucide="chevron-down" class="h-3.5 w-3.5 hidden md:inline"></i>
-            </button>
-            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                <a href="c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
-                <a href="../cn/c10_treasury.html" class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-            </div>
+        <div class="flex items-center gap-4">
+          <a href="index.html#invest"
+            class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+            Invest in C10
+          </a>
+          <a href="https://www.ff.com/us/" target="_blank" class="hover:opacity-80 transition-opacity">
+            <img src="../assets/icons/brand/FF.svg" width="32" height="24" alt="FF Logo">
+          </a>
         </div>
+
       </div>
-      
+
       <!-- Mobile Buttons -->
       <div class="md:hidden flex items-center gap-2">
-        <a href="index.html#invest" class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-           Invest in C10
-         </a>
-        <!-- Mobile Language Switcher -->
-        <div class="relative">
-            <button id="mobileLangSwitcher" class="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" style="font-size: 14px;">
-                <i data-lucide="globe" class="h-3.5 w-3.5"></i>
-            </button>
-            <div id="mobileLangDropdown" class="hidden absolute right-0 mt-2 w-24 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
-                <a href="c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">EN</a>
-                <a href="../cn/c10_treasury.html" class="block px-3 py-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
-            </div>
-        </div>
-        <button id="mobileMenuBtn" class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50" aria-label="Toggle menu">
+        <a href="index.html#invest"
+          class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+          Invest in C10
+        </a>
+
+        <button id="mobileMenuBtn"
+          class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50"
+          aria-label="Toggle menu">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </div>
-    
+
     <!-- Mobile Navigation Menu -->
-    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+    <div id="mobileMenu"
+      class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
       <nav class="px-4 py-3 space-y-1">
-        <a href="index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
-        <a href="c10_treasury.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">C10 Treasury</a>
-        <a href="c10_index.html" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
-        <a href="index.html#ETF" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
-        <a href="https://www.ff.com/us/" class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors" target="_blank">FFAI</a>
+        <a href="index.html"
+          class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
+        <a href="c10_index.html"
+          class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+          Index</a>
+        <a href="c10_treasury.html"
+          class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md font-bold gradient-text transition-colors">C10
+          Treasury</a>
+        <a href="index.html#ETF"
+          class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+          ETF</a>
+        <a href="https://www.ff.com/us/"
+          class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
+          target="_blank">FF</a>
       </nav>
     </div>
   </header>
@@ -107,7 +128,8 @@
   <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
     <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
       <div>
-        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
           <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury — Rules‑Based Crypto Basket
         </div>
         <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
@@ -115,31 +137,36 @@
           <span class="gradient-text">Balancing Growth and Risk</span>
         </h1>
         <p class="mt-4 text-slate-700 max-w-2xl">
-          FF C10 Treasury plans to adopt an "80% Passive + 20% Active" portfolio configuration. The "80% Passive" portion strictly follows the C10 Index passive allocation, while the "20% Active" portion is manually configured with the top ten cryptocurrencies by market cap (excluding stablecoins and fake coins), with monthly dynamic adjustments.
+          FF C10 Treasury plans to adopt an "80% Passive + 20% Active" portfolio configuration. The "80% Passive"
+          portion strictly follows the C10 Index passive allocation, while the "20% Active" portion is manually
+          configured with the top ten cryptocurrencies by market cap (excluding stablecoins and fake coins), with
+          monthly dynamic adjustments.
         </p>
         <p class="mt-3 text-slate-700 max-w-2xl">
-          Our first-phase asset management scale target is $5-10 billion (to be completed within approximately six months); the second phase will target $100 billion scale; in the third and fourth phases, if ETF licenses are approved, asset scale is expected to achieve accelerated growth, entering the growth channel of hundreds of billions to trillions of dollars.
+          Our first-phase asset management scale target is $5-10 billion (to be completed within approximately six
+          months); the second phase will target $100 billion scale; in the third and fourth phases, if ETF licenses are
+          approved, asset scale is expected to achieve accelerated growth, entering the growth channel of hundreds of
+          billions to trillions of dollars.
         </p>
 
       </div>
-      <div class="grid grid-cols-2 gap-4"> 
-                            <div class="bg-white border border-blue-200 rounded-lg p-4 text-center">
-                                <div class="text-3xl font-bold text-blue-600 mb-1">10</div>
-                                <div class="text-sm text-slate-600">Core Assets</div>
-                            </div>
-                            <div class="bg-white border border-green-200 rounded-lg p-4 text-center">
-                                <div class="text-3xl font-bold text-green-600 mb-1">≤50%</div>
-                                <div class="text-sm text-slate-600">Single Asset Cap</div>
-                            </div>
-                            <div class="bg-white border border-emerald-200 rounded-lg p-4 text-center">
-                                <div class="text-3xl font-bold text-emerald-600 mb-1">80%</div>
-                                <div class="text-sm text-slate-600">Market Cap Investment</div>
-                            </div>
-                            <div class="bg-white border border-amber-200 rounded-lg p-4 text-center">
-                                <div class="text-3xl font-bold text-amber-600 mb-1">20%</div>
-                                <div class="text-sm text-slate-600">Performance Investment</div>
-                            </div>
-                        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white border border-slate-200 rounded-lg p-4">
+          <div class="text-sm text-slate-500 mb-1">AUM (USD)</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">$38.6M</div>
+          <div class="text-sm text-green-600">+2.1% this week</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-lg p-4">
+          <div class="text-sm text-slate-500 mb-1">YTD Return</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">+18.4%</div>
+          <div class="text-sm text-slate-600">vs BTC: -3.2%</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-lg p-4">
+          <div class="text-sm text-slate-500 mb-1">Annualized Volatility</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">31.7%</div>
+          <div class="text-sm text-slate-600">6.4% lower than BTC</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -151,13 +178,16 @@
         <p class="text-slate-700 mb-4">C10 Treasury operates a dual‑engine model of passive index + active sleeve:</p>
         <ul class="space-y-3 text-slate-700">
           <li class="flex gap-2"><i data-lucide="layers" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-            <span><b>Passive</b>: Rules‑based tracking of the free‑float market cap top 10 crypto assets with scheduled rebalances; objective: market beta.</span>
+            <span><b>Passive</b>: Rules‑based tracking of the free‑float market cap top 10 crypto assets with scheduled
+              rebalances; objective: market beta.</span>
           </li>
           <li class="flex gap-2"><i data-lucide="activity-square" class="h-5 w-5 text-blue-600 shrink-0"></i>
-            <span><b>Active</b>: 20% sleeve for event‑driven opportunities, correlation trades, hedging, and liquidity management; objective: improve drawdowns and Sharpe.</span>
+            <span><b>Active</b>: 20% sleeve for event‑driven opportunities, correlation trades, hedging, and liquidity
+              management; objective: improve drawdowns and Sharpe.</span>
           </li>
           <li class="flex gap-2"><i data-lucide="shield" class="h-5 w-5 text-cyan-600 shrink-0"></i>
-            <span>Full‑stack compliance and security: MPC custody, tiered permissions, allowlists, on‑chain monitoring, and audit logs.</span>
+            <span>Full‑stack compliance and security: MPC custody, tiered permissions, allowlists, on‑chain monitoring,
+              and audit logs.</span>
           </li>
         </ul>
       </div>
@@ -185,12 +215,14 @@
           <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="ALL">ALL</button>
         </div>
       </div>
-      <p class="text-slate-600 mb-4">Methodology provided by the Capital Team: NAV in USD; backtests use published weights with monthly rebalances; benchmark is BTC.</p>
+      <p class="text-slate-600 mb-4">Methodology provided by the Capital Team: NAV in USD; backtests use published
+        weights with monthly rebalances; benchmark is BTC.</p>
 
       <div class="grid lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-6">
           <div class="flex items-center gap-2 mb-3">
-            <i data-lucide="line-chart" class="h-5 w-5"></i><h4 class="font-semibold">Portfolio NAV vs BTC</h4>
+            <i data-lucide="line-chart" class="h-5 w-5"></i>
+            <h4 class="font-semibold">Portfolio NAV vs BTC</h4>
           </div>
           <div class="h-72"><canvas id="navChart"></canvas></div>
         </div>
@@ -198,8 +230,10 @@
           <h4 class="font-semibold mb-3">Drawdown & Risk Metrics</h4>
           <ul class="space-y-3 text-sm text-slate-700">
             <li class="flex justify-between"><span>Max Drawdown</span><span class="font-semibold">-33.8%</span></li>
-            <li class="flex justify-between"><span>Annualized Volatility</span><span class="font-semibold">31.7%</span></li>
-            <li class="flex justify-between"><span>Sharpe Ratio (rf = 0)</span><span class="font-semibold">0.86</span></li>
+            <li class="flex justify-between"><span>Annualized Volatility</span><span class="font-semibold">31.7%</span>
+            </li>
+            <li class="flex justify-between"><span>Sharpe Ratio (rf = 0)</span><span class="font-semibold">0.86</span>
+            </li>
             <li class="flex justify-between"><span>Monthly Win Rate</span><span class="font-semibold">58%</span></li>
           </ul>
           <p class="text-xs text-slate-500 mt-4">* Backtests are illustrative and not indicative of future results.</p>
@@ -214,199 +248,262 @@
     <div class="mx-auto max-w-6xl px-4">
       <div class="text-center mb-12">
         <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Investment Structure</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">Comprehensive asset allocation strategy with passive and active management components</p>
+        <p class="text-slate-600 max-w-2xl mx-auto">Comprehensive asset allocation strategy with passive and active
+          management components</p>
       </div>
-      
-      <!-- Pie Charts Row -->
-      <div class="grid lg:grid-cols-3 gap-8 mb-12">
-        <!-- 80% Passive Chart -->
-        <div class="bg-slate-50 rounded-xl p-3">
-          <div class="text-center mb-6">
-            <h3 class="text-xl font-bold text-slate-900 mb-2">80% Passive</h3>
-            <p class="text-sm text-slate-600">Passive tracking C10 index asset allocation</p>
-          </div>
-          <div class="h-80 mb-4 flex items-center justify-center">
-            <canvas id="passive80Chart" style="width: 320px; height: 320px; margin: 0 auto; display: block;"></canvas>
-          </div>
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/btc.png" alt="BTC" class="w-4 h-4">
-                <span>BTC</span>
-              </div>
-              <span class="font-medium">35.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/eth.png" alt="ETH" class="w-4 h-4">
-                <span>ETH</span>
-              </div>
-              <span class="font-medium">30.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/xrp.png" alt="XRP" class="w-4 h-4">
-                <span>XRP</span>
-              </div>
-              <span class="font-medium">9.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/bnb.png" alt="BNB" class="w-4 h-4">
-                <span>BNB</span>
-              </div>
-              <span class="font-medium">6.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/sol.png" alt="SOL" class="w-4 h-4">
-                <span>SOL</span>
-              </div>
-              <span class="font-medium">5.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/doge.png" alt="DOGE" class="w-4 h-4">
-                <span>DOGE</span>
-              </div>
-              <span class="font-medium">4.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/ada.png" alt="ADA" class="w-4 h-4">
-                <span>ADA</span>
-              </div>
-              <span class="font-medium">3.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/trx.png" alt="TRX" class="w-4 h-4">
-                <span>TRX</span>
-              </div>
-              <span class="font-medium">2.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/avax.png" alt="AVAX" class="w-4 h-4">
-                <span>AVAX</span>
-              </div>
-              <span class="font-medium">2.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/dot.png" alt="DOT" class="w-4 h-4">
-                <span>DOT</span>
-              </div>
-              <span class="font-medium">1.5%</span>
-            </div>
-            <div class="text-xs text-slate-500 mt-3">* Passive tracking index, rebalanced quarterly</div>
-          </div>
-        </div>
 
-        <!-- 20% Active Chart -->
-        <div class="bg-slate-50 rounded-xl p-3">
-          <div class="text-center mb-6">
-            <h3 class="text-xl font-bold text-slate-900 mb-2">20% Active</h3>
-            <p class="text-sm text-slate-600">Active management for enhanced returns</p>
-          </div>
-          <div class="h-80 mb-4 flex items-center justify-center">
-            <canvas id="active20Chart" style="width: 320px; height: 320px; margin: 0 auto; display: block;"></canvas>
-          </div>
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/eth.png" alt="ETH" class="w-4 h-4">
-                <span>ETH</span>
-              </div>
-              <span class="font-medium">100.0%</span>
-            </div>
-            <div class="text-xs text-slate-500 mt-3">* Active management, adjusted based on market conditions</div>
-          </div>
-        </div>
-
-        <!-- 100% Total Weight Chart -->
-        <div class="bg-slate-50 rounded-xl p-3">
+      <!-- Investment Structure Layout -->
+      <div class="grid lg:grid-cols-2 gap-8 mb-12">
+        <!-- Total Weight 100% - Left Side -->
+        <div class="bg-slate-50 rounded-xl p-6">
           <div class="text-center mb-6">
             <h3 class="text-xl font-bold text-slate-900 mb-2">Total Weight 100%</h3>
             <p class="text-sm text-slate-600">Combined allocation</p>
           </div>
-          <div class="h-80 mb-4 flex items-center justify-center">
-            <canvas id="total100Chart" style="width: 320px; height: 320px; margin: 0 auto; display: block;"></canvas>
-          </div>
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/btc.png" alt="BTC" class="w-4 h-4">
-                <span>BTC</span>
+          <div class="flex flex-col lg:flex-col gap-8">
+            <!-- Chart -->
+            <div class="flex-1 mb-6">
+              <div class="h-80 flex items-center justify-center">
+                <canvas id="total100Chart" style="width: 350px; height: 350px; margin: 0 auto; display: block;"></canvas>
               </div>
-              <span class="font-medium">28.0%</span>
             </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/eth.png" alt="ETH" class="w-4 h-4">
-                <span>ETH</span>
+            <!-- Asset List -->
+            <div class="flex-1 space-y-2 text-sm mt-8">
+              <!-- Header -->
+              <div class="grid grid-cols-3 gap-2 pb-2 border-b border-slate-200 font-medium text-slate-600 text-xs">
+                <span>Asset</span>
+                <span class="text-center">Holdings</span>
+                <span class="text-right">Weight</span>
               </div>
-              <span class="font-medium">44.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/xrp.png" alt="XRP" class="w-4 h-4">
-                <span>XRP</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/btc.png" alt="BTC" class="w-4 h-4">
+                  <span>BTC</span>
+                </div>
+                <span class="text-center font-medium">2.8</span>
+                <span class="text-right font-medium">28.0%</span>
               </div>
-              <span class="font-medium">7.2%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/bnb.png" alt="BNB" class="w-4 h-4">
-                <span>BNB</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/eth.png" alt="ETH" class="w-4 h-4">
+                  <span>ETH</span>
+                </div>
+                <span class="text-center font-medium">44.0</span>
+                <span class="text-right font-medium">44.0%</span>
               </div>
-              <span class="font-medium">4.8%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/sol.png" alt="SOL" class="w-4 h-4">
-                <span>SOL</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/xrp.png" alt="XRP" class="w-4 h-4">
+                  <span>XRP</span>
+                </div>
+                <span class="text-center font-medium">3,600</span>
+                <span class="text-right font-medium">7.2%</span>
               </div>
-              <span class="font-medium">4.0%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/doge.png" alt="DOGE" class="w-4 h-4">
-                <span>DOGE</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/bnb.png" alt="BNB" class="w-4 h-4">
+                  <span>BNB</span>
+                </div>
+                <span class="text-center font-medium">7.2</span>
+                <span class="text-right font-medium">4.8%</span>
               </div>
-              <span class="font-medium">3.2%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/ada.png" alt="ADA" class="w-4 h-4">
-                <span>ADA</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/sol.png" alt="SOL" class="w-4 h-4">
+                  <span>SOL</span>
+                </div>
+                <span class="text-center font-medium">18.0</span>
+                <span class="text-right font-medium">4.0%</span>
               </div>
-              <span class="font-medium">2.4%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/trx.png" alt="TRX" class="w-4 h-4">
-                <span>TRX</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/doge.png" alt="DOGE" class="w-4 h-4">
+                  <span>DOGE</span>
+                </div>
+                <span class="text-center font-medium">800</span>
+                <span class="text-right font-medium">3.2%</span>
               </div>
-              <span class="font-medium">1.6%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/avax.png" alt="AVAX" class="w-4 h-4">
-                <span>AVAX</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/ada.png" alt="ADA" class="w-4 h-4">
+                  <span>ADA</span>
+                </div>
+                <span class="text-center font-medium">480</span>
+                <span class="text-right font-medium">2.4%</span>
               </div>
-              <span class="font-medium">1.6%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="../assets/icons/crypto/dot.png" alt="DOT" class="w-4 h-4">
-                <span>DOT</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/trx.png" alt="TRX" class="w-4 h-4">
+                  <span>TRX</span>
+                </div>
+                <span class="text-center font-medium">640</span>
+                <span class="text-right font-medium">1.6%</span>
               </div>
-              <span class="font-medium">1.2%</span>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/avax.png" alt="AVAX" class="w-4 h-4">
+                  <span>AVAX</span>
+                </div>
+                <span class="text-center font-medium">3.2</span>
+                <span class="text-right font-medium">1.6%</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 items-center">
+                <div class="flex items-center gap-2">
+                  <img src="../assets/icons/crypto/dot.png" alt="DOT" class="w-4 h-4">
+                  <span>DOT</span>
+                </div>
+                <span class="text-center font-medium">14.4</span>
+                <span class="text-right font-medium">1.2%</span>
+              </div>
+              <div class="text-xs text-slate-500 mt-3">* Combined passive and active allocation</div>
             </div>
-            <div class="text-xs text-slate-500 mt-3">* Combined passive and active allocations</div>
           </div>
         </div>
+
+        <!-- Right Side: 80% and 20% Stacked -->
+        <div class="space-y-6">
+          <!-- 80% Passive Chart -->
+          <div class="bg-slate-50 rounded-xl p-6">
+            <div class="text-center mb-6">
+              <h3 class="text-xl font-bold text-slate-900 mb-2">80% Passive</h3>
+              <p class="text-sm text-slate-600">Passive tracking C10 index asset allocation</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-6">
+              <!-- Chart -->
+              <div class="flex-1">
+                <div class="h-64 flex items-center justify-center">
+                  <canvas id="passive80Chart" style="width: 240px; height: 240px; margin: 0 auto; display: block;"></canvas>
+                </div>
+              </div>
+              <!-- Asset List -->
+              <div class="flex-1 space-y-2 text-sm">
+                <!-- Header -->
+                <div class="grid grid-cols-3 gap-2 pb-2 border-b border-slate-200 font-medium text-slate-600 text-xs">
+                  <span>Asset</span>
+                  <span class="text-center">Holdings</span>
+                  <span class="text-right">Weight</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/btc.png" alt="BTC" class="w-4 h-4">
+                    <span>BTC</span>
+                  </div>
+                  <span class="text-center font-medium">2.8</span>
+                  <span class="text-right font-medium">35.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/eth.png" alt="ETH" class="w-4 h-4">
+                    <span>ETH</span>
+                  </div>
+                  <span class="text-center font-medium">30.0</span>
+                  <span class="text-right font-medium">30.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/xrp.png" alt="XRP" class="w-4 h-4">
+                    <span>XRP</span>
+                  </div>
+                  <span class="text-center font-medium">3,240</span>
+                  <span class="text-right font-medium">9.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/bnb.png" alt="BNB" class="w-4 h-4">
+                    <span>BNB</span>
+                  </div>
+                  <span class="text-center font-medium">5.8</span>
+                  <span class="text-right font-medium">6.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/sol.png" alt="SOL" class="w-4 h-4">
+                    <span>SOL</span>
+                  </div>
+                  <span class="text-center font-medium">15.0</span>
+                  <span class="text-right font-medium">5.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/doge.png" alt="DOGE" class="w-4 h-4">
+                    <span>DOGE</span>
+                  </div>
+                  <span class="text-center font-medium">640</span>
+                  <span class="text-right font-medium">4.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/ada.png" alt="ADA" class="w-4 h-4">
+                    <span>ADA</span>
+                  </div>
+                  <span class="text-center font-medium">360</span>
+                  <span class="text-right font-medium">3.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/trx.png" alt="TRX" class="w-4 h-4">
+                    <span>TRX</span>
+                  </div>
+                  <span class="text-center font-medium">480</span>
+                  <span class="text-right font-medium">2.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/avax.png" alt="AVAX" class="w-4 h-4">
+                    <span>AVAX</span>
+                  </div>
+                  <span class="text-center font-medium">2.4</span>
+                  <span class="text-right font-medium">2.0%</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 items-center">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/dot.png" alt="DOT" class="w-4 h-4">
+                    <span>DOT</span>
+                  </div>
+                  <span class="text-center font-medium">10.8</span>
+                  <span class="text-right font-medium">1.5%</span>
+                </div>
+                <div class="text-xs text-slate-500 mt-3">* Passive tracking index, rebalanced quarterly</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 20% Active Chart -->
+          <div class="bg-slate-50 rounded-xl p-6">
+            <div class="text-center mb-6">
+              <h3 class="text-xl font-bold text-slate-900 mb-2">20% Active</h3>
+              <p class="text-sm text-slate-600">Active management for enhanced returns</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-6">
+              <!-- Chart -->
+              <div class="flex-1">
+                <div class="h-64 flex items-center justify-center">
+                  <canvas id="active20Chart" style="width: 240px; height: 240px; margin: 0 auto; display: block;"></canvas>
+                </div>
+              </div>
+              <!-- Asset List -->
+              <div class="flex-1 space-y-2 text-sm">
+                <!-- Header -->
+                <div class="grid grid-cols-3 gap-4 pb-2 border-b border-slate-200 text-xs font-medium text-slate-600">
+                  <span>Asset</span>
+                  <span class="text-center">Holdings</span>
+                  <span class="text-right">Weight</span>
+                </div>
+                <!-- Asset Row -->
+                <div class="grid grid-cols-3 gap-4 items-center py-1">
+                  <div class="flex items-center gap-2">
+                    <img src="../assets/icons/crypto/eth.png" alt="ETH" class="w-4 h-4">
+                    <span>ETH</span>
+                  </div>
+                  <span class="text-center text-slate-600">8.8</span>
+                  <span class="font-medium text-right">100.0%</span>
+                </div>
+                <div class="text-xs text-slate-500 mt-3">* Active management, adjusted based on market conditions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
 
@@ -418,9 +515,10 @@
     <div class="mx-auto max-w-6xl px-4">
       <div class="text-center mb-12">
         <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">FF C10 Treasury Advantages</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">Professional crypto asset index investment solutions providing comprehensive investment protection and convenience</p>
+        <p class="text-slate-600 max-w-2xl mx-auto">Professional crypto asset index investment solutions providing
+          comprehensive investment protection and convenience</p>
       </div>
-      
+
       <div class="grid md:grid-cols-2 gap-6">
         <!-- One-Stop Convenient Investment -->
         <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -430,11 +528,13 @@
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-900 mb-3">One-Stop Convenient Investment</h3>
-              <p class="text-slate-600 leading-relaxed">Eliminates the enormous effort and operational costs of individual research, purchasing, storage, monitoring, and adjustment of multiple cryptocurrencies, providing a convenient and efficient one-stop investment experience.</p>
+              <p class="text-slate-600 leading-relaxed">Eliminates the enormous effort and operational costs of
+                individual research, purchasing, storage, monitoring, and adjustment of multiple cryptocurrencies,
+                providing a convenient and efficient one-stop investment experience.</p>
             </div>
           </div>
         </div>
-        
+
         <!-- Automatic Rebalancing & Professional Maintenance -->
         <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-start gap-4">
@@ -442,12 +542,15 @@
               <i data-lucide="refresh-cw" class="h-6 w-6 text-emerald-600"></i>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-slate-900 mb-3">Automatic Rebalancing & Professional Maintenance</h3>
-              <p class="text-slate-600 leading-relaxed">C10 Treasury automatically adjusts portfolio structure monthly, strictly tracking the top ten cryptocurrencies by market cap. Manual completion of this operation by individual investors is not only cumbersome and time-consuming, but also prone to errors or delays.</p>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">Automatic Rebalancing & Professional Maintenance
+              </h3>
+              <p class="text-slate-600 leading-relaxed">C10 Treasury automatically adjusts portfolio structure monthly,
+                strictly tracking the top ten cryptocurrencies by market cap. Manual completion of this operation by
+                individual investors is not only cumbersome and time-consuming, but also prone to errors or delays.</p>
             </div>
           </div>
         </div>
-        
+
         <!-- Transparent Custody & Security Assurance -->
         <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-start gap-4">
@@ -456,11 +559,12 @@
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-900 mb-3">Transparent Custody & Security Assurance</h3>
-              <p class="text-slate-600 leading-relaxed">Provides transparent custody mechanisms, solving security risks and trust issues associated with individual custody of large amounts of crypto assets.</p>
+              <p class="text-slate-600 leading-relaxed">Provides transparent custody mechanisms, solving security risks
+                and trust issues associated with individual custody of large amounts of crypto assets.</p>
             </div>
           </div>
         </div>
-        
+
         <!-- Professional Yield Management & Risk Control -->
         <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-start gap-4">
@@ -469,7 +573,9 @@
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-900 mb-3">Professional Yield Management & Risk Control</h3>
-              <p class="text-slate-600 leading-relaxed">Includes professional yield management strategies and built-in multiple downside protection mechanisms, which are complex risk management tools that individual investors typically find difficult to design and execute independently.</p>
+              <p class="text-slate-600 leading-relaxed">Includes professional yield management strategies and built-in
+                multiple downside protection mechanisms, which are complex risk management tools that individual
+                investors typically find difficult to design and execute independently.</p>
             </div>
           </div>
         </div>
@@ -478,64 +584,74 @@
   </section>
 
   <!-- Footer -->
-    <footer id="contact" class="border-t border-slate-200 bg-white/60">
-        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
-            <div>
-                <a href="index.html" class="flex items-center gap-2">
-                  <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
-                  <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto Treasury</div>
-                </a>
-                <p class="py-4">Rules-based digital asset indices for institutions</p>
-            </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Company</div>
-                <ul class="space-y-1">
-                    <li><a class="hover:text-slate-900" href="#business">About</a></li>
-                    <li><a class="hover:text-slate-900" href="#insights">Research</a></li>
-                    <li><a class="hover:text-slate-900" href="#security">Security</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Contact</div>
-                <ul class="space-y-1">
-                    <li>Email: hello@c10index.com</li>
-                    <li>Telegram: @C10Index</li>
-                    <li>Twitter/X: @C10_Index</li>
-                </ul>
-            </div>
-            <div>
-                <div class="font-semibold text-slate-900 mb-2">Legal</div>
-                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results.</p>
-            </div>
+  <footer id="contact" class="border-t border-slate-200 bg-white/60">
+    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+      <div>
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="C10 Logo">
+          <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
+        </a>
+        <p class="py-4">Rules-based digital asset indices for institutions</p>
+
+        <!-- Language Switcher -->
+        <div class="mt-2 relative">
+          <button id="langSwitcher"
+            class="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+            <span>English</span>
+            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+          </button>
+          <div id="langDropdown"
+            class="absolute left-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50 hidden">
+            <a href="c10_treasury.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">English</a>
+            <a href="../cn/c10_treasury.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">中文</a>
+          </div>
         </div>
-        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
-    </footer>
+      </div>
+
+      <div>
+        <div class="font-semibold text-slate-900 mb-2">Contact</div>
+        <ul class="space-y-1">
+          <li>Email: hello@c10index.com</li>
+          <li>Telegram: @C10Index</li>
+          <li>Twitter/X: @C10_Index</li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold text-slate-900 mb-2">Legal</div>
+        <p class="text-xs">All content is for informational purposes only and does not constitute investment
+          advice. Digital assets are volatile and carry risk. Past performance is not indicative of future
+          results.</p>
+      </div>
+    </div>
+    <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+  </footer>
 
   <script>
     lucide.createIcons();
 
     // --- Section 2: NAV vs BTC (mock) ---
     const navCtx = document.getElementById('navChart').getContext('2d');
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const navSeries = [100,103,108,104,111,117,121,118,126,132,135,139];
-    const btcSeries = [100,106,114,107,118,126,134,126,140,151,154,160];
-    new Chart(navCtx,{
-      type:'line',
-      data:{
-        labels:months,
-        datasets:[
-          {label:'C10 Treasury NAV', data:navSeries, borderColor:'#0ea5e9', backgroundColor:'rgba(14,165,233,0.08)', fill:true, tension:0.35},
-          {label:'BTC = 100', data:btcSeries, borderColor:'#64748b', backgroundColor:'transparent', fill:false, borderDash:[6,4], tension:0.35}
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const navSeries = [100, 103, 108, 104, 111, 117, 121, 118, 126, 132, 135, 139];
+    const btcSeries = [100, 106, 114, 107, 118, 126, 134, 126, 140, 151, 154, 160];
+    new Chart(navCtx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          { label: 'C10 Treasury NAV', data: navSeries, borderColor: '#0ea5e9', backgroundColor: 'rgba(14,165,233,0.08)', fill: true, tension: 0.35 },
+          { label: 'BTC = 100', data: btcSeries, borderColor: '#64748b', backgroundColor: 'transparent', fill: false, borderDash: [6, 4], tension: 0.35 }
         ]
       },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:true, labels:{boxWidth:10}}},
-        scales:{y:{beginAtZero:false, grid:{color:'rgba(0,0,0,0.08)'}}, x:{grid:{color:'rgba(0,0,0,0.06)'}}}
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, labels: { boxWidth: 10 } } },
+        scales: { y: { beginAtZero: false, grid: { color: 'rgba(0,0,0,0.08)' } }, x: { grid: { color: 'rgba(0,0,0,0.06)' } } }
       }
     });
 
-// Investment Structure Charts using ECharts
+    // Investment Structure Charts using ECharts
     // 80% Passive Chart (70-360 degrees)
     console.log('Initializing charts...');
     const passive80Element = document.getElementById('passive80Chart');
@@ -543,315 +659,339 @@
     if (!passive80Element) {
       console.error('passive80Chart element not found!');
     } else {
-    const passive80Chart = echarts.init(passive80Element, null, {
-      devicePixelRatio: window.devicePixelRatio || 2,
-      renderer: 'canvas'
-    });
-    console.log('passive80Chart initialized:', passive80Chart);
-    const passive80Data = [
-      { name: 'BTC', value: 35.0, itemStyle: { color: '#f7931a' } },
-      { name: 'ETH', value: 30.0, itemStyle: { color: '#627eea' } },
-      { name: 'XRP', value: 9.0, itemStyle: { color: '#23292f' } },
-      { name: 'BNB', value: 6.0, itemStyle: { color: '#f0b90b' } },
-      { name: 'SOL', value: 5.0, itemStyle: { color: '#8950f5' } },
-      { name: 'DOGE', value: 4.0, itemStyle: { color: '#ba9f33' } },
-      { name: 'ADA', value: 3.0, itemStyle: { color: '#0033ad' } },
-      { name: 'TRX', value: 2.0, itemStyle: { color: '#ff0013' } },
-      { name: 'AVAX', value: 2.0, itemStyle: { color: '#e84142' } },
-      { name: 'DOT', value: 1.5, itemStyle: { color: '#e6007a' } }
-    ];
-    
-    passive80Chart.setOption({
-      tooltip: {
-        trigger: 'item',
-        formatter: function(params) {
-          return params.name + ': ' + params.value + '%';
-        }
-      },
-      series: [{
-        type: 'pie',
-        radius: ['45%', '68%'],
-        center: ['50%', '50%'],
-        data: passive80Data,
-        label: {
-          show: true,
-          position: 'outside',
-          formatter: '{b}',
-          fontSize: 11,
-          color: '#374151'
-        },
-        labelLine: {
-          show: true,
-          length: 5,
-          length2: 10,
-          lineStyle: {
-            color: '#9ca3af',
-            width: 1
-          }
-        },
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }]
-    });
+      const passive80Chart = echarts.init(passive80Element, null, {
+        devicePixelRatio: window.devicePixelRatio || 2,
+        renderer: 'canvas'
+      });
+      console.log('passive80Chart initialized:', passive80Chart);
+      const passive80Data = [
+        { name: 'BTC', value: 35.0, itemStyle: { color: '#f7931a' } },
+        { name: 'ETH', value: 30.0, itemStyle: { color: '#627eea' } },
+        { name: 'XRP', value: 9.0, itemStyle: { color: '#23292f' } },
+        { name: 'BNB', value: 6.0, itemStyle: { color: '#f0b90b' } },
+        { name: 'SOL', value: 5.0, itemStyle: { color: '#8950f5' } },
+        { name: 'DOGE', value: 4.0, itemStyle: { color: '#ba9f33' } },
+        { name: 'ADA', value: 3.0, itemStyle: { color: '#0033ad' } },
+        { name: 'TRX', value: 2.0, itemStyle: { color: '#ff0013' } },
+        { name: 'AVAX', value: 2.0, itemStyle: { color: '#e84142' } },
+        { name: 'DOT', value: 1.5, itemStyle: { color: '#e6007a' } }
+      ];
 
-    // 20% Active Chart (full circle, ETH only)
-    const active20Chart = echarts.init(document.getElementById('active20Chart'), null, {
-      devicePixelRatio: window.devicePixelRatio || 2,
-      renderer: 'canvas'
-    });
-    const active20Data = [
-      { name: 'ETH', value: 100, itemStyle: { color: '#627eea' } }
-    ];
-    
-    active20Chart.setOption({
-      tooltip: {
-        trigger: 'item',
-        formatter: function(params) {
-          return params.name + ': ' + params.value + '%';
-        }
-      },
-      series: [{
-        type: 'pie',
-        radius: ['45%', '68%'],
-        center: ['50%', '50%'],
-        data: active20Data,
-        label: {
-          show: true,
-          position: 'outside',
-          formatter: '{b}',
-          fontSize: 11,
-          color: '#374151'
-        },
-        labelLine: {
-          show: true,
-          length: 8,
-          length2: 15,
-          lineStyle: {
-            color: '#9ca3af',
-            width: 1
+      passive80Chart.setOption({
+        tooltip: {
+          trigger: 'item',
+          formatter: function (params) {
+            return params.name + ': ' + params.value + '%';
           }
         },
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
+        series: [{
+          type: 'pie',
+          radius: ['45%', '68%'],
+          center: ['50%', '50%'],
+          data: passive80Data,
+          label: {
+            show: true,
+            position: 'outside',
+            formatter: '{b}',
+            fontSize: 11,
+            color: '#374151'
+          },
+          labelLine: {
+            show: true,
+            length: 5,
+            length2: 10,
+            lineStyle: {
+              color: '#9ca3af',
+              width: 1
+            }
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
           }
-        }
-      }]
-    });
+        }]
+      });
 
-    // 100% Total Weight Chart (0-360 degrees)
-    const total100Chart = echarts.init(document.getElementById('total100Chart'), null, {
-      devicePixelRatio: window.devicePixelRatio || 2,
-      renderer: 'canvas'
-    });
-    // Calculate combined data: 80% passive + 20% active (ETH)
-    const total100Data = [
+      // 20% Active Chart (full circle, ETH only)
+      const active20Chart = echarts.init(document.getElementById('active20Chart'), null, {
+        devicePixelRatio: window.devicePixelRatio || 2,
+        renderer: 'canvas'
+      });
+      const active20Data = [
+        { name: 'ETH', value: 100, itemStyle: { color: '#627eea' } }
+      ];
+
+      active20Chart.setOption({
+        tooltip: {
+          trigger: 'item',
+          formatter: function (params) {
+            return params.name + ': ' + params.value + '%';
+          }
+        },
+        series: [{
+          type: 'pie',
+          radius: ['45%', '68%'],
+          center: ['50%', '50%'],
+          data: active20Data,
+          label: {
+            show: true,
+            position: 'outside',
+            formatter: '{b}',
+            fontSize: 11,
+            color: '#374151'
+          },
+          labelLine: {
+            show: true,
+            length: 8,
+            length2: 15,
+            lineStyle: {
+              color: '#9ca3af',
+              width: 1
+            }
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }]
+      });
+
+      // 100% Total Weight Chart (0-360 degrees)
+      const total100Chart = echarts.init(document.getElementById('total100Chart'), null, {
+        devicePixelRatio: window.devicePixelRatio || 2,
+        renderer: 'canvas'
+      });
+      // Calculate combined data: 80% passive + 20% active (ETH)
+      const total100Data = [
         { name: 'BTC', value: 28.0, itemStyle: { color: '#f7931a' } }, // 35 * 0.8
-      { name: 'ETH', value: 44.0, itemStyle: { color: '#627eea' } }, // 30 * 0.8 + 20
-      { name: 'XRP', value: 7.2, itemStyle: { color: '#23292f' } }, // 9 * 0.8
-      { name: 'BNB', value: 4.8, itemStyle: { color: '#f0b90b' } }, // 6 * 0.8
-      { name: 'SOL', value: 4.0, itemStyle: { color: '#8950f5' } }, // 5 * 0.8
-      { name: 'DOGE', value: 3.2, itemStyle: { color: '#ba9f33' } }, // 4 * 0.8
-      { name: 'ADA', value: 2.4, itemStyle: { color: '#0033ad' } }, // 3 * 0.8
-      { name: 'TRX', value: 1.6, itemStyle: { color: '#ff0013' } }, // 2 * 0.8
-      { name: 'AVAX', value: 1.6, itemStyle: { color: '#e84142' } }, // 2 * 0.8
-      { name: 'DOT', value: 1.2, itemStyle: { color: '#e6007a' } } // 1.5 * 0.8
-    ];
-    
-    total100Chart.setOption({
-      tooltip: {
-        trigger: 'item',
-        formatter: function(params) {
-          return params.name + ': ' + params.value + '%';
-        }
-      },
-      series: [{
-        type: 'pie',
-        radius: ['45%', '68%'],
-        center: ['50%', '50%'],
-        data: total100Data,
-        label: {
-          show: true,
-          position: 'outside',
-          formatter: '{b}',
-          fontSize: 11,
-          color: '#374151'
-        },
-        labelLine: {
-          show: true,
-          length: 5,
-          length2: 10,
-          lineStyle: {
-            color: '#9ca3af',
-            width: 1
+        { name: 'ETH', value: 44.0, itemStyle: { color: '#627eea' } }, // 30 * 0.8 + 20
+        { name: 'XRP', value: 7.2, itemStyle: { color: '#23292f' } }, // 9 * 0.8
+        { name: 'BNB', value: 4.8, itemStyle: { color: '#f0b90b' } }, // 6 * 0.8
+        { name: 'SOL', value: 4.0, itemStyle: { color: '#8950f5' } }, // 5 * 0.8
+        { name: 'DOGE', value: 3.2, itemStyle: { color: '#ba9f33' } }, // 4 * 0.8
+        { name: 'ADA', value: 2.4, itemStyle: { color: '#0033ad' } }, // 3 * 0.8
+        { name: 'TRX', value: 1.6, itemStyle: { color: '#ff0013' } }, // 2 * 0.8
+        { name: 'AVAX', value: 1.6, itemStyle: { color: '#e84142' } }, // 2 * 0.8
+        { name: 'DOT', value: 1.2, itemStyle: { color: '#e6007a' } } // 1.5 * 0.8
+      ];
+
+      total100Chart.setOption({
+        tooltip: {
+          trigger: 'item',
+          formatter: function (params) {
+            return params.name + ': ' + params.value + '%';
           }
         },
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
+        series: [{
+          type: 'pie',
+          radius: ['45%', '68%'],
+          center: ['50%', '50%'],
+          data: total100Data,
+          label: {
+            show: true,
+            position: 'outside',
+            formatter: '{b}',
+            fontSize: 11,
+            color: '#374151'
+          },
+          labelLine: {
+            show: true,
+            length: 5,
+            length2: 10,
+            lineStyle: {
+              color: '#9ca3af',
+              width: 1
+            }
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
           }
-        }
-      }]
-    });
+        }]
+      });
 
-    // Resize all charts after initialization
-    passive80Chart.resize();
-    active20Chart.resize();
-    total100Chart.resize();
-
-    // Window resize handler for charts
-    window.addEventListener('resize', function() {
+      // Resize all charts after initialization
       passive80Chart.resize();
       active20Chart.resize();
       total100Chart.resize();
-    });
+
+      // Window resize handler for charts
+      window.addEventListener('resize', function () {
+        passive80Chart.resize();
+        active20Chart.resize();
+        total100Chart.resize();
+      });
 
     } // End of else block
 
     // Backtest chart removed for cleaner design
 
     // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
         const t = document.querySelector(a.getAttribute('href'));
-        if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); }
+        if (t) { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
   </script>
 
-  <!-- Right Drawer Overlay -->
-<div id="rightDrawerBackdrop"
-     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 z-[70]"></div>
+  </aside>
+  <script>
+    (function () {
+      const openBtn = document.getElementById('openRightMenu');
+      const closeBtn = document.getElementById('closeRightMenu');
+      const drawer = document.getElementById('rightDrawer');
+      const backdrop = document.getElementById('rightDrawerBackdrop');
 
-<!-- Right Drawer Panel -->
-<aside id="rightDrawer" role="dialog" aria-modal="true" aria-labelledby="rightDrawerTitle"
-  class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0c0d0e] text-slate-200 z-[80]
-         translate-x-full transition-transform duration-300 will-change-transform">
+      const open = () => {
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('pointer-events-none', 'opacity-0');
+        document.body.classList.add('overflow-hidden');
+        // focus the first link for accessibility
+        const firstLink = drawer.querySelector('a,button');
+        if (firstLink) firstLink.focus();
+      };
 
-  <!-- Header -->
-  <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
-    <h2 id="rightDrawerTitle" class="text-sm tracking-wide text-white/80">Menu</h2>
-    <button id="closeRightMenu" aria-label="Close menu"
-      class="h-8 w-8 inline-grid place-items-center rounded-md hover:bg-white/5">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/80" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
-    </button>
-  </div>
+      const close = () => {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('pointer-events-none', 'opacity-0');
+        document.body.classList.remove('overflow-hidden');
+        openBtn?.focus();
+      };
 
-  
-</aside>
-<script>
-  (function () {
-    const openBtn = document.getElementById('openRightMenu');
-    const closeBtn = document.getElementById('closeRightMenu');
-    const drawer  = document.getElementById('rightDrawer');
-    const backdrop = document.getElementById('rightDrawerBackdrop');
+      openBtn?.addEventListener('click', open);
+      closeBtn?.addEventListener('click', close);
+      backdrop?.addEventListener('click', close);
 
-    const open = () => {
-      drawer.classList.remove('translate-x-full');
-      backdrop.classList.remove('pointer-events-none', 'opacity-0');
-      document.body.classList.add('overflow-hidden');
-      // focus the first link for accessibility
-      const firstLink = drawer.querySelector('a,button');
-      if (firstLink) firstLink.focus();
-    };
-
-    const close = () => {
-      drawer.classList.add('translate-x-full');
-      backdrop.classList.add('pointer-events-none', 'opacity-0');
-      document.body.classList.remove('overflow-hidden');
-      openBtn?.focus();
-    };
-
-    openBtn?.addEventListener('click', open);
-    closeBtn?.addEventListener('click', close);
-    backdrop?.addEventListener('click', close);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
-    });
-  })();
-
-  // Mobile menu functionality
-  (function() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    function toggleMobileMenu() {
-      mobileMenu.classList.toggle('hidden');
-    }
-
-    function closeMobileMenu() {
-      mobileMenu.classList.add('hidden');
-    }
-
-    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-        closeMobileMenu();
-      }
-    });
-
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeMobileMenu();
-      }
-    });
-  })();
-
-  // Language switcher functionality
-  (function() {
-    // Desktop language switcher
-    const langSwitcher = document.getElementById('langSwitcher');
-    const langDropdown = document.getElementById('langDropdown');
-    
-    if (langSwitcher && langDropdown) {
-      langSwitcher.addEventListener('click', function() {
-        langDropdown.classList.toggle('hidden');
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
       });
-      
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
-          langDropdown.classList.add('hidden');
+    })();
+
+    // Mobile menu functionality
+    (function () {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      function toggleMobileMenu() {
+        mobileMenu.classList.toggle('hidden');
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+      }
+
+      mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+          closeMobileMenu();
         }
       });
-    }
-    
-    // Mobile language switcher
-    const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
-    const mobileLangDropdown = document.getElementById('mobileLangDropdown');
-    
-    if (mobileLangSwitcher && mobileLangDropdown) {
-      mobileLangSwitcher.addEventListener('click', function() {
-        mobileLangDropdown.classList.toggle('hidden');
-      });
-      
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
-          mobileLangDropdown.classList.add('hidden');
+
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeMobileMenu();
         }
       });
-    }
-  })();
-</script>
+    })();
+
+    // Language switcher functionality
+    (function () {
+      // Desktop language switcher
+      const langSwitcher = document.getElementById('langSwitcher');
+      const langDropdown = document.getElementById('langDropdown');
+
+      if (langSwitcher && langDropdown) {
+        langSwitcher.addEventListener('click', function () {
+          langDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+          if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
+            langDropdown.classList.add('hidden');
+          }
+        });
+      }
+
+      // Mobile language switcher
+      const mobileLangSwitcher = document.getElementById('mobileLangSwitcher');
+      const mobileLangDropdown = document.getElementById('mobileLangDropdown');
+
+      if (mobileLangSwitcher && mobileLangDropdown) {
+        mobileLangSwitcher.addEventListener('click', function () {
+          mobileLangDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+          if (!mobileLangSwitcher.contains(event.target) && !mobileLangDropdown.contains(event.target)) {
+            mobileLangDropdown.classList.add('hidden');
+          }
+        });
+      }
+    })();
+  </script>
+
+  <script>
+    // Footer language switcher functionality
+    (function () {
+      const footerLangSwitcher = document.getElementById('footerLangSwitcher');
+      const footerLangDropdown = document.getElementById('footerLangDropdown');
+
+      if (footerLangSwitcher && footerLangDropdown) {
+        footerLangSwitcher.addEventListener('click', function () {
+          footerLangDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+          if (!footerLangSwitcher.contains(event.target) && !footerLangDropdown.contains(event.target)) {
+            footerLangDropdown.classList.add('hidden');
+          }
+        });
+      }
+    })();
+
+    // URL Parameter Control JavaScript
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const onlyApp = urlParams.get('ONLYAPP');
+      
+      if (onlyApp === '1') {
+        // Hide header and footer
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        
+        if (header) {
+          header.style.display = 'none';
+        }
+        if (footer) {
+          footer.style.display = 'none';
+        }
+        
+        // Add extra padding to Hero section
+        const heroSection = document.querySelector('section.relative.overflow-hidden.bg-gradient-to-br');
+        if (heroSection) {
+          heroSection.style.paddingTop = 'calc(2.5rem + 40px)';
+        }
+      }
+    })();
+  </script>
 
 </body>
+
 </html>
