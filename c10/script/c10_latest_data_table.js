@@ -1,71 +1,4 @@
-const GRAPHQL_ENDPOINT = "http://localhost:8000/graphql";
-const C10_DATA_QUERY = `
-        query c10 {
-    c10LatestMarketData {
-        id
-        name
-        symbol
-        currentPrice
-        marketCap
-        marketCapChangePercentage24h
-        weight
-        updatedAt
-    }
-}
-        `;
-
-async function fetchData(isFirst) {
-  const response = await fetch(GRAPHQL_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: C10_DATA_QUERY }),
-  });
-
-  const json = await response.json();
-  const data = json.data.c10LatestMarketData;
-  renderTable2(data);
-  if(isFirst){
-    renderWeightPie(data);
-  }
-
-  // if (json.data && json.data.c10LatestMarketData) {
-  //   const indexData = json.data.c10Index24h.map((d) => {
-  //     return [d.calculatedAt, d.index];
-  //   });
-
-  //   return indexData;
-  // }
-}
-
-
-
-// async function fetchStockList() {
-//   try {
-//     const response = await fetch(API_URL);
-//     if (!response.ok) throw new Error("网络请求失败");
-
-//     const stocks = await response.json();
-//     renderTable(stocks);
-//   } catch (error) {
-//     console.error("获取股票数据失败：", error);
-//   }
-// }
-
-function renderTable(stocks) {
-  const tbody = document.querySelector("#stock-table tbody");
-  tbody.innerHTML = ""; // 清空旧数据
-
-  stocks.forEach(stock => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-          <td>${stock.name}</td>
-          <td>${stock.price}</td>
-        `;
-    tbody.appendChild(tr);
-  });
-}
-
-function renderTable2(constituents) {
+export function renderTable(constituents) {
         // const constituents = [
         //     { rank: 1, symbol: "BTC", name: "Bitcoin", weight: 35.0, price: 119383.71, marketCap: 2380000000000, change: 0.36 },
         //     { rank: 2, symbol: "ETH", name: "Ethereum", weight: 25.0, price: 4578.78, marketCap: 552900000000, change: 6.88 },
@@ -96,7 +29,7 @@ function renderTable2(constituents) {
   });
 }
 
-function renderWeightPie(constituents){
+export function renderWeightPie(constituents){
         const pieChart = echarts.init(document.getElementById('pieChart'));
         const pieData = constituents.map((c, index) => ({
             name: c.symbol.toUpperCase(),
@@ -144,15 +77,8 @@ function renderWeightPie(constituents){
                 }
             }]
         });
+
+        window.addEventListener('resize', function() {
+            pieChart.resize();
+        });
 }
-
-export function loadTable(){
-  fetchData(true);
-  setInterval(fetchData, 10 * 1000);
-}
-// 页面加载时立即获取一次
-// fetchData();
-
-
-// 每5分钟刷新一次
-// setInterval(fetchStockList, 5 * 60 * 1000);
