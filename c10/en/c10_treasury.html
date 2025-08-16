@@ -70,7 +70,7 @@
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2">
-        <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
+        <img src="../assets/icons/brand/C10.png" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
       </a>
 
       <!-- Desktop Navigation -->
@@ -136,14 +136,13 @@
   <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
     <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 items-center">
       <div>
-        <div
-          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
-          <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury Management
-        </div>
         <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
-          Treasury Products Based on the C10 Index<br>
-          <span class="gradient-text"> Accumulating and Compounding the Global Top 10 Cryptocurrencies Portfolio</span>
+          C10 Treasury<br>
+          <span class="gradient-text">Treasury Products Based on the C10 Index</span>
         </h1>
+        <p class="mt-4 text-slate-700 max-w-2xl">
+          Accumulating and Compounding the Global Top 10 Cryptocurrencies Portfolio
+        </p>
         <p class="mt-4 text-slate-700 max-w-2xl">
           The C10 Treasury program adopts an “80% passive + 20% active” allocation strategy. 80% is strictly passively
           allocated according to the C10 Index. 20% is actively managed across the top 10 cryptocurrencies by market
@@ -170,8 +169,8 @@
         </div>
         <div class="bg-white border border-slate-200 rounded-lg p-4">
           <div class="text-sm text-slate-500 mb-1">Annualized Volatility</div>
-          <div class="text-2xl font-bold text-slate-900 mb-1">0</div>
-          <div class="text-sm text-slate-600">0</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">0%</div>
+          <div class="text-sm text-slate-600">vs. BTC: 0%</div>
         </div>
       </div>
     </div>
@@ -179,40 +178,42 @@
 
   <!-- Section 1: Overview -->
   <section id="s1" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-100">
-    <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-8 items-start">
-      <div>
-        <h2 class="text-2xl font-semibold mb-3">Overview</h2>
-        <p class="text-slate-700 mb-4">The C10 Treasury is managed by combining a passive index component with an active
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Overview</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">The C10 Treasury is managed by combining a passive index component with an active
           allocation.
         </p>
-        <ul class="space-y-3 text-slate-700">
-          <li class="flex gap-2"><i data-lucide="layers" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-            <span>The passive component represents 80% of the portfolio, allocated according to rules tracking the top
-              ten cryptocurrencies by free-float market capitalization, with periodic rebalancing. Its objective is to
-              capture market beta.
-            </span>
-          </li>
-          <li class="flex gap-2"><i data-lucide="activity-square" class="h-5 w-5 text-blue-600 shrink-0"></i>
-            <span>The active component accounts for 20% of the portfolio and is used for event-driven opportunities,
-              correlation trades, hedging, and liquidity management. Its objective is to improve drawdown performance
-              and Sharpe ratio.</span>
-          </li>
-          <li class="flex gap-2"><i data-lucide="shield" class="h-5 w-5 text-cyan-600 shrink-0"></i>
-            <span>The strategy incorporates full-stack compliance and security, including MPC custody, tiered
-              permissions, whitelists, on-chain monitoring, and audit logs.</span>
-          </li>
-        </ul>
       </div>
-      <div class="bg-white border border-slate-200 rounded-xl p-6">
-        <h4 class="font-semibold mb-3">Process Overview</h4>
-        <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700">
-          <li>Strategy design and risk budgeting</li>
-          <li>Create transaction intent in the console and run compliance checks</li>
-          <li>MPC signing and tiered cold/warm fund movements</li>
-          <li>Execution, settlement, and reconciliation</li>
-          <li>Weekly reporting and public disclosures</li>
-        </ol>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2 bg-emerald-100 rounded-lg">
+                <i data-lucide="layers" class="h-6 w-6 text-emerald-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900">Passive Component</h3>
+            </div>
+            <p class="text-slate-700 leading-relaxed">80% of the portfolio, allocated according to rules tracking the top ten cryptocurrencies by free-float market capitalization, with periodic rebalancing. Its objective is to capture market beta.</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2 bg-blue-100 rounded-lg">
+                <i data-lucide="activity-square" class="h-6 w-6 text-blue-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900">Active Component</h3>
+            </div>
+            <p class="text-slate-700 leading-relaxed">20% of the portfolio used for event-driven opportunities, correlation trades, hedging, and liquidity management. Its objective is to improve drawdown performance and Sharpe ratio.</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2 bg-cyan-100 rounded-lg">
+                <i data-lucide="shield" class="h-6 w-6 text-cyan-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900">Full-Stack Compliance</h3>
+            </div>
+            <p class="text-slate-700 leading-relaxed">Incorporates full-stack compliance and security, including MPC custody, tiered permissions, whitelists, on-chain monitoring, and audit logs.</p>
+          </div>
+        </div>
     </div>
   </section>
 
@@ -220,7 +221,7 @@
   <section id="s2" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
     <div class="mx-auto max-w-7xl px-4">
       <div class="flex items-center justify-between mb-4">
-        <h2 class="text-2xl font-semibold">Returns & Simulated History</h2>
+        <h2 class="text-2xl font-semibold">Index and Return Simulation for the Past 5 Years</h2>
         <div class="flex gap-2">
           <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm" data-range="1Y">1Y</button>
           <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="3Y">3Y</button>
@@ -260,8 +261,7 @@
     <div class="mx-auto max-w-6xl px-4">
       <div class="text-center mb-12">
         <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Investment Structure</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">Comprehensive asset allocation strategy with passive and active
-          management components</p>
+        <p class="text-slate-600 max-w-2xl mx-auto">Comprehensive asset allocation strategy, including 80% passive management and 20% active management portfolio.</p>
       </div>
 
       <!-- Investment Structure Layout -->
@@ -602,10 +602,10 @@
 
   <!-- Footer -->
   <footer id="contact" class="border-t border-slate-200 bg-white/60">
-    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-slate-700">
       <div>
         <a href="index.html" class="flex items-center gap-2">
-          <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="C10 Logo">
+          <img src="../assets/icons/brand/C10.png" width="69" height="30" alt="C10 Logo">
           <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
         </a>
         <p class="py-4">No. 1 Treasury for Top 10 Crypto Portfolio</p>

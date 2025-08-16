@@ -81,7 +81,7 @@
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2">
-        <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
+        <img src="../assets/icons/brand/C10.png" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
       </a>
 
       <!-- Desktop Navigation -->
@@ -143,34 +143,34 @@
     </div>
   </header>
 
- 
+
 
   <!-- Realtime Snapshot Section -->
   <section class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-cyan-100 to-blue-100"">
-    <div class="mx-auto max-w-7xl px-4">
-      <h1 class="text-4xl font-bold text-center mb-8 flex items-center justify-center gap-3">
-        C10 Index Real-time Trend
-      </h1>
-      <div class="p-6 min-w-0 overflow-x-auto" id="realtime">
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex gap-2">
-            <span class="text-black px-2 py-1 rounded" style="font-size: 40px;" id="lastPrice">2,891.42</span>
-            <span class="text-sm text-green-600 px-2 py-1 rounded flex items-center" id="lastChange">+2.13%</span>
-          </div>
-          <div class="flex gap-2">
-             <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
-            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
-            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
-            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
-            <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button> 
-          </div>
-          
+    <div class=" mx-auto max-w-7xl px-4">
+    <h1 class="text-4xl font-bold text-center mb-8 flex items-center justify-center gap-3">
+      C10 Index Real-time Trend
+    </h1>
+    <div class="p-6 min-w-0 overflow-x-auto" id="realtime">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex gap-2">
+          <span class="text-black px-2 py-1 rounded" style="font-size: 40px;" id="lastPrice">2,891.42</span>
+          <span class="text-sm text-green-600 px-2 py-1 rounded flex items-center" id="lastChange">+2.13%</span>
         </div>
-        <div class="h-80 w-full min-w-0">
-          <div id="indexChart" class="w-full h-full"></div>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button>
         </div>
-        <p class="text-[11px] text-slate-500 mt-3">Realtime data(UTC) and index chart.</p>
+
       </div>
+      <div class="h-80 w-full min-w-0">
+        <div id="indexChart" class="w-full h-full"></div>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-3">Realtime data(UTC) and index chart.</p>
+    </div>
     </div>
   </section>
 
@@ -185,17 +185,19 @@
         About the C10 Index
       </h1>
       <p class="mt-6 text-slate-700 max-w-5xl mx-auto text-center">
-        The first investable, exchange-traded basket index of the top ten cryptocurrencies issued by a U.S.-listed company — the C10 Index.
+        The first investable, exchange-traded basket index of the top ten cryptocurrencies issued by a U.S.-listed
+        company — the C10 Index.
       </p>
       <p class="mt-6 text-slate-700 max-w-5xl mx-auto text-center"">
         Centered on Bitcoin and Ethereum, the index covers the top ten cryptocurrencies by free-float market capitalization, excluding stablecoins. It is calculated using market-cap weighted rules, with a maximum 50% allocation to any single asset.
       </p>
-      <p class="mt-6 text-slate-700 max-w-5xl mx-auto text-center"">
-        The index methodology is based on established Nasdaq practices, ensuring scientific rigor while maintaining transparency and traceability.
+      <p class=" mt-6 text-slate-700 max-w-5xl mx-auto text-center"">
+        The index methodology is based on established Nasdaq practices, ensuring scientific rigor while maintaining
+        transparency and traceability.
       </p>
 
       <!-- 4 Theme Blocks, 1 Row 4 Columns Layout -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-6" >
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-6">
         <!-- First Row -->
         <!-- Index Definition Card -->
         <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
@@ -246,10 +248,11 @@
     <div class="mx-auto max-w-7xl px-4">
       <div class="flex items-center gap-2 mb-4">
         <i data-lucide="layout-dashboard" class="h-5 w-5"></i>
-        <h3 class="text-2xl font-semibold">Constituents & Weights</h3>
+        <h3 class="text-2xl font-semibold">Crypto Constituents & Weights</h3>
       </div>
-      <p class="text-slate-600 mb-6 max-w-3xl">Composition of the C10 Index, including a weight pie chart and a sortable
-        list of assets. </p>
+      <p class="text-slate-600 mb-6 max-w-3xl">The C10 Index tracks the top 10 cryptocurrencies by weighted allocation,
+        dynamically adjusting with market movements to offer investors a diversified and broad-based reference for
+        crypto investing.</p>
 
       <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
         <!-- Pie -->
@@ -284,23 +287,19 @@
     </div>
   </section>
 
-   <!-- Hero -->
+  <!-- Hero -->
   <section class="relative overflow-hidden bg-gradient-to-br from-white to-slate-200">
     <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
       <div class="max-w-4xl mx-auto">
-        <div
-          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
-          <i data-lucide="sparkles" class="h-4 w-4"></i> Official Top‑10 Crypto Market Index
-        </div>
         <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
-          Measure the Market
-          <span class="block gradient-text">with the C10 Index</span>
+          The C10 Index is not just an index of a crypto portfolio
+          <span class="block gradient-text"> It’s a Weathervane of Future Asset Value and Wealth Trends</span>
         </h1>
         <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
-          FF launches the pioneering "EAI+Crypto" dual-flywheel & dual-bridge ecosystem strategy, releasing the first
-          crypto asset basket C10 Index on US stock markets, along with the Crypto Treasury plan for asset allocation
-          based on this index, while simultaneously applying for crypto asset index fund ETF licenses. Aiming to build
-          the vanguard navigation in the crypto asset era.
+          Centered on Bitcoin and Ethereum, the C10 Index includes the top ten cryptocurrencies by free-float market
+          capitalization, excluding stablecoins. It is calculated using market-cap weighted rules, with a maximum 50%
+          allocation to any single asset. Each cryptocurrency’s weight and price are dynamically adjusted according to
+          market fluctuations, providing investors with a diversified and comprehensive reference for crypto allocation.
         </p>
         <div class="mt-10 flex flex-wrap justify-center gap-8">
           <div class="feature-card">
@@ -325,10 +324,10 @@
 
   <!-- Footer -->
   <footer id="contact" class="border-t border-slate-200 bg-white/60">
-    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-slate-700">
       <div>
         <a href="index.html" class="flex items-center gap-2">
-          <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="C10 Logo">
+          <img src="../assets/icons/brand/C10.png" width="69" height="30" alt="C10 Logo">
           <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
         </a>
         <p class="py-4">No. 1 Treasury for Top 10 Crypto Portfolio</p>
@@ -361,9 +360,16 @@
         <div class="font-semibold text-slate-900 mb-2">Legal</div>
         <div id="legalTextContainer" class="text-xs">
           <p id="legalText" class="line-clamp-3 transition-all duration-300 ease-in-out">
-            All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results. This website and its content are not intended for residents of jurisdictions where such distribution or use would be contrary to local law or regulation. By accessing this site, you acknowledge that you are not located in any such restricted jurisdiction. The information provided herein is subject to change without notice and should not be construed as a recommendation to buy or sell any particular asset. Always consult with qualified financial advisors before making investment decisions.
+            All content is for informational purposes only and does not constitute investment advice. Digital assets are
+            volatile and carry risk. Past performance is not indicative of future results. This website and its content
+            are not intended for residents of jurisdictions where such distribution or use would be contrary to local
+            law or regulation. By accessing this site, you acknowledge that you are not located in any such restricted
+            jurisdiction. The information provided herein is subject to change without notice and should not be
+            construed as a recommendation to buy or sell any particular asset. Always consult with qualified financial
+            advisors before making investment decisions.
           </p>
-          <button id="toggleLegalText" class="mt-2 text-blue-600 hover:text-blue-800 text-xs font-medium transition-colors">
+          <button id="toggleLegalText"
+            class="mt-2 text-blue-600 hover:text-blue-800 text-xs font-medium transition-colors">
             More
           </button>
         </div>
@@ -657,14 +663,14 @@
     lucide.createIcons();
 
     // Legal text expand/collapse functionality
-    (function() {
+    (function () {
       const legalText = document.getElementById('legalText');
       const toggleButton = document.getElementById('toggleLegalText');
-      
+
       if (legalText && toggleButton) {
         let isExpanded = false;
-        
-        toggleButton.addEventListener('click', function() {
+
+        toggleButton.addEventListener('click', function () {
           if (isExpanded) {
             legalText.classList.add('line-clamp-3');
             toggleButton.textContent = 'More';
