@@ -143,47 +143,10 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
-    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
-      <div class="max-w-4xl mx-auto">
-        <div
-          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
-          <i data-lucide="sparkles" class="h-4 w-4"></i> Official Top‑10 Crypto Market Index
-        </div>
-        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
-          Measure the Market
-          <span class="block gradient-text">with the C10 Index</span>
-        </h1>
-        <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
-          FF launches the pioneering "EAI+Crypto" dual-flywheel & dual-bridge ecosystem strategy, releasing the first
-          crypto asset basket C10 Index on US stock markets, along with the Crypto Treasury plan for asset allocation
-          based on this index, while simultaneously applying for crypto asset index fund ETF licenses. Aiming to build
-          the vanguard navigation in the crypto asset era.
-        </p>
-        <div class="mt-10 flex flex-wrap justify-center gap-8">
-          <div class="feature-card">
-            <i data-lucide="target" class="h-10 w-10" style="color: #0ea5e9;"></i>
-            <div class="text-center">
-              <div class="font-bold text-lg">1000</div>
-              <div class="font-medium text-sm">Benchmark Value</div>
-            </div>
-          </div>
-          <div class="feature-card">
-            <i data-lucide="calendar" class="h-10 w-10" style="color: #0ea5e9;"></i>
-            <div class="text-center">
-              <div class="font-bold text-sm">August 16th, PST</div>
-              <div class="font-bold text-sm">12:00 AM</div>
-              <div class="font-medium text-xs mt-1">Benchmark Time</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
 
   <!-- Realtime Snapshot Section -->
-  <section class="py-12 sm:py-16 border-t border-slate-200 bg-white">
+  <section class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-cyan-100 to-blue-100"">
     <div class="mx-auto max-w-7xl px-4">
       <h2 class="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
         <i data-lucide="line-chart" class="h-8 w-8"></i>
@@ -192,16 +155,17 @@
       <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto" id="realtime">
         <div class="flex items-center justify-between mb-4">
           <div class="flex gap-2">
+            <span class="text-black px-2 py-1 rounded" style="font-size: 40px;" id="lastPrice"></span>
+            <span class="text-sm text-green-600 px-2 py-1 rounded flex items-center" id="lastChange"></span>
+          </div>
+          <div class="flex gap-2">
             <!-- <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button> -->
           </div>
-          <div class="flex gap-2">
-            <span class="bg-slate-900 text-white px-2 py-1 rounded text-sm" id="lastPrice"></span>
-            <span class="bg-emerald-100 text-emerald-600 px-2 py-1 rounded text-sm" id="lastChange"></span>
-          </div>
+          
         </div>
         <div class="h-80 w-full min-w-0">
           <div id="indexChart" class="w-full h-full"></div>
@@ -309,6 +273,45 @@
       </div>
 
 
+    </div>
+  </section>
+
+   <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+          <i data-lucide="sparkles" class="h-4 w-4"></i> Official Top‑10 Crypto Market Index
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+          Measure the Market
+          <span class="block gradient-text">with the C10 Index</span>
+        </h1>
+        <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
+          FF launches the pioneering "EAI+Crypto" dual-flywheel & dual-bridge ecosystem strategy, releasing the first
+          crypto asset basket C10 Index on US stock markets, along with the Crypto Treasury plan for asset allocation
+          based on this index, while simultaneously applying for crypto asset index fund ETF licenses. Aiming to build
+          the vanguard navigation in the crypto asset era.
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-8">
+          <div class="feature-card">
+            <i data-lucide="target" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-lg">1000</div>
+              <div class="font-medium text-sm">Benchmark Value</div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <i data-lucide="calendar" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-sm">August 16th, PST</div>
+              <div class="font-bold text-sm">12:00 AM</div>
+              <div class="font-medium text-xs mt-1">Benchmark Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
