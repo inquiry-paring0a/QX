@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - FFAI Crypto Treasury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
+    <style>
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo"> FFAI Crypto
+            </a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-6">
+                <nav class="flex items-center gap-6 text-sm text-slate-600">
+                    <a href="index.html" class="hover:text-slate-900">Home</a>
+                    <a href="c10_index.html" class="hover:text-slate-900">C10 Index</a>
+                    <a href="c10_treasury.html" class="hover:text-slate-900">C10 Treasury</a>
+                    <a href="index.html#ETF" class="hover:text-slate-900">C10 ETF</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <a href="index.html#invest"
+                        class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+                        Invest in C10
+                    </a>
+                    <a href="https://www.faradayfuturecn.com/cn/" target="_blank"
+                        class="hover:opacity-80 transition-opacity">
+                        <img src="../assets/icons/brand/FF.svg" width="32" height="24" alt="FF Logo">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Buttons -->
+            <div class="md:hidden flex items-center gap-2">
+                <a href="index.html#invest"
+                    class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
+                    Invest in C10
+                </a>
+
+                <button id="mobileMenuBtn"
+                    class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50"
+                    aria-label="Toggle menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu"
+            class="hidden md:hidden absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg mx-4 mt-2 z-50">
+            <nav class="px-4 py-3 space-y-1">
+                <a href="index.html"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
+                <a href="c10_index.html"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
+                <a href="c10_treasury.html"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Treasury</a>
+                <a href="index.html#ETF"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
+                <a href="https://www.faradayfuturecn.com/cn/"
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
+                    target="_blank">FF</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 404 Content -->
+    <main class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100 min-h-screen flex items-center">
+        <div class="mx-auto max-w-7xl px-4 py-20 text-center">
+            <!-- 404 Icon -->
+            <div class="mb-8 flex justify-center">
+                <div class="floating-animation">
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
+                        <i data-lucide="search-x" class="h-16 w-16 text-slate-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 404 Title -->
+            <h1 class="text-6xl sm:text-8xl font-bold gradient-text mb-4">404</h1>
+            
+            <!-- Error Message -->
+            <h2 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-4">
+                Page Not Found
+            </h2>
+            
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                Sorry, the page you are trying to access does not exist or has been moved. Please check if the URL is correct. You can also return to the homepage or browse the C10 Index and C10 Treasury.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="index.html"
+                    class="bg-slate-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="home" class="h-4 w-4"></i>
+                    Back to Home
+                </a>
+                <a href="c10_index.html"
+                    class="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors flex items-center gap-2">
+                    <i data-lucide="trending-up" class="h-4 w-4"></i>
+                    View C10 Index
+                </a>
+                <a href="c10_treasury.html"
+                    class="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors flex items-center gap-2">
+                    <i data-lucide="shield" class="h-4 w-4"></i>
+                    C10 Treasury
+                </a>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+            <div>
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
+                    <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
+                </a>
+                <p class="py-4">Rule-based digital asset index for institutions</p>
+                <!-- Language Switcher -->
+                <div class="relative mt-2">
+                    <button id="langSwitcher"
+                        class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-sm">
+                        <i data-lucide="globe" class="h-3.5 w-3.5"></i>
+                        <span>English</span>
+                        <i data-lucide="chevron-down" class="h-3.5 w-3.5"></i>
+                    </button>
+                    <div id="langDropdown"
+                        class="hidden absolute left-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+                        <a href="404.html"
+                            class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">English</a>
+                        <a href="../cn/404.html"
+                            class="block px-4 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50">中文</a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Contact</div>
+                <ul class="space-y-1">
+                    <li>Email: hello@c10index.com</li>
+                    <li>Telegram: @C10Index</li>
+                    <li>Twitter/X: @C10_Index</li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-semibold text-slate-900 mb-2">Legal Disclaimer</div>
+                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risks. Past performance does not guarantee future results.</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Asset Management. All rights reserved.</div>
+    </footer>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        (function () {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function (event) {
+                    if (!mobileMenuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+
+                // Close menu on escape key
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape') {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+        })();
+    </script>
+
+    <!-- Language Switcher JavaScript -->
+    <script>
+        (function () {
+            // Desktop language switcher
+            const langSwitcher = document.getElementById('langSwitcher');
+            const langDropdown = document.getElementById('langDropdown');
+
+            if (langSwitcher && langDropdown) {
+                langSwitcher.addEventListener('click', function () {
+                    langDropdown.classList.toggle('hidden');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function (event) {
+                    if (!langSwitcher.contains(event.target) && !langDropdown.contains(event.target)) {
+                        langDropdown.classList.add('hidden');
+                    }
+                });
+            }
+        })();
+    </script>
+
+    <!-- URL Parameter Control JavaScript -->
+    <script>
+        (function () {
+            // Check URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const onlyApp = urlParams.get('ONLYAPP');
+            
+            if (onlyApp === '1') {
+                // Hide header
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.display = 'none';
+                }
+                
+                // Hide footer
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    footer.style.display = 'none';
+                }
+                
+                // Add 40px top padding to main content
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    const currentPadding = window.getComputedStyle(mainContent).paddingTop;
+                    const currentPaddingValue = parseInt(currentPadding) || 0;
+                    mainContent.style.paddingTop = (currentPaddingValue + 40) + 'px';
+                }
+            }
+        })();
+    </script>
+
+    <!-- Initialize Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>

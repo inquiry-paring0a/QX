@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-bundle.min.js"></script>
+    <script src="../script/apponly-handler.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -48,6 +49,32 @@
 
         .gradient-bg {
             background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
+        }
+
+        .indexLastData {
+            padding: 0px 20px 0px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+        
+        /* Custom scrollbar styles */
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+        
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
 </head>
@@ -149,71 +176,73 @@
 
             <!-- Simplified Chart -->
             <div class="h-80 w-full" id="index">
+                <div class="indexLastData"><span id="indexValue"></span><span id="indexChange"></span></div>
                 <canvas id="indexChart" class="w-full h-full"></canvas>
             </div>
             
             <div></div>
             <!-- Assets Display -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4">
-                <!-- BTC -->
-                <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">BTC</div>
-                    <div class="text-xs text-slate-600 font-semibold">28.5%</div>
-                </div>
+            <!-- Asset List Container - Outside chart container -->
+            <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
+                    <!-- BTC -->
+                    <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">BTC</div>
+                        <div class="text-xs text-slate-600 font-semibold">28.5%</div>
+                    </div>
 
-                <!-- ETH -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">ETH</div>
-                    <div class="text-xs text-slate-600 font-semibold">22.1%</div>
-                </div>
+                    <!-- ETH -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">ETH</div>
+                        <div class="text-xs text-slate-600 font-semibold">22.1%</div>
+                    </div>
 
-                <!-- XRP -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">XRP</div>
-                    <div class="text-xs text-slate-600 font-semibold">8.3%</div>
-                </div>
+                    <!-- XRP -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">XRP</div>
+                        <div class="text-xs text-slate-600 font-semibold">8.3%</div>
+                    </div>
 
-                <!-- SOL -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">SOL</div>
-                    <div class="text-xs text-slate-600 font-semibold">7.9%</div>
-                </div>
+                    <!-- SOL -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">SOL</div>
+                        <div class="text-xs text-slate-600 font-semibold">7.9%</div>
+                    </div>
 
-                <!-- BNB -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">BNB</div>
-                    <div class="text-xs text-slate-600 font-semibold">6.2%</div>
-                </div>
+                    <!-- BNB -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">BNB</div>
+                        <div class="text-xs text-slate-600 font-semibold">6.2%</div>
+                    </div>
 
-                <!-- DOGE -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">DOGE</div>
-                    <div class="text-xs text-slate-600 font-semibold">5.4%</div>
-                </div>
+                    <!-- DOGE -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">DOGE</div>
+                        <div class="text-xs text-slate-600 font-semibold">5.4%</div>
+                    </div>
 
-                <!-- ADA -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">ADA</div>
-                    <div class="text-xs text-slate-600 font-semibold">4.7%</div>
-                </div>
+                    <!-- ADA -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">ADA</div>
+                        <div class="text-xs text-slate-600 font-semibold">4.7%</div>
+                    </div>
 
-                <!-- AVAX -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">AVAX</div>
-                    <div class="text-xs text-slate-600 font-semibold">4.1%</div>
-                </div>
+                    <!-- AVAX -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">AVAX</div>
+                        <div class="text-xs text-slate-600 font-semibold">4.1%</div>
+                    </div>
 
-                <!-- TRX -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">TRX</div>
-                    <div class="text-xs text-slate-600 font-semibold">3.8%</div>
-                </div>
+                    <!-- TRX -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">TRX</div>
+                        <div class="text-xs text-slate-600 font-semibold">3.8%</div>
+                    </div>
 
-                <!-- DOT -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">DOT</div>
-                    <div class="text-xs text-slate-600 font-semibold">3.2%</div>
-                </div>
+                    <!-- DOT -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">DOT</div>
+                        <div class="text-xs text-slate-600 font-semibold">3.2%</div>
+                    </div>
 
             </div>
         </div>
@@ -767,11 +796,6 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // 窗口大小变化时重新调整图表大小
-        window.addEventListener('resize', function () {
-            pieChart.resize();
-        });
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -854,63 +878,35 @@
         })();
     </script>
 
-    <!-- URL Parameter Control JavaScript -->
-    <script>
-        (function () {
-            // Check URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const onlyApp = urlParams.get('ONLYAPP');
-            
-            if (onlyApp === '1') {
-                // Hide header
-                const header = document.querySelector('header');
-                if (header) {
-                    header.style.display = 'none';
-                }
-                
-                // Hide footer
-                const footer = document.querySelector('footer');
-                if (footer) {
-                    footer.style.display = 'none';
-                }
-                
-                // Add 40px top padding to Hero section
-                const heroSection = document.querySelector('#hero');
-                if (heroSection) {
-                    const currentPadding = window.getComputedStyle(heroSection).paddingTop;
-                    const currentPaddingValue = parseInt(currentPadding) || 0;
-                    heroSection.style.paddingTop = (currentPaddingValue + 40) + 'px';
-                }
-                
-                // Add ONLYAPP=1 parameter to all links pointing to c10_index.html and c10_treasury.html
-                const links = document.querySelectorAll('a[href="c10_index.html"], a[href="c10_treasury.html"]');
-                links.forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href && (href === 'c10_index.html' || href === 'c10_treasury.html')) {
-                        link.setAttribute('href', href + '?ONLYAPP=1');
-                    }
-                });
-            }
-        })();
-    </script>
     <script type="module">
-        import { loadData, loadIndexHistory } from '/script/datasource.js';
-        import { initChart } from '/script/c10_index_chart_2.js';
-        import { renderTable, renderWeightPie } from '/script/c10_latest_data_table_2.js';
-        import { updateHistoryChart } from '/script/c10_index_history.js';
+        import { loadData, loadIndexHistory } from '../script/datasource.js';
+        import { createOrUpdateChart, updateIndexValue } from '../script/c10_index_chart.js';
+        import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
+        import { updateHistoryChart } from '../script/c10_index_history.js';
+        import { createIndexChart, updateIndexChart} from '../script/c10_index_chart_new.js'
 
+        let chart;
         await loadData((data, isFirst) => {
-            initChart(data.c10Index24h, {
-                cId: 'index',
-                bg: '#d6f1fe',
-                gdColor: '#c3e0ea',
-                axColor: '#b0c8d2',
-            })
+            // createOrUpdateChart(data.c10Index24h, {
+            //     cId: 'index',
+            //     bg: '#d6f1fe',
+            //     gdColor: '#c3e0ea',
+            //     axColor: '#b0c8d2',
+            // })
+
+            if(!chart){
+                chart = createIndexChart(data, { containerId: 'indexChart' });
+            }else{
+                updateIndexChart(chart, data)
+            }
+
 
             if (isFirst) {
                 renderWeightPie(data.c10LatestMarketData);
             }
             renderTable(data.c10LatestMarketData)
+
+            updateIndexValue(data, 'indexValue', 'indexChange');
         });
 
         await loadIndexHistory(data => {

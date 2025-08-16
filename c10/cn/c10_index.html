@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- ========== HTML头部区域 ========== -->
+<!-- 包含页面元数据、外部资源引入、样式定义等 -->
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FFAI Crypto Treasury</title>
+  <!-- 外部CSS和JavaScript库引入 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="../script/apponly-handler.js"></script>
+  <!-- 字体资源预加载和引入 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
     rel="stylesheet">
+  <!-- 网站图标设置 -->
   <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
   <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
+  <!-- 自定义样式定义 -->
   <style>
     body {
       font-family: 'Roboto', 'Noto Sans SC', sans-serif;
@@ -54,7 +62,8 @@
 </head>
 
 <body class="min-h-screen bg-slate-50 text-slate-800">
-  <!-- Header -->
+  <!-- ========== 页面头部导航栏 ========== -->
+  <!-- 包含网站Logo、导航菜单、语言切换、移动端菜单等 -->
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2">
@@ -72,7 +81,7 @@
         <div class="flex items-center gap-4">
           <a href="index.html#invest"
             class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-            投资C10
+            投资我们
           </a>
           <a href="https://www.faradayfuturecn.com/cn/" target="_blank" class="hover:opacity-80 transition-opacity">
             <img src="../assets/icons/brand/FF.svg" width="32" height="24" alt="FF Logo">
@@ -85,7 +94,7 @@
       <div class="md:hidden flex items-center gap-2">
         <a href="index.html#invest"
           class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-          投资C10
+          投资我们
         </a>
 
         <button id="mobileMenuBtn"
@@ -119,61 +128,25 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
-    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
-      <div class="max-w-4xl mx-auto">
-        <div
-          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
-          <i data-lucide="sparkles" class="h-4 w-4"></i> C10指数
-        </div>
-        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
-          C10 不仅是一个指数
-          <span class="block gradient-text">更是未来资产价值与财富走势的风向标</span>
-        </h1>
-        <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
-          以比特币和以太币为核心，囊括除稳定币外流通市值排名前十的加密资产，按流通市值加权平均等规则计算，单一币种权重不超过 50%。每种加密货币的权重和价格随市场波动动态调整，为投资者提供多元化和广泛的加密资产投资组合参考。
-        </p>
-        <div class="mt-10 flex flex-wrap justify-center gap-8">
-          <div class="feature-card">
-            <i data-lucide="target" class="h-10 w-10" style="color: #0ea5e9;"></i>
-            <div class="text-center">
-              <div class="font-bold text-lg">1000</div>
-              <div class="font-medium text-sm">基准数值</div>
-            </div>
-          </div>
-          <div class="feature-card">
-            <i data-lucide="calendar" class="h-10 w-10" style="color: #0ea5e9;"></i>
-            <div class="text-center">
-              <div class="font-bold text-sm">美西时间 8月16日</div>
-              <div class="font-bold text-sm">凌晨 0 点</div>
-              <div class="font-medium text-xs mt-1">基准点时间</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Realtime Snapshot Section -->
-  <section class="py-12 sm:py-16 border-t border-slate-200 bg-white">
+  <!-- ========== 实时数据快照区域 ========== -->
+  <!-- 显示C10指数的实时价格、涨跌幅、走势图表和时间选择器 -->
+  <section class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-cyan-100 to-blue-100">
     <div class="mx-auto max-w-7xl px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
-        <i data-lucide="line-chart" class="h-8 w-8"></i>
+      <h1 class="text-4xl font-bold text-center mb-8 flex items-center justify-center gap-3">
         C10指数实时走势
-      </h2>
-      <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto" id="realtime">
+      </h1>
+      <div class="p-6 min-w-0 overflow-x-auto" id="realtime">
         <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-2">
+            <span class="text-black px-2 py-1 rounded" style="font-size: 40px;" id="lastPrice">2,891.42</span>
+            <span class="text-sm text-green-600 px-2 py-1 rounded flex items-center" id="lastChange">+2.13%</span>
+          </div>
           <div class="flex gap-2">
             <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
             <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button>
-          </div>
-          <div class="flex gap-2">
-            <span class="bg-slate-900 text-white px-2 py-1 rounded text-sm" id="lastPrice">2,891.42</span>
-            <span class="bg-emerald-100 text-emerald-600 px-2 py-1 rounded text-sm" id="lastChange">+2.13%</span>
           </div>
         </div>
         <div class="h-80 w-full min-w-0">
@@ -184,9 +157,8 @@
     </div>
   </section>
 
-
-
-  <!-- Section 2: About the C10 Index -->
+  <!-- ========== 关于C10指数介绍区域 ========== -->
+  <!-- 介绍C10指数的定义、权重规则、方法论和再平衡机制 -->
   <section id="methodology" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-blue-50 to-cyan-50">
     <div class="mx-auto max-w-7xl px-4">
       <!-- Main Title -->
@@ -252,8 +224,9 @@
     </div>
   </section>
 
-  <!-- Section 3: Constituents & Weights -->
-  <section id="constituents" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+  <!-- ========== 成分与权重展示区域 ========== -->
+  <!-- 展示C10指数的加密货币成分、权重分布饼图和详细数据表格 -->
+  <section id="constituents" class="py-12 sm:py-16  bg-white">
     <div class="mx-auto max-w-7xl px-4">
       <div class="flex items-center gap-2 mb-4">
         <i data-lucide="layout-dashboard" class="h-5 w-5"></i>
@@ -293,7 +266,45 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ========== Hero宣传区域 ========== -->
+  <!-- 主要宣传内容，包含C10指数的核心价值主张和关键特性展示 -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
+          <i data-lucide="sparkles" class="h-4 w-4"></i> C10指数
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+          C10 不仅是一个指数
+          <span class="block gradient-text">更是未来资产价值与财富走势的风向标</span>
+        </h1>
+        <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
+          以比特币和以太币为核心，囊括除稳定币外流通市值排名前十的加密资产，按流通市值加权平均等规则计算，单一币种权重不超过 50%。每种加密货币的权重和价格随市场波动动态调整，为投资者提供多元化和广泛的加密资产投资组合参考。
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-8">
+          <div class="feature-card">
+            <i data-lucide="target" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-lg">1000</div>
+              <div class="font-medium text-sm">基准数值</div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <i data-lucide="calendar" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-sm">美西时间 8月16日</div>
+              <div class="font-bold text-sm">凌晨 0 点</div>
+              <div class="font-medium text-xs mt-1">基准点时间</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 页脚区域 ========== -->
+  <!-- 包含公司信息、联系方式、法律声明和语言切换功能 -->
   <footer id="contact" class="border-t border-slate-200 bg-white/60">
     <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
       <div>
@@ -302,7 +313,7 @@
           <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
           <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
         </a>
-        <p class="py-4">面向机构的基于规则的数字资产指数</p>
+        <p class="py-4">十大加密资产组合第一财库</p>
         <!-- Language Switcher -->
         <div class="relative mt-2">
           <button id="langSwitcher"
@@ -324,9 +335,9 @@
       <div>
         <div class="font-semibold text-slate-900 mb-2">联系方式</div>
         <ul class="space-y-1">
-          <li>邮箱: hello@c10index.com</li>
-          <li>Telegram: @C10Index</li>
-          <li>Twitter/X: @C10_Index</li>
+          <li>邮箱: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
+          <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank"
+              class="hover:text-blue-600">@FaradayFuture</a></li>
         </ul>
       </div>
       <div>
@@ -334,9 +345,11 @@
         <p class="text-xs">所有内容仅供信息参考，不构成投资建议。数字资产具有波动性并存在风险。过往表现不代表未来结果。</p>
       </div>
     </div>
-    <div class="text-center text-xs text-slate-500 pb-8">© 2025 加密资产管理。保留所有权利。</div>
+    <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto 保留所有权利</div>
   </footer>
 
+  <!-- ========== JavaScript脚本区域 ========== -->
+  <!-- 包含图标初始化、模拟数据、图表配置、交互功能和数据加载脚本 -->
   <script>
     // Icons
     lucide.createIcons();
@@ -374,117 +387,117 @@
 
     // ------- Charts -------
     // Section 1: Realtime line
-    const indexChart = echarts.init(document.getElementById('indexChart'));
-    indexChart.setOption({
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      tooltip: {
-        trigger: 'axis',
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        borderColor: '#e2e8f0',
-        borderWidth: 1,
-        textStyle: {
-          color: '#374151'
-        },
-        formatter: function (params) {
-          const data = params[0];
-          return `时间: ${data.axisValue}<br/>指数: ${data.value.toFixed(2)}`;
-        }
-      },
-      xAxis: {
-        type: 'category',
-        data: intraday.map(d => d.t),
-        axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
-        splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
-        axisLabel: { color: 'rgba(0,0,0,0.7)' }
-      },
-      yAxis: {
-        type: 'value',
-        scale: true,
-        axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
-        splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
-        axisLabel: { color: 'rgba(0,0,0,0.7)' }
-      },
-      series: [{
-        name: 'C10 Index',
-        type: 'line',
-        data: series,
-        smooth: false,
-        lineStyle: { color: '#0ea5e9', width: 2 },
-        symbol: 'circle',
-        symbolSize: 4,
-        itemStyle: {
-          color: '#0ea5e9',
-          borderColor: '#ffffff',
-          borderWidth: 2
-        },
-        emphasis: {
-          itemStyle: {
-            color: '#0ea5e9',
-            borderColor: '#ffffff',
-            borderWidth: 3,
-            shadowBlur: 10,
-            shadowColor: 'rgba(14, 165, 233, 0.3)'
-          },
-          symbolSize: 8
-        }
-      }]
-    });
+    // const indexChart = echarts.init(document.getElementById('indexChart'));
+    // indexChart.setOption({
+    //   grid: {
+    //     left: '3%',
+    //     right: '4%',
+    //     bottom: '3%',
+    //     containLabel: true
+    //   },
+    //   tooltip: {
+    //     trigger: 'axis',
+    //     backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    //     borderColor: '#e2e8f0',
+    //     borderWidth: 1,
+    //     textStyle: {
+    //       color: '#374151'
+    //     },
+    //     formatter: function (params) {
+    //       const data = params[0];
+    //       return `时间: ${data.axisValue}<br/>指数: ${data.value.toFixed(2)}`;
+    //     }
+    //   },
+    //   xAxis: {
+    //     type: 'category',
+    //     data: intraday.map(d => d.t),
+    //     axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
+    //     splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
+    //     axisLabel: { color: 'rgba(0,0,0,0.7)' }
+    //   },
+    //   yAxis: {
+    //     type: 'value',
+    //     scale: true,
+    //     axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
+    //     splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
+    //     axisLabel: { color: 'rgba(0,0,0,0.7)' }
+    //   },
+    //   series: [{
+    //     name: 'C10 Index',
+    //     type: 'line',
+    //     data: series,
+    //     smooth: false,
+    //     lineStyle: { color: '#0ea5e9', width: 2 },
+    //     symbol: 'circle',
+    //     symbolSize: 4,
+    //     itemStyle: {
+    //       color: '#0ea5e9',
+    //       borderColor: '#ffffff',
+    //       borderWidth: 2
+    //     },
+    //     emphasis: {
+    //       itemStyle: {
+    //         color: '#0ea5e9',
+    //         borderColor: '#ffffff',
+    //         borderWidth: 3,
+    //         shadowBlur: 10,
+    //         shadowColor: 'rgba(14, 165, 233, 0.3)'
+    //       },
+    //       symbolSize: 8
+    //     }
+    //   }]
+    // });
 
 
 
     // Section 3: Weights pie
-    const pieChart = echarts.init(document.getElementById('pieChart'));
-    const pieData = constituents.map((c, index) => ({
-      name: c.symbol,
-      value: c.weight,
-      itemStyle: {
-        color: [
-          '#f59e0b', '#3b82f6', '#10b981', '#f97316', '#8b5cf6',
-          '#06b6d4', '#ef4444', '#84cc16', '#f59e0b', '#6366f1'
-        ][index % 10]
-      }
-    }));
+    // const pieChart = echarts.init(document.getElementById('pieChart'));
+    // const pieData = constituents.map((c, index) => ({
+    //   name: c.symbol,
+    //   value: c.weight,
+    //   itemStyle: {
+    //     color: [
+    //       '#f59e0b', '#3b82f6', '#10b981', '#f97316', '#8b5cf6',
+    //       '#06b6d4', '#ef4444', '#84cc16', '#f59e0b', '#6366f1'
+    //     ][index % 10]
+    //   }
+    // }));
 
-    pieChart.setOption({
-      tooltip: {
-        trigger: 'item',
-        formatter: '{b}: {c}%'
-      },
-      series: [{
-        type: 'pie',
-        radius: ['60%', '90%'],
-        center: ['50%', '50%'],
-        data: pieData,
-        label: {
-          show: true,
-          position: 'outside',
-          formatter: '{b}',
-          fontSize: 12,
-          color: '#374151'
-        },
-        labelLine: {
-          show: true,
-          length: 5,
-          length2: 15,
-          lineStyle: {
-            color: '#9ca3af',
-            width: 1
-          }
-        },
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }]
-    });
+    // pieChart.setOption({
+    //   tooltip: {
+    //     trigger: 'item',
+    //     formatter: '{b}: {c}%'
+    //   },
+    //   series: [{
+    //     type: 'pie',
+    //     radius: ['60%', '90%'],
+    //     center: ['50%', '50%'],
+    //     data: pieData,
+    //     label: {
+    //       show: true,
+    //       position: 'outside',
+    //       formatter: '{b}',
+    //       fontSize: 12,
+    //       color: '#374151'
+    //     },
+    //     labelLine: {
+    //       show: true,
+    //       length: 5,
+    //       length2: 15,
+    //       lineStyle: {
+    //         color: '#9ca3af',
+    //         width: 1
+    //       }
+    //     },
+    //     emphasis: {
+    //       itemStyle: {
+    //         shadowBlur: 10,
+    //         shadowOffsetX: 0,
+    //         shadowColor: 'rgba(0, 0, 0, 0.5)'
+    //       }
+    //     }
+    //   }]
+    // });
 
     // 窗口大小变化时重新调整图表大小
     window.addEventListener('resize', function () {
@@ -493,20 +506,20 @@
     });
 
     // ------- Table -------
-    const tbody = document.getElementById('tableBody');
-    constituents.forEach(c => {
-      const tr = document.createElement('tr');
-      tr.className = 'border-t border-slate-200 hover:bg-slate-50';
-      tr.innerHTML = `
-        <td class="px-4 py-3">${c.rank}</td>
-        <td class="px-4 py-3 font-semibold">${c.symbol}</td>
-        <td class="px-4 py-3 text-right">${c.weight.toFixed(1)}%</td>
-        <td class="px-4 py-3 text-right">$${c.price.toFixed(2)}</td>
-        <td class="px-4 py-3 text-right">$${(c.marketCap / 1e9).toFixed(1)}B</td>
-        <td class="px-4 py-3 ${c.change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${c.change >= 0 ? '+' : ''}${c.change.toFixed(2)}%</td>
-      `;
-      tbody.appendChild(tr);
-    });
+    // const tbody = document.getElementById('tableBody');
+    // constituents.forEach(c => {
+    //   const tr = document.createElement('tr');
+    //   tr.className = 'border-t border-slate-200 hover:bg-slate-50';
+    //   tr.innerHTML = `
+    //     <td class="px-4 py-3">${c.rank}</td>
+    //     <td class="px-4 py-3 font-semibold">${c.symbol}</td>
+    //     <td class="px-4 py-3 text-right">${c.weight.toFixed(1)}%</td>
+    //     <td class="px-4 py-3 text-right">$${c.price.toFixed(2)}</td>
+    //     <td class="px-4 py-3 text-right">$${(c.marketCap / 1e9).toFixed(1)}B</td>
+    //     <td class="px-4 py-3 ${c.change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${c.change >= 0 ? '+' : ''}${c.change.toFixed(2)}%</td>
+    //   `;
+    //   tbody.appendChild(tr);
+    // });
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -620,30 +633,39 @@
     // Initialize Lucide icons
     lucide.createIcons();
 
-    // URL Parameter Control JavaScript
-    (function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const onlyApp = urlParams.get('ONLYAPP');
-      
-      if (onlyApp === '1') {
-        // Hide header and footer
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
-        
-        if (header) {
-          header.style.display = 'none';
-        }
-        if (footer) {
-          footer.style.display = 'none';
-        }
-        
-        // Add extra padding to Hero section
-        const heroSection = document.querySelector('section.relative.overflow-hidden.bg-gradient-to-br');
-        if (heroSection) {
-          heroSection.style.paddingTop = 'calc(2.5rem + 40px)';
-        }
+    // APPONLY Parameter Handler is included via external script
+  </script>
+  <script type="module">
+    import { loadData } from '../script/datasource.js';
+    import {
+      createIndexTrendChart,
+      updateIndexTrendChart,
+      updateLastPrice,
+      updateLastChange,
+    } from '../script/c10_index_trend.js';
+    import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
+
+    let chart;
+    await loadData((data, isFirst) => {
+      var formattedData = data.c10Index24h.map(d => ({ t: d.calculatedAt, v: d.index }));
+      if (chart) {
+        updateIndexTrendChart(formattedData, chart);
       }
-    })();
+      else {
+        chart = createIndexTrendChart(formattedData, { containerId: 'indexChart', lang: 'en' });
+      }
+
+      const before = data.c10Index24h[0].index;
+      const current = data.c10Index24h[data.c10Index24h.length - 1].index;
+      const change = (current - before) / before;
+      updateLastPrice(current, 'lastPrice');
+      updateLastChange(change, 'lastChange');
+
+      if (isFirst) {
+        renderWeightPie(data.c10LatestMarketData);
+      }
+      renderTable(data.c10LatestMarketData)
+    });
   </script>
 
 </body>
