@@ -147,23 +147,18 @@
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
-
         <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+            <!-- 左侧文案 -->
             <div>
-
-                <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+                <h1 class="text-3xl sm:text-5xl font-semibold leading-tight">
                     C10 Treasury
-                    <span class="block gradient-text">Building the No. 1 Treasury for the Top 10 Crypto Asset Portfolio</span>
+                    <span class="block gradient-text">Building the No. 1 Treasury for the Top 10 Crypto Asset
+                        Portfolio</span>
                 </h1>
                 <p class="mt-4 text-slate-600 max-w-xl">
                     FF's Proprietary "EAI + Crypto" Dual-flywheel & Dual Bridge Eco-Strategy, building the first C10
                     Treasury product based on the top 10 crypto asset basket index issued by a U.S. listed company. C10
                     Index Announced. Aiming to become the number one treasury for this top ten crypto asset portfolio.
-                </p>
-                <p class="mt-4 text-slate-600 max-w-xl">
-                    FF’s proprietary “EAI + Crypto” Dual-Flywheel & Dual-Bridge Eco-Strategy launches the first C10
-                    Treasury product issued by a U.S.-listed company — an index-based treasury on a basket of the top 10
-                    crypto assets.
                 </p>
                 <div class="mt-6 flex flex-wrap items-center gap-3">
                     <a href="c10_index.html"
@@ -176,13 +171,17 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Simplified Chart -->
-            <div class="h-80 w-full" id="index">
-                <div class="indexLastData"><span id="indexValue"></span><span id="indexChange"></span></div>
-                <canvas id="indexChart" class="w-full h-full"></canvas>
-                <!-- Assets Display -->
-                <!-- Asset List Container - Outside chart container -->
+            <!-- Right side: Chart card -->
+            <div>
+                <div id="index" class="relative w-full h-80 rounded-lg bg-white/0">
+                    <!-- The overlay must be placed at a higher level and confined within the container. -->
+                    <div class="indexLastData absolute top-3 right-3 z-20">
+                        <span id="indexValue"></span><span id="indexChange"></span>
+                    </div>
+                    <!-- canvas 放在底层 -->
+                    <canvas id="indexChart" class="absolute inset-0 w-full h-full z-10"></canvas>
+                </div>
+                <!-- 资产列表容器 - 移出图表容器外部 -->
                 <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
                     <!-- BTC -->
                     <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
@@ -243,14 +242,10 @@
                         <div class="text-xs font-medium text-slate-900">DOT</div>
                         <div class="text-xs text-slate-600 font-semibold">3.2%</div>
                     </div>
-
                 </div>
-                <div></div>
             </div>
-
-
-        </div>
     </section>
+
 
     <!-- FFAI Crypto Treasury Strategy -->
     <section class="py-16 bg-gradient-to-br from-slate-50 to-white border-t border-slate-200">

@@ -131,11 +131,10 @@
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100">
-
         <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+            <!-- 左侧文案 -->
             <div>
-
-                <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+                <h1 class="text-3xl sm:text-5xl font-semibold leading-tight">
                     C10财库
                     <span class="block gradient-text">构建十大加密资产组合第一财库</span>
                 </h1>
@@ -153,81 +152,79 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Simplified Chart -->
-            <div class="h-80 w-full" id="index">
-                <div class="indexLastData"><span id="indexValue"></span><span id="indexChange"></span></div>
-                <canvas id="indexChart" class="w-full h-full"></canvas>
-                <!-- 资产列表容器 - 移出图表容器外部 -->
-                <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
-                    <!-- BTC -->
-                    <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">BTC</div>
-                        <div class="text-xs text-slate-600 font-semibold">28.5%</div>
+            <!-- 右侧：图表卡片 -->
+            <div>
+                <div id="index" class="relative w-full h-80 rounded-lg bg-white/0">
+                    <!-- 覆盖层一定放在更高层，并限制在容器内 -->
+                    <div class="indexLastData absolute top-3 right-3 z-20">
+                        <span id="indexValue"></span><span id="indexChange"></span>
                     </div>
-
-                    <!-- ETH -->
-                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">ETH</div>
-                        <div class="text-xs text-slate-600 font-semibold">22.1%</div>
-                    </div>
-
-                    <!-- XRP -->
-                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">XRP</div>
-                        <div class="text-xs text-slate-600 font-semibold">8.3%</div>
-                    </div>
-
-                    <!-- SOL -->
-                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">SOL</div>
-                        <div class="text-xs text-slate-600 font-semibold">7.9%</div>
-                    </div>
-
-                    <!-- BNB -->
-                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">BNB</div>
-                        <div class="text-xs text-slate-600 font-semibold">6.2%</div>
-                    </div>
-
-                    <!-- DOGE -->
-                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">DOGE</div>
-                        <div class="text-xs text-slate-600 font-semibold">5.4%</div>
-                    </div>
-
-                    <!-- ADA -->
-                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">ADA</div>
-                        <div class="text-xs text-slate-600 font-semibold">4.7%</div>
-                    </div>
-
-                    <!-- AVAX -->
-                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">AVAX</div>
-                        <div class="text-xs text-slate-600 font-semibold">4.1%</div>
-                    </div>
-
-                    <!-- TRX -->
-                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">TRX</div>
-                        <div class="text-xs text-slate-600 font-semibold">3.8%</div>
-                    </div>
-
-                    <!-- DOT -->
-                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                        <div class="text-xs font-medium text-slate-900">DOT</div>
-                        <div class="text-xs text-slate-600 font-semibold">3.2%</div>
-                    </div>
-
+                    <!-- canvas 放在底层 -->
+                    <canvas id="indexChart" class="absolute inset-0 w-full h-full z-10"></canvas>
                 </div>
+                <!-- 资产列表容器 - 移出图表容器外部 -->
+                    <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
+                        <!-- BTC -->
+                        <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">BTC</div>
+                            <div class="text-xs text-slate-600 font-semibold">28.5%</div>
+                        </div>
+
+                        <!-- ETH -->
+                        <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">ETH</div>
+                            <div class="text-xs text-slate-600 font-semibold">22.1%</div>
+                        </div>
+
+                        <!-- XRP -->
+                        <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">XRP</div>
+                            <div class="text-xs text-slate-600 font-semibold">8.3%</div>
+                        </div>
+
+                        <!-- SOL -->
+                        <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">SOL</div>
+                            <div class="text-xs text-slate-600 font-semibold">7.9%</div>
+                        </div>
+
+                        <!-- BNB -->
+                        <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">BNB</div>
+                            <div class="text-xs text-slate-600 font-semibold">6.2%</div>
+                        </div>
+
+                        <!-- DOGE -->
+                        <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">DOGE</div>
+                            <div class="text-xs text-slate-600 font-semibold">5.4%</div>
+                        </div>
+
+                        <!-- ADA -->
+                        <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">ADA</div>
+                            <div class="text-xs text-slate-600 font-semibold">4.7%</div>
+                        </div>
+
+                        <!-- AVAX -->
+                        <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">AVAX</div>
+                            <div class="text-xs text-slate-600 font-semibold">4.1%</div>
+                        </div>
+
+                        <!-- TRX -->
+                        <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">TRX</div>
+                            <div class="text-xs text-slate-600 font-semibold">3.8%</div>
+                        </div>
+
+                        <!-- DOT -->
+                        <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                            <div class="text-xs font-medium text-slate-900">DOT</div>
+                            <div class="text-xs text-slate-600 font-semibold">3.2%</div>
+                        </div>
+                    </div>
             </div>
-
-
-            <div></div>
-            <!-- Assets Display -->
-
-        </div>
     </section>
 
     <!-- FFAI Crypto Treasury Strategy -->
