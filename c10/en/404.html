@@ -166,7 +166,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-200 bg-white/60">
-        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-slate-700">
             <div>
                 <a href="index.html" class="flex items-center gap-2">
                     <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
@@ -194,16 +194,17 @@
             <div>
                 <div class="font-semibold text-slate-900 mb-2">Contact</div>
                 <ul class="space-y-1">
-                    <li>邮箱: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
+                    <li>Email: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
                     <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank"
                             class="hover:text-blue-600">@FaradayFuture</a></li>
                 </ul>
             </div>
             <div>
                 <div class="font-semibold text-slate-900 mb-2">Legal Disclaimer</div>
-                <p class="text-xs">All content is for informational purposes only and does not constitute investment
-                    advice. Digital assets are volatile and carry risks. Past performance does not guarantee future
-                    results.</p>
+                <div class="relative">
+                    <p id="legalText" class="text-xs transition-all duration-300 ease-in-out overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">The content contained in this document does not constitute tax, legal, insurance or investment advice, nor does it constitute a recommendation, offer to sell or solicitation of an offer to purchase/invest in any securities. Historical market trends are not reliable indicators of actual future market behavior or future performance of any particular investment, and the two may differ significantly and should not be relied upon. All investments carry certain risks and there is no guarantee of positive returns over any time period. Different time periods and market conditions may result in significantly different outcomes. The digital assets contained in the C10 Index are not protected by the Federal Deposit Insurance Corporation (FDIC), may depreciate in value, and are not guaranteed by any bank. Information regarding the digital assets contained in the C10 Index is believed to be reliable, but no warranty is made. The content contained in this document does not constitute any representation or commitment that FFAI will hold more than a minimal amount of the digital assets contained in the C10 Index, and the amount of digital assets held by FFAI may not be material.</p>
+                    <button id="toggleButton" class="text-blue-600 hover:text-blue-800 text-xs mt-1 transition-colors duration-200">More</button>
+                </div>
             </div>
         </div>
         <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto  All rights reserved.</div>
@@ -286,6 +287,35 @@
                     const currentPaddingValue = parseInt(currentPadding) || 0;
                     mainContent.style.paddingTop = (currentPaddingValue + 40) + 'px';
                 }
+            }
+        })();
+    </script>
+
+    <!-- Legal Text Toggle JavaScript -->
+    <script>
+        (function () {
+            const legalText = document.getElementById('legalText');
+            const toggleButton = document.getElementById('toggleButton');
+            let isExpanded = false;
+
+            if (legalText && toggleButton) {
+                toggleButton.addEventListener('click', function () {
+                    if (isExpanded) {
+                        // Collapse
+                        legalText.style.display = '-webkit-box';
+                        legalText.style.webkitLineClamp = '3';
+                        legalText.style.webkitBoxOrient = 'vertical';
+                        toggleButton.textContent = 'More';
+                        isExpanded = false;
+                    } else {
+                        // Expand
+                        legalText.style.display = 'block';
+                        legalText.style.webkitLineClamp = 'none';
+                        legalText.style.webkitBoxOrient = 'initial';
+                        toggleButton.textContent = 'Less';
+                        isExpanded = true;
+                    }
+                });
             }
         })();
     </script>
