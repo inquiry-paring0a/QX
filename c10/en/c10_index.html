@@ -38,6 +38,13 @@
       background-clip: text;
     }
 
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     .feature-card {
       display: flex;
       flex-direction: column;
@@ -88,7 +95,7 @@
         <div class="flex items-center gap-4">
           <a href="index.html#invest"
             class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-            Invest in C10
+            Invest with Us
           </a>
           <a href="https://www.ff.com/us/" target="_blank" class="hover:opacity-80 transition-opacity">
             <img src="../assets/icons/brand/FF.svg" width="32" height="24" alt="FF Logo">
@@ -101,7 +108,7 @@
       <div class="md:hidden flex items-center gap-2">
         <a href="index.html#invest"
           class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-          Invest in C10
+          Invest with Us
         </a>
 
         <button id="mobileMenuBtn"
@@ -224,7 +231,8 @@
             <i data-lucide="info" class="h-6 w-6 text-blue-600"></i>
             <h3 class="font-semibold text-lg">Index Definition</h3>
           </div>
-          <p class="text-slate-700 flex-1">The C10 Index tracks the performance of the top 10 cryptocurrencies by market capitalization, using a market-cap weighted methodology to provide diversified digital asset exposure.</p>
+          <p class="text-slate-700 flex-1">The C10 Index tracks the performance of the top 10 cryptocurrencies by market
+            capitalization, using a market-cap weighted methodology to provide diversified digital asset exposure.</p>
         </div>
 
         <!-- Weight Rules Card -->
@@ -233,7 +241,8 @@
             <i data-lucide="scale" class="h-6 w-6 text-green-600"></i>
             <h3 class="font-semibold text-lg">Weight Rules</h3>
           </div>
-          <p class="text-slate-700 flex-1">Market-cap based weight allocation with a maximum single asset weight of 50%, ensuring index diversification and risk distribution.</p>
+          <p class="text-slate-700 flex-1">Market-cap based weight allocation with a maximum single asset weight of 50%,
+            ensuring index diversification and risk distribution.</p>
         </div>
 
         <!-- Mature Methodology Card -->
@@ -242,7 +251,8 @@
             <i data-lucide="book-open" class="h-6 w-6 text-purple-600"></i>
             <h3 class="font-semibold text-lg">Mature Methodology</h3>
           </div>
-          <p class="text-slate-700 flex-1">Employs proven index construction methods with transparent rules and rigorous governance processes, ensuring index reliability and consistency.</p>
+          <p class="text-slate-700 flex-1">Employs proven index construction methods with transparent rules and rigorous
+            governance processes, ensuring index reliability and consistency.</p>
         </div>
 
         <!-- Regular Rebalancing Card -->
@@ -251,7 +261,8 @@
             <i data-lucide="refresh-cw" class="h-6 w-6 text-orange-600"></i>
             <h3 class="font-semibold text-lg">Regular Rebalancing</h3>
           </div>
-          <p class="text-slate-700 flex-1">Monthly weight adjustments ensure the index always reflects the latest market conditions, maintaining optimal risk-return characteristics.</p>
+          <p class="text-slate-700 flex-1">Monthly weight adjustments ensure the index always reflects the latest market
+            conditions, maintaining optimal risk-return characteristics.</p>
         </div>
 
       </div>
@@ -309,7 +320,7 @@
           <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="C10 Logo">
           <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
         </a>
-        <p class="py-4">Rules-based digital asset indices for institutions</p>
+        <p class="py-4">No. 1 Treasury for Top 10 Crypto Portfolio</p>
 
         <!-- Language Switcher -->
         <div class="mt-2 relative">
@@ -330,19 +341,24 @@
       <div>
         <div class="font-semibold text-slate-900 mb-2">Contact</div>
         <ul class="space-y-1">
-          <li>Email: hello@c10index.com</li>
-          <li>Telegram: @C10Index</li>
-          <li>Twitter/X: @C10_Index</li>
+          <li>Email: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
+          <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank"
+              class="hover:text-blue-600">@FaradayFuture</a></li>
         </ul>
       </div>
       <div>
         <div class="font-semibold text-slate-900 mb-2">Legal</div>
-        <p class="text-xs">All content is for informational purposes only and does not constitute investment
-          advice. Digital assets are volatile and carry risk. Past performance is not indicative of future
-          results.</p>
+        <div id="legalTextContainer" class="text-xs">
+          <p id="legalText" class="line-clamp-3 transition-all duration-300 ease-in-out">
+            All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results. This website and its content are not intended for residents of jurisdictions where such distribution or use would be contrary to local law or regulation. By accessing this site, you acknowledge that you are not located in any such restricted jurisdiction. The information provided herein is subject to change without notice and should not be construed as a recommendation to buy or sell any particular asset. Always consult with qualified financial advisors before making investment decisions.
+          </p>
+          <button id="toggleLegalText" class="mt-2 text-blue-600 hover:text-blue-800 text-xs font-medium transition-colors">
+            More
+          </button>
+        </div>
       </div>
     </div>
-    <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+    <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto All rights reserved.</div>
   </footer>
 
   <script>
@@ -629,40 +645,62 @@
     // Initialize Lucide icons
     lucide.createIcons();
 
+    // Legal text expand/collapse functionality
+    (function() {
+      const legalText = document.getElementById('legalText');
+      const toggleButton = document.getElementById('toggleLegalText');
+      
+      if (legalText && toggleButton) {
+        let isExpanded = false;
+        
+        toggleButton.addEventListener('click', function() {
+          if (isExpanded) {
+            legalText.classList.add('line-clamp-3');
+            toggleButton.textContent = 'More';
+            isExpanded = false;
+          } else {
+            legalText.classList.remove('line-clamp-3');
+            toggleButton.textContent = 'Less';
+            isExpanded = true;
+          }
+        });
+      }
+    })();
+
     // APPONLY Parameter Handler is included via external script
   </script>
-    <script type="module">
-        import { loadData } from '../script/datasource.js';
-        import {
-          createIndexTrendChart,
-          updateIndexTrendChart,
-          updateLastPrice,
-          updateLastChange,
-        } from '../script/c10_index_trend.js';
-        import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
+  <script type="module">
+    import { loadData } from '../script/datasource.js';
+    import {
+      createIndexTrendChart,
+      updateIndexTrendChart,
+      updateLastPrice,
+      updateLastChange,
+    } from '../script/c10_index_trend.js';
+    import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
 
-        let chart;
-        await loadData((data, isFirst) => {
-          var formattedData = data.c10Index24h.map(d => ({ t: d.calculatedAt, v: d.index}));
-          if(chart){
-            updateIndexTrendChart(formattedData, chart);
-          }
-          else{
-            chart = createIndexTrendChart(formattedData, {containerId: 'indexChart', lang: 'en'});
-          }
+    let chart;
+    await loadData((data, isFirst) => {
+      var formattedData = data.c10Index24h.map(d => ({ t: d.calculatedAt, v: d.index }));
+      if (chart) {
+        updateIndexTrendChart(formattedData, chart);
+      }
+      else {
+        chart = createIndexTrendChart(formattedData, { containerId: 'indexChart', lang: 'en' });
+      }
 
-          const before = data.c10Index24h[0].index;
-          const current = data.c10Index24h[data.c10Index24h.length - 1].index;
-          const change = (current - before) / before;
-          updateLastPrice(current, 'lastPrice');
-          updateLastChange(change, 'lastChange');
+      const before = data.c10Index24h[0].index;
+      const current = data.c10Index24h[data.c10Index24h.length - 1].index;
+      const change = (current - before) / before;
+      updateLastPrice(current, 'lastPrice');
+      updateLastChange(change, 'lastChange');
 
-            if (isFirst) {
-                renderWeightPie(data.c10LatestMarketData);
-            }
-            renderTable(data.c10LatestMarketData)
-        });
-    </script>
+      if (isFirst) {
+        renderWeightPie(data.c10LatestMarketData);
+      }
+      renderTable(data.c10LatestMarketData)
+    });
+  </script>
 
 </body>
 

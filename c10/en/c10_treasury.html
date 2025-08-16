@@ -39,6 +39,13 @@
       background-clip: text;
     }
 
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     /* Chip class with standard CSS instead of @apply */
     .chip {
       display: inline-flex;
@@ -77,7 +84,7 @@
         <div class="flex items-center gap-4">
           <a href="index.html#invest"
             class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-            Invest in C10
+            Invest with Us
           </a>
           <a href="https://www.ff.com/us/" target="_blank" class="hover:opacity-80 transition-opacity">
             <img src="../assets/icons/brand/FF.svg" width="32" height="24" alt="FF Logo">
@@ -90,7 +97,7 @@
       <div class="md:hidden flex items-center gap-2">
         <a href="index.html#invest"
           class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-          Invest in C10
+          Invest with Us
         </a>
 
         <button id="mobileMenuBtn"
@@ -131,41 +138,40 @@
       <div>
         <div
           class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 mb-4">
-          <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury — Rules‑Based Crypto Basket
+          <i data-lucide="sparkles" class="h-4 w-4"></i> C10 Treasury Management
         </div>
         <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
-          Rules‑Driven Asset Allocation<br>
-          <span class="gradient-text">Balancing Growth and Risk</span>
+          Treasury Products Based on the C10 Index<br>
+          <span class="gradient-text"> Accumulating and Compounding the Global Top 10 Cryptocurrencies Portfolio</span>
         </h1>
         <p class="mt-4 text-slate-700 max-w-2xl">
-          FF C10 Treasury plans to adopt an "80% Passive + 20% Active" portfolio configuration. The "80% Passive"
-          portion strictly follows the C10 Index passive allocation, while the "20% Active" portion is manually
-          configured with the top ten cryptocurrencies by market cap (excluding stablecoins and fake coins), with
-          monthly dynamic adjustments.
+          The C10 Treasury program adopts an “80% passive + 20% active” allocation strategy. 80% is strictly passively
+          allocated according to the C10 Index. 20% is actively managed across the top 10 cryptocurrencies by market
+          capitalization, with monthly dynamic adjustments.
         </p>
         <p class="mt-3 text-slate-700 max-w-2xl">
-          Our first-phase asset management scale target is $5-10 billion (to be completed within approximately six
-          months); the second phase will target $100 billion scale; in the third and fourth phases, if ETF licenses are
-          approved, asset scale is expected to achieve accelerated growth, entering the growth channel of hundreds of
-          billions to trillions of dollars.
+          Professional custody, deposit & staking yield mechanisms, and multiple downside protection measures are in
+          place to enhance stable cash flow, strengthen net asset growth, and drive sustained increases in corporate
+          value.
         </p>
 
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="bg-white border border-slate-200 rounded-lg p-4">
-          <div class="text-sm text-slate-500 mb-1">AUM (USD)</div>
-          <div class="text-2xl font-bold text-slate-900 mb-1">$38.6M</div>
-          <div class="text-sm text-green-600">+2.1% this week</div>
+          <div class="text-sm text-slate-500 mb-1">Assets Under Management (USD)</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">Coming Soon</div>
+          <div class="text-sm text-green-600">Weekly Growth: 0%</div>
         </div>
         <div class="bg-white border border-slate-200 rounded-lg p-4">
-          <div class="text-sm text-slate-500 mb-1">YTD Return</div>
-          <div class="text-2xl font-bold text-slate-900 mb-1">+18.4%</div>
-          <div class="text-sm text-slate-600">vs BTC: -3.2%</div>
+          <div class="text-sm text-slate-500 mb-1">Year-to-Date Return</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">0</div>
+          <div class="text-sm text-slate-600">vs. BTC: 0%
+          </div>
         </div>
         <div class="bg-white border border-slate-200 rounded-lg p-4">
           <div class="text-sm text-slate-500 mb-1">Annualized Volatility</div>
-          <div class="text-2xl font-bold text-slate-900 mb-1">31.7%</div>
-          <div class="text-sm text-slate-600">6.4% lower than BTC</div>
+          <div class="text-2xl font-bold text-slate-900 mb-1">0</div>
+          <div class="text-sm text-slate-600">0</div>
         </div>
       </div>
     </div>
@@ -176,19 +182,24 @@
     <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-8 items-start">
       <div>
         <h2 class="text-2xl font-semibold mb-3">Overview</h2>
-        <p class="text-slate-700 mb-4">C10 Treasury operates a dual‑engine model of passive index + active sleeve:</p>
+        <p class="text-slate-700 mb-4">The C10 Treasury is managed by combining a passive index component with an active
+          allocation.
+        </p>
         <ul class="space-y-3 text-slate-700">
           <li class="flex gap-2"><i data-lucide="layers" class="h-5 w-5 text-emerald-600 shrink-0"></i>
-            <span><b>Passive</b>: Rules‑based tracking of the free‑float market cap top 10 crypto assets with scheduled
-              rebalances; objective: market beta.</span>
+            <span>The passive component represents 80% of the portfolio, allocated according to rules tracking the top
+              ten cryptocurrencies by free-float market capitalization, with periodic rebalancing. Its objective is to
+              capture market beta.
+            </span>
           </li>
           <li class="flex gap-2"><i data-lucide="activity-square" class="h-5 w-5 text-blue-600 shrink-0"></i>
-            <span><b>Active</b>: 20% sleeve for event‑driven opportunities, correlation trades, hedging, and liquidity
-              management; objective: improve drawdowns and Sharpe.</span>
+            <span>The active component accounts for 20% of the portfolio and is used for event-driven opportunities,
+              correlation trades, hedging, and liquidity management. Its objective is to improve drawdown performance
+              and Sharpe ratio.</span>
           </li>
           <li class="flex gap-2"><i data-lucide="shield" class="h-5 w-5 text-cyan-600 shrink-0"></i>
-            <span>Full‑stack compliance and security: MPC custody, tiered permissions, allowlists, on‑chain monitoring,
-              and audit logs.</span>
+            <span>The strategy incorporates full-stack compliance and security, including MPC custody, tiered
+              permissions, whitelists, on-chain monitoring, and audit logs.</span>
           </li>
         </ul>
       </div>
@@ -216,8 +227,8 @@
           <button class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-sm" data-range="ALL">ALL</button>
         </div>
       </div>
-      <p class="text-slate-600 mb-4">Methodology provided by the Capital Team: NAV in USD; backtests use published
-        weights with monthly rebalances; benchmark is BTC.</p>
+      <p class="text-slate-600 mb-4">Backtested using the C10 Index, with monthly rebalancing based on published asset
+        weights.</p>
 
       <div class="grid lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-6">
@@ -265,7 +276,8 @@
             <!-- Chart -->
             <div class="flex-1 mb-6">
               <div class="h-80 flex items-center justify-center">
-                <canvas id="total100Chart" style="width: 350px; height: 350px; margin: 0 auto; display: block;"></canvas>
+                <canvas id="total100Chart"
+                  style="width: 350px; height: 350px; margin: 0 auto; display: block;"></canvas>
               </div>
             </div>
             <!-- Asset List -->
@@ -373,7 +385,8 @@
               <!-- Chart -->
               <div class="flex-1">
                 <div class="h-64 flex items-center justify-center">
-                  <canvas id="passive80Chart" style="width: 240px; height: 240px; margin: 0 auto; display: block;"></canvas>
+                  <canvas id="passive80Chart"
+                    style="width: 240px; height: 240px; margin: 0 auto; display: block;"></canvas>
                 </div>
               </div>
               <!-- Asset List -->
@@ -479,7 +492,8 @@
               <!-- Chart -->
               <div class="flex-1">
                 <div class="h-64 flex items-center justify-center">
-                  <canvas id="active20Chart" style="width: 240px; height: 240px; margin: 0 auto; display: block;"></canvas>
+                  <canvas id="active20Chart"
+                    style="width: 240px; height: 240px; margin: 0 auto; display: block;"></canvas>
                 </div>
               </div>
               <!-- Asset List -->
@@ -515,9 +529,11 @@
   <section id="s4" class="py-12 sm:py-16 border-t border-slate-200 bg-slate-50">
     <div class="mx-auto max-w-6xl px-4">
       <div class="text-center mb-12">
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">FF C10 Treasury Advantages</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">Professional crypto asset index investment solutions providing
-          comprehensive investment protection and convenience</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Advantages of C10 Treasury Management
+        </h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">A professional crypto asset index investment solution providing
+          comprehensive investment protection and convenience.
+        </p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
@@ -529,9 +545,9 @@
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-900 mb-3">One-Stop Convenient Investment</h3>
-              <p class="text-slate-600 leading-relaxed">Eliminates the enormous effort and operational costs of
-                individual research, purchasing, storage, monitoring, and adjustment of multiple cryptocurrencies,
-                providing a convenient and efficient one-stop investment experience.</p>
+              <p class="text-slate-600 leading-relaxed">Eliminates the time, effort, and complexity of researching,
+                purchasing, storing, monitoring, and adjusting multiple cryptocurrencies, offering a streamlined,
+                efficient investment experience.</p>
             </div>
           </div>
         </div>
@@ -545,9 +561,9 @@
             <div>
               <h3 class="text-lg font-semibold text-slate-900 mb-3">Automatic Rebalancing & Professional Maintenance
               </h3>
-              <p class="text-slate-600 leading-relaxed">C10 Treasury automatically adjusts portfolio structure monthly,
-                strictly tracking the top ten cryptocurrencies by market cap. Manual completion of this operation by
-                individual investors is not only cumbersome and time-consuming, but also prone to errors or delays.</p>
+              <p class="text-slate-600 leading-relaxed">The C10 Treasury automatically adjusts portfolio holdings each
+                month, strictly tracking the top ten cryptocurrencies by market capitalization. Manual rebalancing is
+                time-consuming, prone to errors, and can lag behind market changes.</p>
             </div>
           </div>
         </div>
@@ -559,9 +575,9 @@
               <i data-lucide="shield-check" class="h-6 w-6 text-purple-600"></i>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-slate-900 mb-3">Transparent Custody & Security Assurance</h3>
-              <p class="text-slate-600 leading-relaxed">Provides transparent custody mechanisms, solving security risks
-                and trust issues associated with individual custody of large amounts of crypto assets.</p>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">Transparent Custody and Security</h3>
+              <p class="text-slate-600 leading-relaxed">Provides a transparent custody framework, addressing the
+                security risks and trust issues of personally holding large amounts of crypto assets.</p>
             </div>
           </div>
         </div>
@@ -574,9 +590,9 @@
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-900 mb-3">Professional Yield Management & Risk Control</h3>
-              <p class="text-slate-600 leading-relaxed">Includes professional yield management strategies and built-in
-                multiple downside protection mechanisms, which are complex risk management tools that individual
-                investors typically find difficult to design and execute independently.</p>
+              <p class="text-slate-600 leading-relaxed">Incorporates professional yield management strategies and
+                multiple downside-protection mechanisms, which are typically difficult for individual investors to
+                design and implement independently.</p>
             </div>
           </div>
         </div>
@@ -592,7 +608,7 @@
           <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="C10 Logo">
           <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
         </a>
-        <p class="py-4">Rules-based digital asset indices for institutions</p>
+        <p class="py-4">No. 1 Treasury for Top 10 Crypto Portfolio</p>
 
         <!-- Language Switcher -->
         <div class="mt-2 relative">
@@ -613,19 +629,24 @@
       <div>
         <div class="font-semibold text-slate-900 mb-2">Contact</div>
         <ul class="space-y-1">
-          <li>Email: hello@c10index.com</li>
-          <li>Telegram: @C10Index</li>
-          <li>Twitter/X: @C10_Index</li>
+          <li>Email: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
+          <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank"
+              class="hover:text-blue-600">@FaradayFuture</a></li>
         </ul>
       </div>
       <div>
         <div class="font-semibold text-slate-900 mb-2">Legal</div>
-        <p class="text-xs">All content is for informational purposes only and does not constitute investment
-          advice. Digital assets are volatile and carry risk. Past performance is not indicative of future
-          results.</p>
+        <div id="legalTextContainer" class="text-xs">
+          <p id="legalText" class="line-clamp-3 transition-all duration-300 ease-in-out">
+            All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risk. Past performance is not indicative of future results. This website and its content are not intended for residents of jurisdictions where such distribution or use would be contrary to local law or regulation. By accessing this site, you acknowledge that you are not located in any such restricted jurisdiction. The information provided herein is subject to change without notice and should not be construed as a recommendation to buy or sell any particular asset. Always consult with qualified financial advisors before making investment decisions.
+          </p>
+          <button id="toggleLegalText" class="mt-2 text-blue-600 hover:text-blue-800 text-xs font-medium transition-colors">
+            More
+          </button>
+        </div>
       </div>
     </div>
-    <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Treasury. All rights reserved.</div>
+    <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto All rights reserved.</div>
   </footer>
 
   <script>
@@ -967,16 +988,38 @@
       }
     })();
 
+    // Legal text expand/collapse functionality
+    (function() {
+      const legalText = document.getElementById('legalText');
+      const toggleButton = document.getElementById('toggleLegalText');
+      
+      if (legalText && toggleButton) {
+        let isExpanded = false;
+        
+        toggleButton.addEventListener('click', function() {
+          if (isExpanded) {
+            legalText.classList.add('line-clamp-3');
+            toggleButton.textContent = 'More';
+            isExpanded = false;
+          } else {
+            legalText.classList.remove('line-clamp-3');
+            toggleButton.textContent = 'Less';
+            isExpanded = true;
+          }
+        });
+      }
+    })();
+
   </script>
   <script type="module">
-        import { loadIndexHistoryWithBitcoin } from '../script/datasource.js';
-        import { updateChart } from '../script/c10_return_history.js';
+    import { loadIndexHistoryWithBitcoin } from '../script/datasource.js';
+    import { updateChart } from '../script/c10_return_history.js';
 
-        await loadIndexHistoryWithBitcoin(data => {
-            updateChart(data, {
-                containerId: 'navChart',
-            });
-        })
+    await loadIndexHistoryWithBitcoin(data => {
+      updateChart(data, {
+        containerId: 'navChart',
+      });
+    })
   </script>
 
 </body>

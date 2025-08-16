@@ -35,9 +35,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-20px);
             }
@@ -63,7 +66,7 @@
                 <div class="flex items-center gap-4">
                     <a href="index.html#invest"
                         class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-                        Invest in C10
+                        Invest with Us
                     </a>
                     <a href="https://www.faradayfuturecn.com/cn/" target="_blank"
                         class="hover:opacity-80 transition-opacity">
@@ -76,7 +79,7 @@
             <div class="md:hidden flex items-center gap-2">
                 <a href="index.html#invest"
                     class="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-slate-800 transition-colors">
-                    Invest in C10
+                    Invest with Us
                 </a>
 
                 <button id="mobileMenuBtn"
@@ -98,11 +101,14 @@
                 <a href="index.html"
                     class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">Home</a>
                 <a href="c10_index.html"
-                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Index</a>
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+                    Index</a>
                 <a href="c10_treasury.html"
-                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 Treasury</a>
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+                    Treasury</a>
                 <a href="index.html#ETF"
-                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10 ETF</a>
+                    class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors">C10
+                    ETF</a>
                 <a href="https://www.faradayfuturecn.com/cn/"
                     class="block py-3 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
                     target="_blank">FF</a>
@@ -124,14 +130,15 @@
 
             <!-- 404 Title -->
             <h1 class="text-6xl sm:text-8xl font-bold gradient-text mb-4">404</h1>
-            
+
             <!-- Error Message -->
             <h2 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-4">
                 Page Not Found
             </h2>
-            
+
             <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-                Sorry, the page you are trying to access does not exist or has been moved. Please check if the URL is correct. You can also return to the homepage or browse the C10 Index and C10 Treasury.
+                Sorry, the page you are trying to access does not exist or has been moved. Please check if the URL is
+                correct. You can also return to the homepage or browse the C10 Index and C10 Treasury.
             </p>
 
             <!-- Action Buttons -->
@@ -165,7 +172,7 @@
                     <img src="../assets/icons/brand/C10.svg" width="69" height="30" alt="FFAI Logo">
                     <div class="text-lg" style="font-family: 'Roboto', sans-serif;">FFAI Crypto</div>
                 </a>
-                <p class="py-4">Rule-based digital asset index for institutions</p>
+                <p class="py-4">No. 1 Treasury for Top 10 Crypto Portfolio</p>
                 <!-- Language Switcher -->
                 <div class="relative mt-2">
                     <button id="langSwitcher"
@@ -187,17 +194,19 @@
             <div>
                 <div class="font-semibold text-slate-900 mb-2">Contact</div>
                 <ul class="space-y-1">
-                    <li>Email: hello@c10index.com</li>
-                    <li>Telegram: @C10Index</li>
-                    <li>Twitter/X: @C10_Index</li>
+                    <li>邮箱: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
+                    <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank"
+                            class="hover:text-blue-600">@FaradayFuture</a></li>
                 </ul>
             </div>
             <div>
                 <div class="font-semibold text-slate-900 mb-2">Legal Disclaimer</div>
-                <p class="text-xs">All content is for informational purposes only and does not constitute investment advice. Digital assets are volatile and carry risks. Past performance does not guarantee future results.</p>
+                <p class="text-xs">All content is for informational purposes only and does not constitute investment
+                    advice. Digital assets are volatile and carry risks. Past performance does not guarantee future
+                    results.</p>
             </div>
         </div>
-        <div class="text-center text-xs text-slate-500 pb-8">© 2025 Crypto Asset Management. All rights reserved.</div>
+        <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto  All rights reserved.</div>
     </footer>
 
     <!-- Mobile Menu JavaScript -->
@@ -256,20 +265,20 @@
             // Check URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const onlyApp = urlParams.get('ONLYAPP');
-            
+
             if (onlyApp === '1') {
                 // Hide header
                 const header = document.querySelector('header');
                 if (header) {
                     header.style.display = 'none';
                 }
-                
+
                 // Hide footer
                 const footer = document.querySelector('footer');
                 if (footer) {
                     footer.style.display = 'none';
                 }
-                
+
                 // Add 40px top padding to main content
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
