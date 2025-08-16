@@ -66,6 +66,11 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
+  <!-- Floating Back Button -->
+  <button id="backButton" class="fixed top-12 left-4 z-50 w-10 h-10 bg-white/20 backdrop-blur-md border border-white/30 rounded-full hover:bg-white/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center group" onclick="goBack()">
+    <i data-lucide="chevron-left" class="h-5 w-5 text-slate-700 group-hover:text-slate-900"></i>
+  </button>
+
 
 
   <!-- Hero -->
@@ -789,6 +794,16 @@
       });
     })();
 
+    // Back button functionality
+    function goBack() {
+      // Try to go back in history first
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // If no history, go to app index or main index
+        window.location.href = './index.html';
+      }
+    }
 
   </script>
 
