@@ -547,7 +547,7 @@
 
   <!-- Footer -->
   <footer id="contact" class="border-t border-slate-200 bg-white/60">
-    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+    <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-slate-700">
       <div>
 
         <a href="index.html" class="flex items-center gap-2">
@@ -583,7 +583,14 @@
       </div>
       <div>
         <div class="font-semibold text-slate-900 mb-2">法律声明</div>
-        <p class="text-xs">所有内容仅供信息参考，不构成投资建议。数字资产具有波动性并存在风险。过往表现不代表未来结果。</p>
+        <div class="legal-text-container">
+          <p id="legalText" class="legal-text collapsed text-xs text-slate-600 leading-relaxed">
+            本文件所载内容不构成税务、法律、保险或投资建议，亦不构成任何证券的推荐、出售要约或购买/投资要约的招揽。历史市场趋势并非未来实际市场行为或任何特定投资未来表现的可靠指标，二者可能存在重大差异，不应据此依赖。所有投资均伴随一定风险，无法保证在任何时间段内都会获得正向回报。不同的时间段和市场环境可能会导致显著不同的结果。C10指数所包含的数字资产不受美国联邦存款保险公司（FDIC）保障，可能贬值，且无银行担保。有关C10指数所包含数字资产的信息来源被认为是可靠的，但并不作保证。本文件所载内容不构成任何关于FFAI将持有超过极少量C10指数所含数字资产的陈述或承诺，且FFAI所持有的数字资产数量可能并不具有实质性意义。
+          </p>
+          <button id="toggleLegalText" class="text-blue-600 hover:text-blue-800 text-sm mt-2 focus:outline-none">
+            更多
+          </button>
+        </div>
       </div>
     </div>
     <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto 保留所有权利</div>
@@ -918,6 +925,52 @@
         containerId: 'navChart',
       });
     })
+  </script>
+
+  <!-- Legal text collapse/expand functionality -->
+  <style>
+    .legal-text {
+      max-height: 4.5em;
+      overflow: hidden;
+      line-height: 1.5;
+      transition: max-height 0.3s ease;
+    }
+    
+    .legal-text.expanded {
+      max-height: none;
+    }
+    
+    .legal-toggle-btn {
+      color: #3b82f6;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    
+    .legal-toggle-btn:hover {
+      color: #1d4ed8;
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const legalText = document.querySelector('.legal-text');
+      const toggleBtn = document.querySelector('.legal-toggle-btn');
+      
+      if (legalText && toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+          if (legalText.classList.contains('expanded')) {
+            legalText.classList.remove('expanded');
+            toggleBtn.textContent = '更多';
+          } else {
+            legalText.classList.add('expanded');
+            toggleBtn.textContent = '收起';
+          }
+        });
+      }
+    });
   </script>
 
 </body>

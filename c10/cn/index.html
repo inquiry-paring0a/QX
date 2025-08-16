@@ -40,22 +40,22 @@
             justify-content: flex-end;
             gap: 20px;
         }
-        
+
         /* 自定义滚动条样式 */
         .overflow-x-auto::-webkit-scrollbar {
             height: 6px;
         }
-        
+
         .overflow-x-auto::-webkit-scrollbar-track {
             background: #f1f5f9;
             border-radius: 3px;
         }
-        
+
         .overflow-x-auto::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 3px;
         }
-        
+
         .overflow-x-auto::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
@@ -159,74 +159,74 @@
                 <div class="indexLastData"><span id="indexValue"></span><span id="indexChange"></span></div>
                 <canvas id="indexChart" class="w-full h-full"></canvas>
                 <!-- 资产列表容器 - 移出图表容器外部 -->
-            <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
-                <!-- BTC -->
-                <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">BTC</div>
-                    <div class="text-xs text-slate-600 font-semibold">28.5%</div>
-                </div>
+                <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
+                    <!-- BTC -->
+                    <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">BTC</div>
+                        <div class="text-xs text-slate-600 font-semibold">28.5%</div>
+                    </div>
 
-                <!-- ETH -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">ETH</div>
-                    <div class="text-xs text-slate-600 font-semibold">22.1%</div>
-                </div>
+                    <!-- ETH -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">ETH</div>
+                        <div class="text-xs text-slate-600 font-semibold">22.1%</div>
+                    </div>
 
-                <!-- XRP -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">XRP</div>
-                    <div class="text-xs text-slate-600 font-semibold">8.3%</div>
-                </div>
+                    <!-- XRP -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">XRP</div>
+                        <div class="text-xs text-slate-600 font-semibold">8.3%</div>
+                    </div>
 
-                <!-- SOL -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">SOL</div>
-                    <div class="text-xs text-slate-600 font-semibold">7.9%</div>
-                </div>
+                    <!-- SOL -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">SOL</div>
+                        <div class="text-xs text-slate-600 font-semibold">7.9%</div>
+                    </div>
 
-                <!-- BNB -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">BNB</div>
-                    <div class="text-xs text-slate-600 font-semibold">6.2%</div>
-                </div>
+                    <!-- BNB -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">BNB</div>
+                        <div class="text-xs text-slate-600 font-semibold">6.2%</div>
+                    </div>
 
-                <!-- DOGE -->
-                <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">DOGE</div>
-                    <div class="text-xs text-slate-600 font-semibold">5.4%</div>
-                </div>
+                    <!-- DOGE -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">DOGE</div>
+                        <div class="text-xs text-slate-600 font-semibold">5.4%</div>
+                    </div>
 
-                <!-- ADA -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">ADA</div>
-                    <div class="text-xs text-slate-600 font-semibold">4.7%</div>
-                </div>
+                    <!-- ADA -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">ADA</div>
+                        <div class="text-xs text-slate-600 font-semibold">4.7%</div>
+                    </div>
 
-                <!-- AVAX -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">AVAX</div>
-                    <div class="text-xs text-slate-600 font-semibold">4.1%</div>
-                </div>
+                    <!-- AVAX -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">AVAX</div>
+                        <div class="text-xs text-slate-600 font-semibold">4.1%</div>
+                    </div>
 
-                <!-- TRX -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">TRX</div>
-                    <div class="text-xs text-slate-600 font-semibold">3.8%</div>
-                </div>
+                    <!-- TRX -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">TRX</div>
+                        <div class="text-xs text-slate-600 font-semibold">3.8%</div>
+                    </div>
 
-                <!-- DOT -->
-                <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
-                    <div class="text-xs font-medium text-slate-900">DOT</div>
-                    <div class="text-xs text-slate-600 font-semibold">3.2%</div>
-                </div>
+                    <!-- DOT -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">DOT</div>
+                        <div class="text-xs text-slate-600 font-semibold">3.2%</div>
+                    </div>
 
+                </div>
             </div>
-            </div>
-            
-            
+
+
             <div></div>
             <!-- Assets Display -->
-            
+
         </div>
     </section>
 
@@ -564,7 +564,7 @@
             <p class="text-slate-600 mb-4">
                 C10 ETF 目前处于规划与筹备阶段
             </p>
-            
+
 
 
 
@@ -580,11 +580,12 @@
                 <div>
                     <h2 class="text-3xl font-bold text-slate-900 mb-6">投资我们</h2>
                     <p class="text-slate-600 mb-6 text-lg leading-relaxed">
-                        我们诚邀具有远见的投资人、机构与我们携手，共同参与 C10 Treasury 与 C10 Index 的成长之路。无论您关注稳定回报，还是布局长期价值，我们的透明规则与稳健策略都将为您的投资提供坚实保障。
+                        我们诚邀具有远见的投资人、机构与我们携手，共同参与 C10 Treasury 与 C10 Index
+                        的成长之路。无论您关注稳定回报，还是布局长期价值，我们的透明规则与稳健策略都将为您的投资提供坚实保障。
 
                     </p>
                     <p class="text-slate-600 leading-relaxed">
-                        留下您的联系方式，我们的团队将在与您尽快联系。
+                        留下您的联系方式，我们的团队将尽快与您联系。
                     </p>
                 </div>
 
@@ -637,7 +638,7 @@
                         </div>
 
                         <div class="text-xs text-slate-500 leading-relaxed">
-                            当您与FF互动时，我们可能会根据适用的Web3隐私标准和法规收集和存储匿名和/或许可数据。我们的 
+                            当您与FF互动时，我们可能会根据适用的Web3隐私标准和法规收集和存储匿名和/或许可数据。我们的
                             <a href="#" class="text-cyan-600 hover:text-cyan-700 underline">隐私声明</a>
                             解释了我们如何使用和保护您的数据，无论是链上还是链下。
                         </div>
@@ -654,7 +655,7 @@
 
     <!-- Footer -->
     <footer id="contact" class="border-t border-slate-200 bg-white/60">
-        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-slate-700">
+        <div class="mx-auto max-w-7xl px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-slate-700">
             <div>
 
                 <a href="index.html" class="flex items-center gap-2">
@@ -684,12 +685,18 @@
                 <div class="font-semibold text-slate-900 mb-2">联系方式</div>
                 <ul class="space-y-1">
                     <li>邮箱: <a href="mailto:IR@ff.com" class="hover:text-blue-600">IR@ff.com</a></li>
-                    <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank" class="hover:text-blue-600">@FaradayFuture</a></li>
+                    <li>Twitter/X: <a href="https://x.com/FaradayFuture" target="_blank"
+                            class="hover:text-blue-600">@FaradayFuture</a></li>
                 </ul>
             </div>
             <div>
                 <div class="font-semibold text-slate-900 mb-2">法律声明</div>
-                <p class="text-xs">所有内容仅供信息参考，不构成投资建议。数字资产具有波动性并存在风险。过往表现不代表未来结果。</p>
+                <div class="legal-text-container">
+                    <p id="legalText" class="text-xs legal-text collapsed">
+                        本文件所载内容不构成税务、法律、保险或投资建议，亦不构成任何证券的推荐、出售要约或购买/投资要约的招揽。历史市场趋势并非未来实际市场行为或任何特定投资未来表现的可靠指标，二者可能存在重大差异，不应据此依赖。所有投资均伴随一定风险，无法保证在任何时间段内都会获得正向回报。不同的时间段和市场环境可能会导致显著不同的结果。C10指数所包含的数字资产不受美国联邦存款保险公司（FDIC）保障，可能贬值，且无银行担保。有关C10指数所包含数字资产的信息来源被认为是可靠的，但并不作保证。本文件所载内容不构成任何关于FFAI将持有超过极少量C10指数所含数字资产的陈述或承诺，且FFAI所持有的数字资产数量可能并不具有实质性意义。
+                    </p>
+                    <button id="toggleLegalText" class="text-blue-600 hover:text-blue-800 text-xs mt-1 transition-colors">更多</button>
+                </div>
             </div>
         </div>
         <div class="text-center text-xs text-slate-500 pb-8">© 2025 FFAI Crypto 保留所有权利</div>
@@ -983,20 +990,20 @@
             // 检查URL参数
             const urlParams = new URLSearchParams(window.location.search);
             const onlyApp = urlParams.get('ONLYAPP');
-            
+
             if (onlyApp === '1') {
                 // 隐藏header
                 const header = document.querySelector('header');
                 if (header) {
                     header.style.display = 'none';
                 }
-                
+
                 // 隐藏footer
                 const footer = document.querySelector('footer');
                 if (footer) {
                     footer.style.display = 'none';
                 }
-                
+
                 // 给Hero区域增加40px的顶部padding
                 const heroSection = document.querySelector('#hero');
                 if (heroSection) {
@@ -1013,7 +1020,7 @@
         import { createOrUpdateChart, updateIndexValue } from '../script/c10_index_chart.js';
         import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
         import { updateHistoryChart } from '../script/c10_index_history.js';
-        import { createIndexChart, updateIndexChart} from '../script/c10_index_chart_new.js'
+        import { createIndexChart, updateIndexChart } from '../script/c10_index_chart_new.js'
 
         let chart;
         await loadData((data, isFirst) => {
@@ -1024,9 +1031,9 @@
             //     axColor: '#b0c8d2',
             // })
 
-            if(!chart){
+            if (!chart) {
                 chart = createIndexChart(data, { containerId: 'indexChart' });
-            }else{
+            } else {
                 updateIndexChart(chart, data)
             }
 
@@ -1043,7 +1050,48 @@
             updateHistoryChart(data.c10IndexHistory, {
                 cId: 'trendChart',
             });
-        })
+        });
+    </script>
+
+    <!-- Legal Text Collapse/Expand Functionality -->
+    <style>
+        .legal-text {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .legal-text.collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+        }
+        
+        .legal-text.expanded {
+            -webkit-line-clamp: unset;
+            line-clamp: unset;
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const legalText = document.getElementById('legalText');
+            const toggleButton = document.getElementById('toggleLegalText');
+            
+            if (legalText && toggleButton) {
+                toggleButton.addEventListener('click', function() {
+                    if (legalText.classList.contains('collapsed')) {
+                        legalText.classList.remove('collapsed');
+                        legalText.classList.add('expanded');
+                        toggleButton.textContent = '收起';
+                    } else {
+                        legalText.classList.remove('expanded');
+                        legalText.classList.add('collapsed');
+                        toggleButton.textContent = '更多';
+                    }
+                });
+            }
+        })();
     </script>
 
 </body>
