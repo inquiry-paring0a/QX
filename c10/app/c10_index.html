@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KZP3ZNTW');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FFAI Crypto Treasury</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="../script/apponly-handler.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
+  <style>
+    body {
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #06b6d4, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 12px;
+      text-align: center;
+      min-height: 100px;
+      width: 240px;
+      color: #334155;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZP3ZNTW" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+
+
+
+  <!-- Realtime Snapshot Section -->
+  <section class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-cyan-100 to-blue-100"">
+    <div class=" mx-auto max-w-7xl px-4 py-6">
+    <h1 class="text-4xl font-bold text-center mb-8 flex items-center justify-center gap-3">
+      C10 Index Real-time Trend
+    </h1>
+    <div class="p-6 min-w-0 overflow-x-auto" id="realtime">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex gap-2">
+          <span class="text-black px-2 py-1 rounded" style="font-size: 40px;" id="lastPrice">2,891.42</span>
+          <span class="text-sm text-green-600 px-2 py-1 rounded flex items-center" id="lastChange">+2.13%</span>
+        </div>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 bg-slate-900 text-white rounded text-sm">1D</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1W</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1M</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">3M</button>
+          <button class="px-3 py-1 bg-slate-100 text-slate-600 rounded text-sm">1Y</button>
+        </div>
+
+      </div>
+      <div class="h-80 w-full min-w-0">
+        <div id="indexChart" class="w-full h-full"></div>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-3">Realtime data(UTC) and index chart.</p>
+    </div>
+    </div>
+  </section>
+
+
+
+  <!-- Section 2: About the C10 Index -->
+  <section id="methodology" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div class="mx-auto max-w-7xl px-4">
+      <!-- Main Title -->
+      <h1 class="text-4xl font-bold text-center mb-12 flex items-center justify-center gap-4">
+        <i data-lucide="book-open" class="h-10 w-10"></i>
+        About the C10 Index
+      </h1>
+      <p class="mt-6 text-slate-700 max-w-5xl mx-auto text-center">
+        The first investable, exchange-traded basket index of the top ten cryptocurrencies issued by a U.S.-listed
+        company — the C10 Index.
+      </p>
+      <p class="mt-6 text-slate-700 max-w-5xl mx-auto text-center"">
+        Centered on Bitcoin and Ethereum, the index covers the top ten cryptocurrencies by free-float market capitalization, excluding stablecoins. It is calculated using market-cap weighted rules, with a maximum 50% allocation to any single asset.
+      </p>
+      <p class=" mt-6 text-slate-700 max-w-5xl mx-auto text-center"">
+        The index methodology is based on established Nasdaq practices, ensuring scientific rigor while maintaining
+        transparency and traceability.
+      </p>
+
+      <!-- 4 Theme Blocks, 1 Row 4 Columns Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-6">
+        <!-- First Row -->
+        <!-- Index Definition Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="info" class="h-6 w-6 text-blue-600"></i>
+            <h3 class="font-semibold text-lg">Index Definition</h3>
+          </div>
+          <p class="text-slate-700 flex-1">The C10 Index tracks the performance of the top 10 cryptocurrencies by market
+            capitalization, using a market-cap weighted methodology to provide diversified digital asset exposure.</p>
+        </div>
+
+        <!-- Weight Rules Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="scale" class="h-6 w-6 text-green-600"></i>
+            <h3 class="font-semibold text-lg">Weight Rules</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Market-cap based weight allocation with a maximum single asset weight of 50%,
+            ensuring index diversification and risk distribution.</p>
+        </div>
+
+        <!-- Mature Methodology Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="book-open" class="h-6 w-6 text-purple-600"></i>
+            <h3 class="font-semibold text-lg">Mature Methodology</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Employs proven index construction methods with transparent rules and rigorous
+            governance processes, ensuring index reliability and consistency.</p>
+        </div>
+
+        <!-- Regular Rebalancing Card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <i data-lucide="refresh-cw" class="h-6 w-6 text-orange-600"></i>
+            <h3 class="font-semibold text-lg">Regular Rebalancing</h3>
+          </div>
+          <p class="text-slate-700 flex-1">Monthly weight adjustments ensure the index always reflects the latest market
+            conditions, maintaining optimal risk-return characteristics.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Constituents & Weights -->
+  <section id="constituents" class="py-12 sm:py-16 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="flex items-center gap-2 mb-4">
+        <i data-lucide="layout-dashboard" class="h-5 w-5"></i>
+        <h3 class="text-2xl font-semibold">Crypto Constituents & Weights</h3>
+      </div>
+      <p class="text-slate-600 mb-6 max-w-3xl">The C10 Index tracks the top 10 cryptocurrencies by weighted allocation,
+        dynamically adjusting with market movements to offer investors a diversified and broad-based reference for
+        crypto investing.</p>
+
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        <!-- Pie -->
+        <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+          <h4 class="font-semibold mb-4 text-center">Weight Distribution</h4>
+          <div class="h-96 w-full min-w-0 flex items-center justify-center">
+            <div id="pieChart" class="w-full h-full"></div>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-3 text-center">* Weights shown are illustrative; refer to the
+            published methodology for official values.</p>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead class="bg-slate-100 text-slate-600">
+              <tr>
+                <th class="px-4 py-3 text-left font-medium">Rank</th>
+                <th class="px-4 py-3 text-left font-medium">Symbol</th>
+                <th class="px-4 py-3 text-right font-medium">Weight</th>
+                <th class="px-4 py-3 text-right font-medium">Price</th>
+                <th class="px-4 py-3 text-right font-medium">Market Cap</th>
+                <th class="px-4 py-3 text-left font-medium">24h %</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-white to-slate-200">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+          The C10 Index is not just an index of a crypto portfolio
+          <span class="block gradient-text"> It’s a Weathervane of Future Asset Value and Wealth Trends</span>
+        </h1>
+        <p class="mt-4 text-slate-700 max-w-3xl mx-auto">
+          Centered on Bitcoin and Ethereum, the C10 Index includes the top ten cryptocurrencies by free-float market
+          capitalization, excluding stablecoins. It is calculated using market-cap weighted rules, with a maximum 50%
+          allocation to any single asset. Each cryptocurrency’s weight and price are dynamically adjusted according to
+          market fluctuations, providing investors with a diversified and comprehensive reference for crypto allocation.
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-8">
+          <div class="feature-card">
+            <i data-lucide="target" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-lg">1000</div>
+              <div class="font-medium text-sm">Benchmark Value</div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <i data-lucide="calendar" class="h-10 w-10" style="color: #0ea5e9;"></i>
+            <div class="text-center">
+              <div class="font-bold text-sm">August 16th, PST</div>
+              <div class="font-bold text-sm">12:00 AM</div>
+              <div class="font-medium text-xs mt-1">Benchmark Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    // Icons
+    lucide.createIcons();
+
+    // ------- Mock data -------
+    // const intraday = [
+    //   { t: "09:30", v: 2821 },
+    //   { t: "10:00", v: 2836 },
+    //   { t: "10:30", v: 2849 },
+    //   { t: "11:00", v: 2832 },
+    //   { t: "11:30", v: 2854 },
+    //   { t: "12:00", v: 2861 },
+    //   { t: "12:30", v: 2853 },
+    //   { t: "13:00", v: 2869 },
+    //   { t: "13:30", v: 2876 },
+    //   { t: "14:00", v: 2868 },
+    //   { t: "14:30", v: 2882 },
+    //   { t: "15:00", v: 2891 }
+    // ];
+
+    // const series = intraday.map(d => d.v);
+
+    const constituents = [
+      { rank: 1, symbol: "BTC", name: "Bitcoin", weight: 35.0, price: 119523, marketCap: 2379441430804, change: 2.14 },
+      { rank: 2, symbol: "ETH", name: "Ethereum", weight: 30.0, price: 4655.05, marketCap: 561524972194, change: 1.25 },
+      { rank: 3, symbol: "XRP", name: "XRP", weight: 9.0, price: 3.24, marketCap: 192389714758, change: 0.44 },
+      { rank: 4, symbol: "BNB", name: "BNB", weight: 6.0, price: 837.02, marketCap: 116583126591, change: -0.42 },
+      { rank: 5, symbol: "SOL", name: "Solana", weight: 5.0, price: 198.14, marketCap: 106776607698, change: 0.88 },
+      { rank: 6, symbol: "DOGE", name: "Dogecoin", weight: 4.0, price: 0.239, marketCap: 35945639802, change: 0.18 },
+      { rank: 7, symbol: "TRX", name: "TRON", weight: 4.0, price: 0.355, marketCap: 33573703701, change: 0.71 },
+      { rank: 8, symbol: "ADA", name: "Cardano", weight: 3.0, price: 0.858, marketCap: 31179958844, change: -1.31 },
+      { rank: 9, symbol: "LINK", name: "Chainlink", weight: 2.0, price: 24.54, marketCap: 16635807163, change: 1.15 },
+      { rank: 10, symbol: "HYPE", name: "Hyperliquid", weight: 2.0, price: 44.50, marketCap: 14905902394, change: 3.25 }
+    ];
+
+    // ------- Charts -------
+    // Section 1: Realtime line
+    // const indexChart = echarts.init(document.getElementById('indexChart'));
+    // indexChart.setOption({
+    //   grid: {
+    //     left: '3%',
+    //     right: '4%',
+    //     bottom: '3%',
+    //     containLabel: true
+    //   },
+    //   tooltip: {
+    //     trigger: 'axis',
+    //     backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    //     borderColor: '#e2e8f0',
+    //     borderWidth: 1,
+    //     textStyle: {
+    //       color: '#374151'
+    //     },
+    //     formatter: function (params) {
+    //       const data = params[0];
+    //       return `时间: ${data.axisValue}<br/>指数: ${data.value.toFixed(2)}`;
+    //     }
+    //   },
+    //   xAxis: {
+    //     type: 'category',
+    //     data: intraday.map(d => d.t),
+    //     axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
+    //     splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
+    //     axisLabel: { color: 'rgba(0,0,0,0.7)' }
+    //   },
+    //   yAxis: {
+    //     type: 'value',
+    //     scale: true,
+    //     axisLine: { lineStyle: { color: 'rgba(0,0,0,0.25)' } },
+    //     splitLine: { lineStyle: { color: 'rgba(0,0,0,0.15)' } },
+    //     axisLabel: { color: 'rgba(0,0,0,0.7)' }
+    //   },
+    //   series: [{
+    //     name: 'C10 Index',
+    //     type: 'line',
+    //     data: series,
+    //     smooth: false,
+    //     lineStyle: { color: '#0ea5e9', width: 2 },
+    //     symbol: 'circle',
+    //     symbolSize: 4,
+    //     itemStyle: {
+    //       color: '#0ea5e9',
+    //       borderColor: '#ffffff',
+    //       borderWidth: 2
+    //     },
+    //     emphasis: {
+    //       itemStyle: {
+    //         color: '#0ea5e9',
+    //         borderColor: '#ffffff',
+    //         borderWidth: 3,
+    //         shadowBlur: 10,
+    //         shadowColor: 'rgba(14, 165, 233, 0.3)'
+    //       },
+    //       symbolSize: 8
+    //     }
+    //   }]
+    // });
+
+
+
+    // Section 3: Weights pie
+    // const pieChart = echarts.init(document.getElementById('pieChart'));
+    // const pieData = constituents.map((c, index) => ({
+    //   name: c.symbol,
+    //   value: c.weight,
+    //   itemStyle: {
+    //     color: [
+    //       '#f59e0b', '#3b82f6', '#10b981', '#f97316', '#8b5cf6',
+    //       '#06b6d4', '#ef4444', '#84cc16', '#f59e0b', '#6366f1'
+    //     ][index % 10]
+    //   }
+    // }));
+
+    // pieChart.setOption({
+    //   tooltip: {
+    //     trigger: 'item',
+    //     formatter: '{b}: {c}%'
+    //   },
+    //   series: [{
+    //     type: 'pie',
+    //     radius: ['60%', '90%'],
+    //     center: ['50%', '50%'],
+    //     data: pieData,
+    //     label: {
+    //       show: true,
+    //       position: 'outside',
+    //       formatter: '{b}',
+    //       fontSize: 12,
+    //       color: '#374151'
+    //     },
+    //     labelLine: {
+    //       show: true,
+    //       length: 5,
+    //       length2: 15,
+    //       lineStyle: {
+    //         color: '#9ca3af',
+    //         width: 1
+    //       }
+    //     },
+    //     emphasis: {
+    //       itemStyle: {
+    //         shadowBlur: 10,
+    //         shadowOffsetX: 0,
+    //         shadowColor: 'rgba(0, 0, 0, 0.5)'
+    //       }
+    //     }
+    //   }]
+    // });
+
+    // 窗口大小变化时重新调整图表大小
+    window.addEventListener('resize', function () {
+      indexChart.resize();
+      pieChart.resize();
+    });
+
+    // ------- Table -------
+    // const tbody = document.getElementById('tableBody');
+    // constituents.forEach(c => {
+    //   const tr = document.createElement('tr');
+    //   tr.className = 'border-t border-slate-200 hover:bg-slate-50';
+    //   tr.innerHTML = `
+    //     <td class="px-4 py-3">${c.rank}</td>
+    //     <td class="px-4 py-3 font-semibold">${c.symbol}</td>
+    //     <td class="px-4 py-3 text-right">${c.weight.toFixed(1)}%</td>
+    //     <td class="px-4 py-3 text-right">$${c.price.toFixed(2)}</td>
+    //     <td class="px-4 py-3 text-right">$${(c.marketCap / 1e9).toFixed(1)}B</td>
+    //     <td class="px-4 py-3 ${c.change >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${c.change >= 0 ? '+' : ''}${c.change.toFixed(2)}%</td>
+    //   `;
+    //   tbody.appendChild(tr);
+    // });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+
+
+  <script>
+    (function () {
+      const openBtn = document.getElementById('openRightMenu');
+      const closeBtn = document.getElementById('closeRightMenu');
+      const drawer = document.getElementById('rightDrawer');
+      const backdrop = document.getElementById('rightDrawerBackdrop');
+
+      const open = () => {
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('pointer-events-none', 'opacity-0');
+        document.body.classList.add('overflow-hidden');
+        // focus the first link for accessibility
+        const firstLink = drawer.querySelector('a,button');
+        if (firstLink) firstLink.focus();
+      };
+
+      const close = () => {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('pointer-events-none', 'opacity-0');
+        document.body.classList.remove('overflow-hidden');
+        openBtn?.focus();
+      };
+
+      openBtn?.addEventListener('click', open);
+      closeBtn?.addEventListener('click', close);
+      backdrop?.addEventListener('click', close);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+    })();
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // APPONLY Parameter Handler is included via external script
+  </script>
+  <script type="module">
+    import { loadData } from '../script/datasource.js';
+    import {
+      createIndexTrendChart,
+      updateIndexTrendChart,
+      updateLastPrice,
+      updateLastChange,
+    } from '../script/c10_index_trend.js';
+    import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
+
+    let chart;
+    await loadData((data, isFirst) => {
+      var formattedData = data.c10Index24h.map(d => ({ t: d.calculatedAt, v: d.index }));
+      if (chart) {
+        updateIndexTrendChart(formattedData, chart);
+      }
+      else {
+        chart = createIndexTrendChart(formattedData, { containerId: 'indexChart', lang: 'en' });
+      }
+
+      const before = data.c10Index24h[0].index;
+      const current = data.c10Index24h[data.c10Index24h.length - 1].index;
+      const change = (current - before) / before;
+      updateLastPrice(current, 'lastPrice');
+      updateLastChange(change, 'lastChange');
+
+      if (isFirst) {
+        renderWeightPie(data.c10LatestMarketData);
+      }
+      renderTable(data.c10LatestMarketData)
+    });
+  </script>
+
+</body>
+
+</html>

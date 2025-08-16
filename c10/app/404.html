@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - FFAI Crypto Treasury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
+    <style>
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800">
+
+
+    <!-- 404 Content -->
+    <main class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100 min-h-screen flex items-center" style="padding-top: 40px;">
+        <div class="mx-auto max-w-7xl px-4 py-20 text-center">
+            <!-- 404 Icon -->
+            <div class="mb-8 flex justify-center">
+                <div class="floating-animation">
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
+                        <i data-lucide="search-x" class="h-16 w-16 text-slate-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 404 Title -->
+            <h1 class="text-6xl sm:text-8xl font-bold gradient-text mb-4">404</h1>
+
+            <!-- Error Message -->
+            <h2 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-4">
+                Page Not Found
+            </h2>
+
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                Sorry, the page you are trying to access does not exist or has been moved. Please check if the URL is
+                correct. You can also return to the homepage or browse the C10 Index and C10 Treasury.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="index.html"
+                    class="bg-slate-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="home" class="h-4 w-4"></i>
+                    Back to Home
+                </a>
+                <a href="c10_index.html"
+                    class="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors flex items-center gap-2">
+                    <i data-lucide="trending-up" class="h-4 w-4"></i>
+                    View C10 Index
+                </a>
+                <a href="c10_treasury.html"
+                    class="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors flex items-center gap-2">
+                    <i data-lucide="shield" class="h-4 w-4"></i>
+                    C10 Treasury
+                </a>
+            </div>
+
+
+        </div>
+    </main>
+
+
+
+
+
+    <!-- URL Parameter Control JavaScript -->
+    <script>
+        (function () {
+            // Check URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const onlyApp = urlParams.get('ONLYAPP');
+
+            if (onlyApp === '1') {
+                // Hide header
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.display = 'none';
+                }
+
+                // Hide footer
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    footer.style.display = 'none';
+                }
+
+                // Add 40px top padding to main content
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    const currentPadding = window.getComputedStyle(mainContent).paddingTop;
+                    const currentPaddingValue = parseInt(currentPadding) || 0;
+                    mainContent.style.paddingTop = (currentPaddingValue + 40) + 'px';
+                }
+            }
+        })();
+    </script>
+
+
+
+    <!-- Initialize Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>

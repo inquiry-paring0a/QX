@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KZP3ZNTW');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFAI Crypto Treasury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.12.1/js/anychart-bundle.min.js"></script>
+    <script src="../script/apponly-handler.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="../assets/favicons/favicon_light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../assets/favicons/favicon_dark.svg" media="(prefers-color-scheme: dark)">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #22d3ee, #3b82f6);
+        }
+
+        .indexLastData {
+            padding: 0px 20px 0px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        /* Custom scrollbar styles */
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800">
+
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100" style="padding-top: 40px;">
+
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+            <div>
+
+                <h1 class="text-3xl sm:text-5xl font-semibold" style="line-height: 1.2;">
+                    C10 Treasury
+                    <span class="block gradient-text">Building the No. 1 Treasury for the Top 10 Crypto Asset Portfolio</span>
+                </h1>
+                <p class="mt-4 text-slate-600 max-w-xl">
+                    FF's Proprietary "EAI + Crypto" Dual-flywheel & Dual Bridge Eco-Strategy, building the first C10
+                    Treasury product based on the top 10 crypto asset basket index issued by a U.S. listed company. C10
+                    Index Announced. Aiming to become the number one treasury for this top ten crypto asset portfolio.
+                </p>
+                <p class="mt-4 text-slate-600 max-w-xl">
+                    FF’s proprietary “EAI + Crypto” Dual-Flywheel & Dual-Bridge Eco-Strategy launches the first C10
+                    Treasury product issued by a U.S.-listed company — an index-based treasury on a basket of the top 10
+                    crypto assets.
+                </p>
+                <div class="mt-6 flex flex-wrap items-center gap-3">
+                    <a href="c10_index.html"
+                        class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                        C10 Index <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                    <a href="c10_treasury.html"
+                        class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+                        C10 Treasury <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Simplified Chart -->
+            <div class="h-80 w-full" id="index">
+                <div class="indexLastData"><span id="indexValue"></span><span id="indexChange"></span></div>
+                <canvas id="indexChart" class="w-full h-full"></canvas>
+                <!-- Assets Display -->
+                <!-- Asset List Container - Outside chart container -->
+                <div class="mt-4 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-1">
+                    <!-- BTC -->
+                    <div class="flex flex-col items-center p-3   rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">BTC</div>
+                        <div class="text-xs text-slate-600 font-semibold">28.5%</div>
+                    </div>
+
+                    <!-- ETH -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">ETH</div>
+                        <div class="text-xs text-slate-600 font-semibold">22.1%</div>
+                    </div>
+
+                    <!-- XRP -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">XRP</div>
+                        <div class="text-xs text-slate-600 font-semibold">8.3%</div>
+                    </div>
+
+                    <!-- SOL -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">SOL</div>
+                        <div class="text-xs text-slate-600 font-semibold">7.9%</div>
+                    </div>
+
+                    <!-- BNB -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">BNB</div>
+                        <div class="text-xs text-slate-600 font-semibold">6.2%</div>
+                    </div>
+
+                    <!-- DOGE -->
+                    <div class="flex flex-col items-center p-3  rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">DOGE</div>
+                        <div class="text-xs text-slate-600 font-semibold">5.4%</div>
+                    </div>
+
+                    <!-- ADA -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">ADA</div>
+                        <div class="text-xs text-slate-600 font-semibold">4.7%</div>
+                    </div>
+
+                    <!-- AVAX -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">AVAX</div>
+                        <div class="text-xs text-slate-600 font-semibold">4.1%</div>
+                    </div>
+
+                    <!-- TRX -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">TRX</div>
+                        <div class="text-xs text-slate-600 font-semibold">3.8%</div>
+                    </div>
+
+                    <!-- DOT -->
+                    <div class="flex flex-col items-center p-3 rounded-lg border  hover:shadow-md transition-all">
+                        <div class="text-xs font-medium text-slate-900">DOT</div>
+                        <div class="text-xs text-slate-600 font-semibold">3.2%</div>
+                    </div>
+
+                </div>
+                <div></div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- FFAI Crypto Treasury Strategy -->
+    <section class="py-16 bg-gradient-to-br from-slate-50 to-white border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+                    C10 Treasury Portfolio Management
+                </h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    The FFAI Crypto Treasury is the core business of FFAI’s digital asset treasury strategy. Its
+                    inaugural product, the C10 Treasury, is dynamically allocated based on the C10 Index—a portfolio of
+                    the world’s top ten cryptocurrencies by market capitalization. The strategy aims to grow assets
+                    through professional, compliant custody, staking yield from locked holdings, and portfolio
+                    compounding, while multiple downside-protection mechanisms help manage risk. Together, these
+                    features support stable cash flow, optimize net asset quality, and drive sustained growth in company
+                    value.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Core Strategy -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="h-5 w-5 text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Core Strategy</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>80% passive allocation, strictly based on C10 index</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>20% active allocation, actively managed</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Operating Framework -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="shield" class="h-5 w-5 text-green-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Operating Framework</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Managed independently by a wholly owned subsidiary</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Compliant custody with staking yield</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Multiple downside-protection mechanisms</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Key indicators -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="bar-chart-3" class="h-5 w-5 text-orange-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Key indicators</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>AFY (Annual Fixed Yield)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>FAY (Find Annual Yield)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="h-4 w-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>CAVPS (Crypto Asset Value per Share)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 bg-gradient-to-br from-slate-100 to-white border border-slate-200 rounded-xl p-6">
+                <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">Why C10 Index?</h3>
+                        <ul class="space-y-2 text-slate-700">
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                Alignment with the industry’s long-term bull market through a diversified basket
+                                approach
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                Reduction of single-token risk with a multi-asset index portfolio
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 shrink-0"></i>
+                                An effortless, efficient way to participate in the growth of the crypto industry
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="h-48 sm:h-60">
+                        <canvas id="trendChart" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-center mt-12">
+                <a href="c10_index.html"
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    Learn More
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- Constituents Table -->
+    <section class="py-14 border-t border-slate-200 bg-gradient-to-br from-white to-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <!-- C10 Index Definition -->
+            <div class="mb-8">
+                <div class="text-center mb-6">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">C10 Index: Key Definition</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Main Description and Statistics -->
+                    <div class="text-center">
+                        <p class="text-lg text-slate-700 leading-relaxed mb-6">
+                            The first basket index of the top 10 cryptocurrencies by market capitalization (excluding
+                            stablecoins), initiated by a U.S.-listed company. Calculated based on market-cap weighting
+                            and other rules, with the weight of any single asset capped at 50%.
+                        </p>
+
+
+                    </div>
+
+                    <!-- Core Features -->
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="bitcoin" class="h-5 w-5 text-orange-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900">Bitcoin & Ethereum</div>
+                                <div class="text-sm text-slate-600">Core Foundation Assets</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="bar-chart-3" class="h-5 w-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900">Market Cap Weighted</div>
+                                <div class="text-sm text-slate-600">Dynamic Weight Allocation</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 p-4 bg-white/80 rounded-lg">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="shield-check" class="h-5 w-5 text-purple-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900">Excludes Stablecoins</div>
+                                <div class="text-sm text-slate-600">Focus on Major Crypto Assets</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                The C10 Index comprises the top 10 cryptocurrencies by weighted allocation, dynamically adjusted with
+                market movements to offer investors a diversified and comprehensive reference for crypto asset
+                portfolios.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Pie -->
+                <div class="bg-white border border-slate-200 rounded-xl p-6 min-w-0 overflow-x-auto">
+                    <h4 class="font-semibold mb-4 text-center">Weight Distribution</h4>
+                    <div class="h-96 w-full min-w-0 flex items-center justify-center">
+                        <div id="pieChart" class="w-full h-full"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-3 text-center">* Weights shown are illustrative; refer to
+                        published methodology for official values.</p>
+                </div>
+
+                <!-- Table -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100 text-slate-600">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-medium">Rank</th>
+                                <th class="px-4 py-3 text-left font-medium">Symbol</th>
+                                <th class="px-4 py-3 text-right font-medium">Weight</th>
+                                <th class="px-4 py-3 text-right font-medium">Price</th>
+                                <th class="px-4 py-3 text-right font-medium">Market Cap</th>
+                                <th class="px-4 py-3 text-left font-medium">24h %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Call to Action -->
+            <div class="text-center mt-12">
+                <a href="c10_treasury.html"
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech & Security -->
+    <section id="security" class="py-10 sm:py-14 lg:py-20 border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-slate-900 mb-4">Technology & Security</h3>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Providing institutional-grade protection and optimization for digital assets through multi-layered
+                    security architecture, dynamic risk management, and comprehensive compliance systems.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <!-- Multi-tier Cold/Hot Wallet Separation & Multi-Sig Mechanism -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="shield" class="h-6 w-6 text-blue-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">Multi-tier Cold & Hot Wallet Separation with
+                            Multi-Signature Security</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Large assets stored long-term in offline cold wallets to reduce hacking risks</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Hot wallets used only for necessary liquidity operations with multi-signature approval
+                                processes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Leverage & Debt Management -->
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="h-6 w-6 text-green-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">Dynamic Leverage & Debt Management</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Similar to the MicroStrategy approach, during high market valuation periods, increase
+                                holdings via low-cost convertible bonds or private loans; during low valuation periods,
+                                optimize the balance sheet through partial asset liquidation or debt buybacks.</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Regular Stress Testing & Scenario Simulation -->
+                <div class="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="activity" class="h-6 w-6 text-purple-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">Regular Stress Testing & Scenario Simulation
+                        </h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>The portfolio undergoes quarterly stress tests, covering scenarios like extreme price
+                                volatility, liquidity shortages, and exchange risks. Contingency plans are prepared in
+                                advance to respond to potential risks.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance & Tax Optimization -->
+                <div class="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="file-check" class="h-6 w-6 text-orange-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-slate-900">Compliance & Tax Optimization</h4>
+                    </div>
+                    <div class="space-y-3 text-slate-700">
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 mt-0.5 shrink-0"></i>
+                            <span>Ongoing monitoring and adherence to digital asset regulations in relevant
+                                jurisdictions, with tax and compliance optimization achieved, where appropriate, through
+                                trusts or offshore Special Purpose Vehicles (SPVs).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C10 ETF Section -->
+    <div id="ETF"></div>
+    <section id="etf"
+        class="py-10 sm:py-14 lg:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-50 to-white">
+        <div class="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+
+            <!-- Left Content -->
+            <h3 class="text-2xl font-semibold mb-3">C10 ETF</h3>
+            <!-- Right Content -->
+            <p class="text-slate-600 mb-4">
+                The C10 ETF is currently in the exploring and preparation phase.
+            </p>
+        </div>
+    </section>
+
+
+
+
+    <!-- Newsletter Signup Section -->
+    <section id="invest" class="bg-slate-100 py-16">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Invest with Us</h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        We invite visionary investors and institutions to join us in the growth journey of the C10
+                        Treasury and C10 Index. Whether you are seeking stable returns or building long-term value, our
+                        transparent rules and robust strategies provide a solid foundation for your investment.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Leave your contact information, and our team will be in touch with you shortly.
+                    </p>
+                </div>
+
+                <!-- Right Form -->
+                <div class="bg-white rounded-2xl p-8">
+                    <form class="space-y-6">
+                        <!-- Two-column grid for form fields -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" placeholder="First Name"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div>
+                                <input type="text" placeholder="Last Name"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div>
+                                <input type="email" placeholder="Email Address"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div>
+                                <input type="tel" placeholder="Phone Number"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <input type="text" placeholder="Address"
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                                    required>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <select
+                                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent bg-white">
+                                    <option value="">Select Your Role</option>
+                                    <option value="individual">Individual Investor</option>
+                                    <option value="crypto-professional">Crypto Professional</option>
+                                    <option value="institutional">Institutional/Family Office</option>
+                                    <option value="media">Media/Analyst</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-xs text-slate-500 leading-relaxed">
+                            When you interact with FF, we may collect and store anonymous and/or permissioned data in
+                            accordance with applicable Web3 privacy standards and regulations. Our <a
+                                href="https://www.ff.com/us/privacy-policy/"
+                                class="text-cyan-600 hover:text-cyan-700 underline">Privacy Policy</a>
+                            explains how we use and protect your data, both on-chain and off-chain.
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-slate-800 transition-colors">
+                            Submit Now
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+    <script type="module">
+        import { loadData, loadIndexHistory } from '../script/datasource.js';
+        import { createOrUpdateChart, updateIndexValue } from '../script/c10_index_chart.js';
+        import { renderTable, renderWeightPie } from '../script/c10_latest_data_table.js';
+        import { updateHistoryChart } from '../script/c10_index_history.js';
+        import { createIndexChart, updateIndexChart } from '../script/c10_index_chart_new.js'
+
+        let chart;
+        await loadData((data, isFirst) => {
+            // createOrUpdateChart(data.c10Index24h, {
+            //     cId: 'index',
+            //     bg: '#d6f1fe',
+            //     gdColor: '#c3e0ea',
+            //     axColor: '#b0c8d2',
+            // })
+
+            if (!chart) {
+                chart = createIndexChart(data, { containerId: 'indexChart' });
+            } else {
+                updateIndexChart(chart, data)
+            }
+
+
+            if (isFirst) {
+                renderWeightPie(data.c10LatestMarketData);
+            }
+            renderTable(data.c10LatestMarketData)
+
+            updateIndexValue(data, 'indexValue', 'indexChange');
+        });
+
+        await loadIndexHistory(data => {
+            updateHistoryChart(data.c10IndexHistory, {
+                cId: 'trendChart',
+            });
+        })
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZP3ZNTW" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+</body>
+
+</html>
